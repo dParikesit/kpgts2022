@@ -10,6 +10,6 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build": "cd frontend && yarn build"
+    "build": "cd frontend && yarn && yarn build"
   }
 }
