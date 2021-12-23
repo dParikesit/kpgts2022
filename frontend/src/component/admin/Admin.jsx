@@ -3,7 +3,7 @@
 const Admin = () => {
     return(
         <div>
-            <p>Admin Michael</p>
+            <p>Admin Parama</p>
         </div>
     )
 }
