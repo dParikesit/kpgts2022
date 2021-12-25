@@ -1,4 +1,3 @@
-const { default: knex } = require('knex');
 const db = require('../database/db');
 
 function getOne(id){
@@ -6,11 +5,11 @@ function getOne(id){
 }
 
 function getOneEmail(email){
-    return db('email').where('email', email).first();
+    return db('user').where('email', email).first();
 }
 
 function create(user) {
-    return knex('user').insert(user, 'id').then(ids => {
+    return db('user').insert(user, 'id').then(ids => {
         return ids[0];
     });
 }
