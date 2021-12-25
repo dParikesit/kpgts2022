@@ -13,8 +13,7 @@
     "express": "^4.17.2",
     "express-session": "^1.17.2",
     "knex": "^0.95.14",
-    "pg": "^8.7.1",
-    "validator": "^13.7.0"
+    "pg": "^8.7.1"
   },
   "scripts": {
     "start": "nodemon index.js",
