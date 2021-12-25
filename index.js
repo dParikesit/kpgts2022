@@ -3,10 +3,11 @@ require('dotenv').config()
 const express = require("express");
 const path = require("path");
 const app = express();
-// const db = require('./database/db')
+const routes = require('./routes/index')
 
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
+app.use("", routes)
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });

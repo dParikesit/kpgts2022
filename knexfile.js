@@ -15,7 +15,7 @@ module.exports = {
       database: process.env.DB_DATABASE,
     },
     migrations: {
-      directory: path.join(__dirname, './database/models/migrations'),
+      directory: path.join(__dirname, './database/migrations'),
     },
     debug: true
   },
@@ -34,7 +34,7 @@ module.exports = {
       max: 10
     },
     migrations: {
-      directory: path.join(__dirname, './database/models/migrations'),
+      directory: path.join(__dirname, './database/migrations'),
     }
   }
 
