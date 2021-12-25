@@ -2,11 +2,11 @@
 exports.up = function(knex) {
   return knex.schema
       .createTable('user', function (table) {
-          table.uuid('id').primary()
+          table.uuid('id').primary().defaultTo(knex.raw('gen_random_uuid()'))
           table.string('email').unique().notNullable()
           table.string('password').notNullable()
           table.string('name')
-          table.string('role').notNullable()
+          table.string('role').notNullable().defaultTo('user')
           table.timestamps(true,true)
       })
       .createTable('registration', function (table) {
@@ -15,16 +15,16 @@ exports.up = function(knex) {
           table.string('sekolah').notNullable()
           table.string('jurusan').notNullable()
           table.string('kontak').notNullable()
-          table.string('file')
+          table.string('fileURL')
           table.boolean('verified').defaultTo(false)
           table.uuid('user_id').references('id').inTable('user')
           table.timestamps(true, true)
       })
       .createTable('post', function (table) {
-          table.uuid('id').primary()
+          table.uuid('id').primary().defaultTo(knex.raw('gen_random_uuid()'))
           table.string('title').notNullable()
           table.string('content').notNullable()
-          table.binary('picture')
+          table.string('picturePath')
           table.uuid('user_id').references('id').inTable('user')
           table.timestamps(true,true)
       })
