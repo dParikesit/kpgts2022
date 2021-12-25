@@ -13,6 +13,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build": "cd frontend && yarn && yarn build"
+    "build": "cd frontend && yarn && yarn build",
+    "knexMigrate": "knex migrate:latest",
+    "knexRollback": "knex migrate:rollback"
   }
 }
