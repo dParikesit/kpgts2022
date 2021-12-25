@@ -1,0 +1,38 @@
+
+exports.up = function(knex) {
+  return knex.schema
+      .createTable('user', function (table) {
+          table.uuid('id').primary()
+          table.string('email').unique().notNullable()
+          table.string('password').notNullable()
+          table.string('name')
+          table.string('role').notNullable()
+          table.timestamps(true,true)
+      })
+      .createTable('registration', function (table) {
+          table.increments('id').primary()
+          table.string('nama').notNullable()
+          table.string('sekolah').notNullable()
+          table.string('jurusan').notNullable()
+          table.string('kontak').notNullable()
+          table.string('file')
+          table.boolean('verified').defaultTo(false)
+          table.uuid('user_id').references('id').inTable('user')
+          table.timestamps(true, true)
+      })
+      .createTable('post', function (table) {
+          table.uuid('id').primary()
+          table.string('title').notNullable()
+          table.string('content').notNullable()
+          table.binary('picture')
+          table.uuid('user_id').references('id').inTable('user')
+          table.timestamps(true,true)
+      })
+};
+
+exports.down = function(knex) {
+  return knex.schema
+      .dropTable('registration')
+      .dropTable('post')
+      .dropTable('user')
+};

@@ -1,7 +1,7 @@
 import Footer from "../komponen_umum/Footer";
 import Navbar from "../komponen_umum/Navbar";
 
-const Informasi_itb = () => {
+const InformasiItb = () => {
     return(
         <div>
             <Navbar></Navbar>
@@ -11,4 +11,4 @@ const Informasi_itb = () => {
     )
 }
 
-export default Informasi_itb;
+export default InformasiItb;
