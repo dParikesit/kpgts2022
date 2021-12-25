@@ -22,10 +22,13 @@ const useStyles = makeStyles(()=>({
     icon:{
         color: "white"
     },
+    drawer: {
+        flexShrink: 0,
+        width: 400
+    },
     paper: {
         background: '#927759',
         color: 'white',
-        width: "240"
     }
 }));
 
@@ -35,7 +38,7 @@ function DrawerComponent() {
 
     return (
     <>
-        <Drawer classes={{paper: classes.paper}} open={openDrawer}  onClose={() => setOpenDrawer(false)} >
+        <Drawer className={classes.drawer} classes={{paper: classes.paper}} open={openDrawer}  onClose={() => setOpenDrawer(false)} >
             <List>
             <ListItem onClick={() => setOpenDrawer(false)}>
                 <ListItemText>
