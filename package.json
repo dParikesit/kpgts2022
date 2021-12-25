@@ -10,9 +10,7 @@
     "express": "^4.17.2",
     "knex": "^0.95.14",
     "pg": "^8.7.1",
-    "react-icons": "^4.3.1",
-    "react-router-dom": "^6.2.1",
-    "styled-components": "^5.3.3"
+    "validator": "^13.7.0"
   },
   "scripts": {
     "start": "nodemon index.js",
