@@ -1,6 +1,6 @@
 
 
-const Informasi_itb = () => {
+const InformasiItb = () => {
     return(
         <div>
             <p>Informasi</p>
@@ -8,4 +8,4 @@ const Informasi_itb = () => {
     )
 }
 
-export default Informasi_itb;
+export default InformasiItb;
