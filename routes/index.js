@@ -1,6 +1,6 @@
-const router = require('express').Router()
-const db = require('../database/db')
+const user = require('./user')
+const registration = require('./registration')
+const post = require('./post')
 
-// router.get()
 
-module.exports = router
+module.exports = {user, registration, post}

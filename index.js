@@ -7,7 +7,10 @@ const routes = require('./routes/index')
 
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
-app.use("", routes)
+app.use("/user", routes.user)
+app.use("/registration", routes.registration)
+app.use("/post", routes.post)
+
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
