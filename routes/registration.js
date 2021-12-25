@@ -6,8 +6,7 @@ const registController = require('../controller/registration')
 // TODO implement user_id dari cookie
 router.post("/", async (req,res)=>{
     try{
-        await db('registration')
-            .insert(req.body)
+        await registController.insert(req.body)
         res.status(200).json('Yey berhasil')
     }catch (e) {
         res.status(500).json({error: e})
