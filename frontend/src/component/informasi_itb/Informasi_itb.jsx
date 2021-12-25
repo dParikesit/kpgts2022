@@ -1,9 +1,12 @@
-
+import Footer from "../komponen_umum/Footer";
+import Navbar from "../komponen_umum/Navbar";
 
 const Informasi_itb = () => {
     return(
         <div>
-            <p>Informasi</p>
+            <Navbar></Navbar>
+            <p>lorem</p>
+            <Footer></Footer>
         </div>
     )
 }
