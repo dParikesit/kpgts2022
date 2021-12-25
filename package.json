@@ -12,9 +12,12 @@
     "pg": "^8.7.1"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "build": "cd frontend && yarn && yarn build",
     "knexMigrate": "knex migrate:latest",
     "knexRollback": "knex migrate:rollback"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
