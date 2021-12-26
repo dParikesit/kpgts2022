@@ -1,4 +1,4 @@
-const db = require('../database/db');
+const db = require('../database/db')['db'];
 
 function insert(data){
     return db('registration').insert(data)

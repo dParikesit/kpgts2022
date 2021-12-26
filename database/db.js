@@ -1,10 +1,12 @@
 const session = require('express-session');
 const KnexSessionStore = require('connect-session-knex')(session);
-const Knex = require('knex');
-const db = require('../knexfile');
-global.knex = Knex(db[environment]);
 
-const knex = Knex({
+const environment = process.env.NODE_ENV || 'development';
+const configuration = require('../knexfile')[environment];
+
+const db = require('knex')(configuration)
+
+const knex = require('knex')({
     client: 'pg',
     connection: {
         host: process.env.DB_HOST,
@@ -13,10 +15,9 @@ const knex = Knex({
         database: process.env.DB_DATABASE,
     },
 });
-
 const store = new KnexSessionStore({
     knex,
     tablename: 'sessions', // optional. Defaults to 'sessions'
 });
 
-module.exports = store;
+module.exports = {db, store};

@@ -1,4 +1,4 @@
-const db = require('../database/db');
+const db = require('../database/db')['db'];
 const router = require('express').Router();
 const registController = require('../controller/registration')
 
