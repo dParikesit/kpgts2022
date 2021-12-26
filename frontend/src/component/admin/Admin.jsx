@@ -1,11 +1,9 @@
-import Footer from "../komponen_umum/Footer";
 import Upload_Berita from "./Upload_berita";
 import Tabel from "./Tabel";
 
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
