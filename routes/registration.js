@@ -30,4 +30,16 @@ router.get("/search", async (req,res)=>{
     }
 })
 
+router.put("/verif", async (req, res) => {
+    try {
+        let userId = req.body.id;
+        let val = true;
+        const data = await registController.findAndUpdate('id', userId, 'verified', val);
+        res.status(200).json(data);
+    } catch(e) {
+        res.status(500).json({error : e});
+    }
+});
+
+
 module.exports = router

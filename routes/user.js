@@ -93,7 +93,7 @@ router.post("/login", (req, res) => {
             if (user) {
                 bcrypt.compare(req.body.password, user.password, (error, response) => {
                     if (response) {
-                        req.session.userId = user.id;
+                        req.session.sid = user.id;
                         req.session.role = user.role;
                         console.log(req.session);
                         res.status(200).json({message : 'Logged in.'});
@@ -135,8 +135,9 @@ router.post("/login", (req, res) => {
 });
 
 // Logout, akses dengan endpoint /api/user/logout
-router.get('/logout',(req,res) => {
+router.post('/logout',(req,res) => {
     req.session.destroy();
+    req.logOut();
     res.redirect('/');
 });
 
