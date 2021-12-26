@@ -144,8 +144,6 @@ const Navbar = () => {
                     </Link>
                   </div>
                 </div> 
-
-                <DrawerComponent />
             </Toolbar>
           </AppBar>
         )}
