@@ -6,6 +6,7 @@ const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const store = require('./database/db');
 const app = express();
 
 app.use(express.json());
@@ -33,6 +34,7 @@ app.use( session({
     secret: process.env.SESSION_SECRET,
     saveUninitialized:true,
     cookie: {
+      store: store,
       httpOnly: true,
       secure: true,
       maxAge: 1000 * 60 * 60 * 24 // Time is in miliseconds

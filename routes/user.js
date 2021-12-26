@@ -102,7 +102,7 @@ router.post("/login", (req, res) => {
                     }
                 });
                 } else {
-                    res.json({ message: "User doesn't exist" });
+                    res.json({ message: "User doesn't exist. Please try to login again." });
                 }
             }
         );
