@@ -17,8 +17,15 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "knex": "^0.95.14",
+<<<<<<< HEAD
     "material-ui-search-bar": "^1.0.0",
     "pg": "^8.7.1"
+=======
+    "pg": "^8.7.1",
+    "react-icons": "^4.3.1",
+    "react-router-dom": "^6.2.1",
+    "styled-components": "^5.3.3"
+>>>>>>> e844a5b9ae5f552d9ce3e5bcd6466b81ecabb67a
   },
   "scripts": {
     "start": "nodemon index.js",

@@ -8,16 +8,15 @@ import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from '@mui/material/IconButton';
 
-const useStyles = makeStyles(()=>({
+const useStyles = makeStyles((theme)=>({
     link:{
-        textDecoration:"none",
         color: "black",
         fontFamily: 'Ramaraja',
         fontSize: "20px",
         "&:hover": {
             color: "blue",
             borderBottom: "1px solid black"
-          },
+        },
     },
     icon:{
         color: "white"
@@ -26,8 +25,8 @@ const useStyles = makeStyles(()=>({
         flexShrink: 0,
         width: 400
     },
-    paper: {
-        background: '#927759',
+    drawerPaper: {
+        background: "blue",
         color: 'white',
     }
 }));
@@ -38,7 +37,17 @@ function DrawerComponent() {
 
     return (
     <>
-        <Drawer className={classes.drawer} classes={{paper: classes.paper}} open={openDrawer}  onClose={() => setOpenDrawer(false)} >
+        <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+            <MenuIcon />
+        </IconButton>
+        <Drawer 
+            className={classes.drawer} 
+            classes={{
+                paper: classes.drawerPaper
+            }} 
+            open={openDrawer}  
+            onClose={() => setOpenDrawer(false)} 
+        >
             <List>
             <ListItem onClick={() => setOpenDrawer(false)}>
                 <ListItemText>
@@ -67,9 +76,6 @@ function DrawerComponent() {
             </ListItem>
             </List>
         </Drawer>
-        <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
-            <MenuIcon />
-        </IconButton>
     </>
   );
 }
