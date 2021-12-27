@@ -78,8 +78,8 @@ router.post("/signup", (req,res) => {
 });
 
 router.get("/login", (req, res) => {
-    if (req.session.user) {
-        res.send({ loggedIn: true, user: req.session.user });
+    if (req.session) {
+        res.send({ loggedIn: true, user: req.session});
     } else {
         res.send({ loggedIn: false });
     }
@@ -93,9 +93,10 @@ router.post("/login", (req, res) => {
             if (user) {
                 bcrypt.compare(req.body.password, user.password, (error, response) => {
                     if (response) {
-                        req.session.sid = user.id;
+                        req.session.uid = user.id;
                         req.session.role = user.role;
                         console.log(req.session);
+                        // req.session.save()
                         res.status(200).json({message : 'Logged in.'});
                     } else {
                         res.json({ message: "Wrong email/password combination!" });

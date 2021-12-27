@@ -1,4 +1,5 @@
 require('dotenv').config()
+const environment = process.env.NODE_ENV || 'development';
 
 const path = require("path");
 const routes = require('./routes/index')
@@ -15,7 +16,7 @@ app.use( session({
   store: store,
   cookie: {
     httpOnly: true,
-    secure: true,
+    secure: !(environment==='development'),
     maxAge: 1000 * 60 * 60 * 24 // Time is in miliseconds
 },
   resave: false
