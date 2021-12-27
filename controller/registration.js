@@ -12,8 +12,12 @@ function getFiltered(colName, query){
     return db('registration').where(colName, query);
 }
 
+function getById(id){
+    return db('registration').where('user_id', id);
+}
+
 function findAndUpdate(colName, query, colNameToUpdate, val) {
     return db('registration').where(colName, query).update({ colNameToUpdate: val });
 }
 
-module.exports = {getAll, getFiltered, insert, findAndUpdate}
+module.exports = {getAll, getFiltered, getById, insert, findAndUpdate}
