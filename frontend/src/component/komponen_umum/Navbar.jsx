@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
   logoMobile: {
     cursor: "pointer",
+    flexGrow: '1'
   },
   link: {
     margin: "auto",
@@ -53,7 +54,8 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     color: "white",
-    marginLeft: theme.spacing(3),
+    marginLeft: theme.spacing(7),
+    textDecoration: "none",
   },
   buttonArea: {
     marginLeft: "auto",
@@ -117,24 +119,24 @@ const Navbar = () => {
         {isMobile ? (
           <>
             <CssBaseline />
-            <AppBar position="static" style={{ background:"#927759", fontFamily: "Ramaraja" }}>
+            <AppBar position="static" style={{ background:"#927759", fontFamily: "Ramaraja", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px" }}>
               <Toolbar>
+                <Typography variant="h4" className={classes.logoMobile} noWrap>
+                  Logo
+                </Typography>
                 <IconButton 
                     onClick={toggleDrawer}
                     color="inherit"
                     aria-label="open drawer"
-                    edge="start"
+                    edge="end"
                     className={classes.menuButton} 
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="h4" className={classes.logoMobile} noWrap>
-                  Logo
-                </Typography>
               </Toolbar>
             </AppBar>
             <Drawer 
-              anchor="left"
+              anchor="right"
               open={open}  
               onClose={toggleDrawer}
             >
@@ -152,21 +154,21 @@ const Navbar = () => {
                 </ListItem >
                 <ListItem onClick={toggleDrawer}>
                     <ListItemText>
-                        <Link to="/informasi" className={classes.linkDrawer}>Tentang Kita</Link>
+                        <Link to="/informasi" className={classes.linkDrawer}>Informasi ITB dan KPGTS</Link>
                     </ListItemText>
                 </ListItem>
                 <Divider sx={{ borderBottomWidth: 1, background: 'black', marginBottom: '10px', marginTop:'10px' }} ></Divider>
                 <ListItem onClick={toggleDrawer}>
                     <ListItemText>
                       <Link to="/login" className={classes.button}>
-                        <ColorButton size="medium" variant="contained">Login</ColorButton>
+                        <ColorButton size="medium" variant="contained" style={{ width:"25vw" }}>Login</ColorButton>
                       </Link>
                     </ListItemText>
                 </ListItem>
                 <ListItem onClick={toggleDrawer}>
                     <ListItemText>
                       <Link to="/register"  className={classes.button}>
-                        <ColorButton size="medium" variant="contained">Register</ColorButton>
+                        <ColorButton size="medium" variant="contained" style={{ width:"25vw" }}>Register</ColorButton>
                       </Link>
                     </ListItemText>
                 </ListItem>
@@ -176,7 +178,7 @@ const Navbar = () => {
           </>
           // Kalo bukan mobile
         ) : (
-          <AppBar position="static" style={{ background:"#927759", fontFamily: "Ramaraja" }}>
+          <AppBar position="static" style={{ background:"#927759", fontFamily: "Ramaraja", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px" }}>
             <CssBaseline />
             <Toolbar>
               <Typography variant="h4" className={classes.logo} noWrap>
@@ -191,7 +193,7 @@ const Navbar = () => {
                       Berita
                     </Link>
                     <Link to="/informasi" className={classes.link}>
-                      Tentang KPGTS
+                      Informasi ITB dan KPGTS
                     </Link>
                   </div>
                   <div className={classes.buttonArea}>
