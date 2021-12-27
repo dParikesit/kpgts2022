@@ -19,9 +19,9 @@ router.post("/", async (req,res)=>{
 router.get("/search", async (req,res)=>{
     try{
         if(req.query.nama){
-            const data = await registController.getOne('nama', req.query.nama)
+            const data = await registController.getFiltered('nama', req.query.nama)
             res.status(200).json(data)
-        } else{
+        }else{
             const data = await registController.getAll()
             res.status(200).json(data)
         }
