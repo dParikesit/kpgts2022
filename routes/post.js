@@ -53,7 +53,7 @@ router.post("/add", upload.single('image'),  async (req, res) => {
                 title: req.body.title,
                 content: req.body.content,
                 picture:'',
-                user_id: req.session.sid // FIX INI
+                user_id: req.session.uid // FIX INI
             }
             if(req.file)
                 picture = `post-${path.extname(req.file.originalname)}`;
