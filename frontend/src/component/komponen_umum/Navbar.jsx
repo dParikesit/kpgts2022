@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
@@ -8,8 +8,14 @@ import Typography from '@mui/material/Typography';
 import { makeStyles } from '@material-ui/core/styles' 
 import {useTheme} from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import DrawerComponent from "./Drawer";
 import { styled } from '@mui/material/styles';
+import MenuIcon from "@material-ui/icons/Menu";
+import IconButton from '@mui/material/IconButton';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import { Divider } from '@mui/material';
 
 const useStyles = makeStyles(theme => ({
   navlinks: {
@@ -22,7 +28,6 @@ const useStyles = makeStyles(theme => ({
   },
   logoMobile: {
     cursor: "pointer",
-    flexGrow: "1",
   },
   link: {
     margin: "auto",
@@ -31,8 +36,19 @@ const useStyles = makeStyles(theme => ({
     fontSize: "24px",
     marginLeft: theme.spacing(8),
     "&:hover": {
-      color: "yellow",
-      borderBottom: "1px solid black"
+      color: "black",
+      borderBottom: "0.2px solid black"
+    },
+  },
+  linkDrawer: {
+    margin: "auto",
+    textDecoration: "none",
+    color: "inherit",
+    fontFamily: "Ramaraja",
+    fontSize: "20px",
+    marginLeft: theme.spacing(3),
+    "&:active": {
+      color: 'white'
     },
   },
   button: {
@@ -46,44 +62,21 @@ const useStyles = makeStyles(theme => ({
   },
   linkArea: {
     display: "flex",
-  }
+  },
+  icon:{
+    color: "white"
+  },
+  marginRight: theme.spacing(2),
+  [theme.breakpoints.up("md")]: {
+    display: "none"
+  },
+  menuButton: {
+      marginLeft: theme.spacing(2),
+      [theme.breakpoints.up("md")]: {
+        display: "none"
+      }
+  },
 }));
-
-const BootstrapButton = styled(Button)({
-  boxShadow: 'none',
-  textTransform: 'none',
-  fontSize: 16,
-  padding: '6px 12px',
-  border: '1px solid',
-  lineHeight: 1.5,
-  backgroundColor: '#0063cc',
-  borderColor: '#0063cc',
-  fontFamily: [
-    '-apple-system',
-    'BlinkMacSystemFont',
-    '"Segoe UI"',
-    'Roboto',
-    '"Helvetica Neue"',
-    'Arial',
-    'sans-serif',
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
-  ].join(','),
-  '&:hover': {
-    backgroundColor: '#0069d9',
-    borderColor: '#0062cc',
-    boxShadow: 'none',
-  },
-  '&:active': {
-    boxShadow: 'none',
-    backgroundColor: '#0062cc',
-    borderColor: '#005cbf',
-  },
-  '&:focus': {
-    boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
-  },
-});
 
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText('#CB7B40'),
@@ -96,26 +89,92 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
+const StyledDiv = styled('div')(() => ({
+  display: 'flex',
+  flex: '1',
+  background: '#927759'
+}))
+
 const Navbar = () => {
     const classes = useStyles();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+    const [open, setOpen] = useState(false);
+    const toggleDrawer = event => {
+      if (
+        event.type === "keydown" &&
+        (event.key === "Tab" || event.key === "Shift")
+      ) {
+        return;
+      }
+  
+      setOpen(!open);
+    };
+
 
     return (
       <>
         {isMobile ? (
           <>
+            <CssBaseline />
             <AppBar position="static" style={{ background:"#927759", fontFamily: "Ramaraja" }}>
-              <CssBaseline />
               <Toolbar>
+                <IconButton 
+                    onClick={toggleDrawer}
+                    color="inherit"
+                    aria-label="open drawer"
+                    edge="start"
+                    className={classes.menuButton} 
+                >
+                    <MenuIcon />
+                </IconButton>
                 <Typography variant="h4" className={classes.logoMobile} noWrap>
                   Logo
                 </Typography>
-                <DrawerComponent />
               </Toolbar>
-              
             </AppBar>
+            <Drawer 
+              anchor="left"
+              open={open}  
+              onClose={toggleDrawer}
+            >
+              <StyledDiv>
+                <List>
+                <ListItem onClick={toggleDrawer}>
+                    <ListItemText>
+                        <Link to="/" className={classes.linkDrawer}>Home</Link>
+                    </ListItemText>
+                </ListItem>
+                <ListItem onClick={toggleDrawer}>
+                    <ListItemText>
+                        <Link to="/berita" className={classes.linkDrawer}>Berita</Link>
+                    </ListItemText>
+                </ListItem >
+                <ListItem onClick={toggleDrawer}>
+                    <ListItemText>
+                        <Link to="/informasi" className={classes.linkDrawer}>Tentang Kita</Link>
+                    </ListItemText>
+                </ListItem>
+                <Divider sx={{ borderBottomWidth: 1, background: 'black', marginBottom: '10px', marginTop:'10px' }} ></Divider>
+                <ListItem onClick={toggleDrawer}>
+                    <ListItemText>
+                      <Link to="/login" className={classes.button}>
+                        <ColorButton size="medium" variant="contained">Login</ColorButton>
+                      </Link>
+                    </ListItemText>
+                </ListItem>
+                <ListItem onClick={toggleDrawer}>
+                    <ListItemText>
+                      <Link to="/register"  className={classes.button}>
+                        <ColorButton size="medium" variant="contained">Register</ColorButton>
+                      </Link>
+                    </ListItemText>
+                </ListItem>
+                </List>
+                </StyledDiv>
+            </Drawer>
           </>
+          // Kalo bukan mobile
         ) : (
           <AppBar position="static" style={{ background:"#927759", fontFamily: "Ramaraja" }}>
             <CssBaseline />
