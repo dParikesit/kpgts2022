@@ -7,7 +7,7 @@ const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-const store = require('./database/db')['store'];
+const {store} = require('./database/db');
 const app = express();
 
 app.use( session({

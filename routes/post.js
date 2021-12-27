@@ -1,4 +1,4 @@
-const db = require('../database/db')['db'];
+const {db} = require('../database/db');
 const multer = require('multer');
 const {body, validationResult} = require('express-validator');
 const router = require('express').Router();

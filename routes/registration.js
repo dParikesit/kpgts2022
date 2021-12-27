@@ -1,6 +1,7 @@
-const db = require('../database/db')['db'];
+const {db} = require('../database/db');
 const router = require('express').Router();
 const registController = require('../controller/registration')
+const {adminChecker} = require('../middleware/role-checker')
 
 // Create TO Participant
 // TODO implement user_id dari cookie
@@ -30,8 +31,9 @@ router.get("/search", async (req,res)=>{
     }
 })
 
-router.put("/verif", async (req, res) => {
+router.put("/verif", adminChecker, async (req, res) => {
     try {
+        console.log("Halo")
         let userId = req.body.id;
         let val = true;
         const data = await registController.findAndUpdate('id', userId, 'verified', val);
