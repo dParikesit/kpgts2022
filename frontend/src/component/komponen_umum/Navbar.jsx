@@ -102,50 +102,53 @@ const Navbar = () => {
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
     return (
-        <AppBar position="static" style={{ background:"#927759", fontFamily: "Ramaraja" }}>
-          <CssBaseline />
-          <Toolbar>
-            {isMobile ? (
-              <Typography variant="h4" className={classes.logoMobile}>
+      <>
+        {isMobile ? (
+          <>
+            <AppBar position="static" style={{ background:"#927759", fontFamily: "Ramaraja" }}>
+              <CssBaseline />
+              <Toolbar>
+                <Typography variant="h4" className={classes.logoMobile} noWrap>
+                  Logo
+                </Typography>
+                <DrawerComponent />
+              </Toolbar>
+              
+            </AppBar>
+          </>
+        ) : (
+          <AppBar position="static" style={{ background:"#927759", fontFamily: "Ramaraja" }}>
+            <CssBaseline />
+            <Toolbar>
+              <Typography variant="h4" className={classes.logo} noWrap>
                 Logo
               </Typography>
-            ) : (
-              <Typography variant="h4" className={classes.logo}>
-                Logo
-              </Typography>
-            )}
-            
-            {/* <Typography variant="h4" className={classes.logo}>
-              Logo
-            </Typography> */}
-
-            {isMobile ? (
-              <DrawerComponent />
-            ) : (
               <div className={classes.navlinks}>
-                <div className={classes.linkArea}>
-                  <Link to="/" className={classes.link}>
-                    Home
-                  </Link>
-                  <Link to="/berita" className={classes.link}>
-                    Berita
-                  </Link>
-                  <Link to="/informasi" className={classes.link}>
-                    Tentang Kita
-                  </Link>
-                </div>
-                <div className={classes.buttonArea}>
-                  <Link to="/login/peserta" className={classes.button}>
-                    <ColorButton size="medium" variant="contained">Login</ColorButton>
-                  </Link>
-                  <Link to="/register"  className={classes.button}>
-                    <ColorButton size="medium" variant="contained">Register</ColorButton>
-                  </Link>
-                </div>
-              </div> 
-            )}
-          </Toolbar>
-        </AppBar>
+                  <div className={classes.linkArea}>
+                    <Link to="/" className={classes.link}>
+                      Home
+                    </Link>
+                    <Link to="/berita" className={classes.link}>
+                      Berita
+                    </Link>
+                    <Link to="/informasi" className={classes.link}>
+                      Tentang KPGTS
+                    </Link>
+                  </div>
+                  <div className={classes.buttonArea}>
+                    <Link to="/login" className={classes.button}>
+                      <ColorButton size="medium" variant="contained">Login</ColorButton>
+                    </Link>
+                    <Link to="/register"  className={classes.button}>
+                      <ColorButton size="medium" variant="contained">Register</ColorButton>
+                    </Link>
+                  </div>
+                </div> 
+            </Toolbar>
+          </AppBar>
+        )}
+        
+      </>
       );
 }
 
