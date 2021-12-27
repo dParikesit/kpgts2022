@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import "./Register.css"
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -257,7 +255,7 @@ export default function Register() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl component="fieldset">
-                    <FormLabel component="legend">Jurusan</FormLabel>
+                    <FormLabel component="legend">Jurusan (ini untuk Try Out)</FormLabel>
                     <RadioGroup
                         aria-label="jurusan"
                         defaultValue="IPA"
@@ -265,7 +263,6 @@ export default function Register() {
                     >
                         <FormControlLabel value="ipa" control={<Radio />} label="IPA" />
                         <FormControlLabel value="ips" control={<Radio />} label="IPS" />
-                        <FormControlLabel value="bahasa" control={<Radio />} label="BAHASA" />
                     </RadioGroup>
                 </FormControl>
               </Grid>
@@ -287,7 +284,7 @@ export default function Register() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Daftar
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

@@ -77,7 +77,6 @@ const Admin = () => {
                                 <Upload_Berita></Upload_Berita>
                             </TabPanel>
                         </Grid>
-                     
                     </Grid>
                 </Box>
             </div>       

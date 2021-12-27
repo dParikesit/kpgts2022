@@ -1,16 +1,19 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function Copyright(props) {
   return (
@@ -27,15 +30,25 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Login() {
+export default function Lupa_Password() {
+    const [open, setOpen] = React.useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
       email: data.get('email'),
-      password: data.get('password'),
     });
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -51,7 +64,7 @@ export default function Login() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Login
+            Lupa Password
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -59,20 +72,10 @@ export default function Login() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Masukkan alamat email"
               name="email"
               autoComplete="email"
               autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
             />
             <Button
               type="submit"
@@ -80,17 +83,17 @@ export default function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Login
+              Submit
             </Button>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                Anda akan dikirimi link untuk mengubah password anda ke email anda
+                </Alert>
+            </Snackbar>
             <Grid container>
               <Grid item xs>
-                <Link href="/lupa_password" variant="body2">
-                  Lupa password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/register" variant="body2">
-                  {"Belum punya akun? Yuk daftar sekarang"}
+                <Link href="/login" variant="body2">
+                  Udah ingat passwordnya? Yuk Login
                 </Link>
               </Grid>
             </Grid>

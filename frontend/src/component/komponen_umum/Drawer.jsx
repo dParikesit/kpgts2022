@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme)=>({
         fontSize: "20px",
         "&:hover": {
             color: "blue",
-            borderBottom: "1px solid black"
         },
     },
     icon:{
@@ -28,16 +27,37 @@ const useStyles = makeStyles((theme)=>({
     drawerPaper: {
         background: "blue",
         color: 'white',
-    }
+    },
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("md")]: {
+      display: "none"
+    },
 }));
 
 function DrawerComponent() {
-    const [openDrawer, setOpenDrawer] = useState(false);
+    const [open, setOpen] = useState(false);
     const classes = useStyles();
 
+    const toggleDrawer = event => {
+        if (
+          event.type === "keydown" &&
+          (event.key === "Tab" || event.key === "Shift")
+        ) {
+          return;
+        }
+    
+        setOpen(!open);
+      };
+
     return (
-    <>
-        <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+    <div>
+        <IconButton 
+            onClick={toggleDrawer}
+            color="inherit"
+            aria-label="open drawer"
+            edge="end"
+            className={classes.menuButton} 
+        >
             <MenuIcon />
         </IconButton>
         <Drawer 
@@ -45,38 +65,39 @@ function DrawerComponent() {
             classes={{
                 paper: classes.drawerPaper
             }} 
-            open={openDrawer}  
-            onClose={() => setOpenDrawer(false)} 
+            anchor="left"
+            open={open}  
+            onClose={toggleDrawer}
         >
             <List>
-            <ListItem onClick={() => setOpenDrawer(false)}>
+            <ListItem onClick={toggleDrawer}>
                 <ListItemText>
-                <Link to="/" className={classes.link}>Home</Link>
+                    <Link to="/" className={classes.link}>Home</Link>
                 </ListItemText>
             </ListItem>
-            <ListItem onClick={() => setOpenDrawer(false)}>
+            <ListItem onClick={toggleDrawer}>
                 <ListItemText>
-                <Link to="/berita" className={classes.link}>Berita</Link>
+                    <Link to="/berita" className={classes.link}>Berita</Link>
                 </ListItemText>
             </ListItem >
-            <ListItem onClick={() => setOpenDrawer(false)}>
+            <ListItem onClick={toggleDrawer}>
                 <ListItemText>
-                <Link to="/informasi" className={classes.link}>Tentang Kita</Link>
+                    <Link to="/informasi" className={classes.link}>Tentang Kita</Link>
                 </ListItemText>
             </ListItem>
-            <ListItem onClick={() => setOpenDrawer(false)}>
+            <ListItem onClick={toggleDrawer}>
                 <ListItemText>
-                <Link to="/login/peserta" className={classes.link}>Login</Link>
+                    <Link to="/login/peserta" className={classes.link}>Login</Link>
                 </ListItemText>
             </ListItem>
-            <ListItem onClick={() => setOpenDrawer(false)}>
+            <ListItem onClick={toggleDrawer}>
                 <ListItemText>
-                <Link to="/register" className={classes.link}>Register</Link>
+                    <Link to="/register" className={classes.link}>Register</Link>
                 </ListItemText>
             </ListItem>
             </List>
         </Drawer>
-    </>
+    </div>
   );
 }
 export default DrawerComponent;
