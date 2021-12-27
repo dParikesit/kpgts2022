@@ -12,8 +12,8 @@ const app = express();
 app.use( session({
   secret: process.env.SESSION_SECRET,
   saveUninitialized:true,
+  store: store,
   cookie: {
-    store: store,
     httpOnly: true,
     secure: true,
     maxAge: 1000 * 60 * 60 * 24 // Time is in miliseconds
