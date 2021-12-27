@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   link: {
     margin: "auto",
     textDecoration: "none",
-    color: "white",
+    color: "#554B3F",
     fontSize: "24px",
     marginLeft: theme.spacing(8),
     "&:hover": {
@@ -44,18 +44,19 @@ const useStyles = makeStyles(theme => ({
   linkDrawer: {
     margin: "auto",
     textDecoration: "none",
-    color: "inherit",
+    color: "#554B3F",
     fontFamily: "Ramaraja",
     fontSize: "20px",
     marginLeft: theme.spacing(3),
     "&:active": {
-      color: 'white'
+      color: 'black'
     },
   },
   button: {
-    color: "white",
-    marginLeft: theme.spacing(7),
+    color: "#554B3F",
+    marginLeft: theme.spacing(6),
     textDecoration: "none",
+    
   },
   buttonArea: {
     marginLeft: "auto",
@@ -66,7 +67,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
   },
   icon:{
-    color: "white"
+    color: "#554B3F"
   },
   marginRight: theme.spacing(2),
   [theme.breakpoints.up("md")]: {
@@ -81,20 +82,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ColorButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText('#CB7B40'),
+  color: theme.palette.getContrastText('#554B3F'),
   fontFamily: 'Ramaraja',
   fontSize: "18px",
   padding: "auto",
-  backgroundColor: '#CB7B40',
+  backgroundColor: '#3AA8B5',
   '&:hover': {
-    backgroundColor: '#d59566',
+    backgroundColor: '#94D3DA',
   },
 }));
 
 const StyledDiv = styled('div')(() => ({
   display: 'flex',
   flex: '1',
-  background: '#927759'
+  background: '#94D3DA'
 }))
 
 const Navbar = () => {
@@ -119,7 +120,7 @@ const Navbar = () => {
         {isMobile ? (
           <>
             <CssBaseline />
-            <AppBar position="static" style={{ background:"#927759", fontFamily: "Ramaraja", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px" }}>
+            <AppBar position="static" style={{ background:"#94D3DA", fontFamily: "Ramaraja", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px" }}>
               <Toolbar>
                 <Typography variant="h4" className={classes.logoMobile} noWrap>
                   Logo
@@ -161,14 +162,14 @@ const Navbar = () => {
                 <ListItem onClick={toggleDrawer}>
                     <ListItemText>
                       <Link to="/login" className={classes.button}>
-                        <ColorButton size="medium" variant="contained" style={{ width:"25vw" }}>Login</ColorButton>
+                        <ColorButton size="medium" variant="contained" style={{ width:"30vw" }}>Login</ColorButton>
                       </Link>
                     </ListItemText>
                 </ListItem>
                 <ListItem onClick={toggleDrawer}>
                     <ListItemText>
                       <Link to="/register"  className={classes.button}>
-                        <ColorButton size="medium" variant="contained" style={{ width:"25vw" }}>Register</ColorButton>
+                        <ColorButton size="medium" variant="contained" style={{ width:"30vw" }}>Register</ColorButton>
                       </Link>
                     </ListItemText>
                 </ListItem>
@@ -178,7 +179,7 @@ const Navbar = () => {
           </>
           // Kalo bukan mobile
         ) : (
-          <AppBar position="static" style={{ background:"#927759", fontFamily: "Ramaraja", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px" }}>
+          <AppBar position="static" style={{ background:"#94D3DA", fontFamily: "Ramaraja", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px" }}>
             <CssBaseline />
             <Toolbar>
               <Typography variant="h4" className={classes.logo} noWrap>
