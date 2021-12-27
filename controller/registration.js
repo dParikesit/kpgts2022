@@ -20,4 +20,9 @@ function findAndUpdate(colName, query, colNameToUpdate, val) {
     return db('registration').where(colName, query).update({ colNameToUpdate: val });
 }
 
-module.exports = {getAll, getFiltered, getById, insert, findAndUpdate}
+function invertVerifBool(id){
+    return db('registration').where({user_id: id}).update({
+        verified: db.raw('NOT ??',  ['verified'])
+    })
+}
+module.exports = {getAll, getFiltered, getById, insert, findAndUpdate, invertVerifBool}
