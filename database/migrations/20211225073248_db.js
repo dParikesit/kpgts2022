@@ -28,10 +28,16 @@ exports.up = function(knex) {
           table.uuid('user_id').references('id').inTable('user')
           table.timestamps(true,true)
       })
+      .createTable('sessions', function (table) {
+          table.string('sid').primary()
+          table.json('sess').notNullable()
+          table.timestamp('expired').notNullable().index()
+      })
 };
 
 exports.down = function(knex) {
   return knex.schema
+      .dropTable('sessions')
       .dropTable('registration')
       .dropTable('post')
       .dropTable('user')
