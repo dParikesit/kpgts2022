@@ -92,7 +92,7 @@ const Admin = () => {
                                 <Tabel></Tabel>
                             </TabPanel>
                             <TabPanel value={value} index={1}>
-                                <Upload_Berita></Upload_Berita>
+                                <Upload_Berita />
                             </TabPanel>
                         </Grid>
                     </Grid>
