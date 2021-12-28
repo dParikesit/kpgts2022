@@ -1,9 +1,6 @@
-const express = require('express');
-const db = require('../database/db')['db'];
 const router = require('express').Router()
 const User = require("../controller/user");
 const {body, validationResult} = require('express-validator');
-var session = require('express-session');
 const bcrypt = require("bcrypt");
 
 // Signup, akses dengan endpoint /api/user/signup
@@ -15,41 +12,6 @@ router.post("/signup", (req,res) => {
         res.status(422).json({ errors: errors.array() });
         return;
     }
-
-    // db.query(
-    //     "SELECT * FROM user where email = ?;",
-    //     req.body.email,
-    //     (err, result) => {
-    //         if (err) {
-    //             console.log(err);
-    //         }
-
-    //         if (result.length > 0) {
-    //             bcrypt.hash(req.body.password, 10, (err, hash) => {
-    //                 if (err) {
-    //                     console.log(err);
-    //                 }
-
-    //                 db.query(
-    //                     "INSERT INTO user (name, email, password, role) VALUES (?,?,?,?)",
-    //                     [req.body.name, req.body.email, hash, req.body.role],
-    //                     (err, result) => {
-    //                         if (err) {
-    //                             console.log(err);
-    //                         }
-                            
-    //                         if (result) {
-    //                             res.status(200).json({message : 'HMMM smoga bisa'});
-    //                         }
-    //                     }
-    //                 );    
-    //             });
-    //         } else {
-    //             res.json({ message: "Email already exist. Please choose another email." });
-    //         }
-    //     }       
-    // )
-
 
     User.getOneEmail(req.body.email)
         .then(user => {
@@ -78,8 +40,8 @@ router.post("/signup", (req,res) => {
 });
 
 router.get("/login", (req, res) => {
-    if (req.session.user) {
-        res.send({ loggedIn: true, user: req.session.user });
+    if (req.session) {
+        res.send({ loggedIn: true, user: req.session});
     } else {
         res.send({ loggedIn: false });
     }
@@ -93,9 +55,10 @@ router.post("/login", (req, res) => {
             if (user) {
                 bcrypt.compare(req.body.password, user.password, (error, response) => {
                     if (response) {
-                        req.session.sid = user.id;
+                        req.session.uid = user.id;
                         req.session.role = user.role;
                         console.log(req.session);
+                        // req.session.save()
                         res.status(200).json({message : 'Logged in.'});
                     } else {
                         res.json({ message: "Wrong email/password combination!" });
@@ -105,30 +68,6 @@ router.post("/login", (req, res) => {
                 res.json({ message: "User doesn't exist. Please try to login again." });
             }
         });
-
-        // db.query(
-        //     "SELECT * FROM user WHERE email = ?;",
-        //     email,
-        //     (err, result) => {
-        //         if (err) {
-        //             console.log(err);
-        //         }
-        
-        //         if (result.length > 0) {
-        //             bcrypt.compare(req.body.password, result[0].password, (error, response) => {
-        //             if (response) {
-        //                 req.session.user = result; //Creating a session
-        //                 console.log(req.session.user);
-        //                 res.status(200).json({result, message : 'HMMM smoga bisa'});
-        //             } else {
-        //                 res.json({ message: "Wrong email/password combination!" });
-        //             }
-        //         });
-        //         } else {
-        //             res.json({ message: "User doesn't exist. Please try to login again." });
-        //         }
-        //     }
-        // );
     } catch (e) {
         res.status(500).json({error: e})
     }    
@@ -136,9 +75,9 @@ router.post("/login", (req, res) => {
 
 // Logout, akses dengan endpoint /api/user/logout
 router.post('/logout',(req,res) => {
-    req.session.destroy();
-    req.logOut();
-    res.redirect('/');
+    req.session.destroy(function() {
+        res.clearCookie('connect.sid', { path: '/' }).status(200).json('Cookie deleted.');
+    });
 });
 
 module.exports = router

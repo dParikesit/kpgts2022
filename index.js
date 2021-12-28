@@ -1,4 +1,5 @@
 require('dotenv').config()
+const environment = process.env.NODE_ENV || 'development';
 
 const path = require("path");
 const routes = require('./routes/index')
@@ -6,16 +7,16 @@ const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-const store = require('./database/db')['store'];
+const {store} = require('./database/db');
 const app = express();
 
 app.use( session({
   secret: process.env.SESSION_SECRET,
   saveUninitialized:true,
+  store: store,
   cookie: {
-    store: store,
     httpOnly: true,
-    secure: true,
+    secure: !(environment==='development'),
     maxAge: 1000 * 60 * 60 * 24 // Time is in miliseconds
 },
   resave: false
