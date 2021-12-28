@@ -12,11 +12,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+// Cek data di line 48
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="">
         KPGTS
       </Link>{' '}
       {new Date().getFullYear()}
@@ -25,9 +27,24 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+    typography: {
+        fontFamily: 'Ramaraja',
+        fontSize: 16
+    },
+    palette: {
+        background: {
+            default: "#F2EBCE"
+        },
+        primary: {
+            main: "#A7B560"
+        }
+    },
+});
 
 export default function Login() {
+
+// Cek data yang masuk di handleSubmit
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -39,7 +56,7 @@ export default function Login() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} >
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

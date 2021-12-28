@@ -11,6 +11,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
+// Ambil data dari line 54 
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -19,7 +21,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="">
         KPGTS
       </Link>{' '}
       {new Date().getFullYear()}
@@ -28,11 +30,27 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+
+const theme = createTheme({
+    typography: {
+        fontFamily: 'Ramaraja',
+        fontSize: 16
+    },
+    palette: {
+        background: {
+            default: "#F2EBCE"
+        },
+        primary: {
+            main: "#A7B560"
+        }
+    },
+});
+
 
 export default function Lupa_Password() {
     const [open, setOpen] = React.useState(false);
 
+// Ambil data dari bawah ini
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

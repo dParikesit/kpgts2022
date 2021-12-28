@@ -10,6 +10,7 @@ import Input from "@material-ui/core/Input";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import Box from '@mui/material/Box';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // Import untuk checkbox
 import Checkbox from '@mui/material/Checkbox';
@@ -24,6 +25,11 @@ import EditIcon from "@material-ui/icons/EditOutlined";
 import DoneIcon from "@material-ui/icons/DoneAllTwoTone";
 import RevertIcon from "@material-ui/icons/NotInterestedOutlined";
 import { TableContainer } from "@material-ui/core";
+
+// Susunan data yg dipakai ada di bawah ini
+// Untuk contoh data dapat dilihat di line 74
+// Untuk kirim email dapat dilihat pada line 270
+// Semangat
 
   const createData = (ID, nama, sekolah, jurusan, kontak, bukti_transfer, verified) => ({
     id: ID,
@@ -47,6 +53,21 @@ const CustomTableCell = ({ row, name, onChange }) => {
       </TableCell>
     );
   };
+
+  const theme = createTheme({
+    typography: {
+        fontFamily: 'Ramaraja',
+        fontSize: 16
+    },
+    palette: {
+        background: {
+            default: "#F2EBCE"
+        },
+        primary: {
+            main: "#A7B560"
+        }
+    },
+});
 
 const Tabel = () => {
 
@@ -133,6 +154,7 @@ const Tabel = () => {
     
       return (
         <div>
+            <ThemeProvider theme={theme} >
             <Paper>
                 <div style={{marginLeft:'3vw', marginTop:'0'}}>
                 <FormControl component="fieldset">
@@ -247,7 +269,6 @@ const Tabel = () => {
                                 
                                 <Button disabled={row.verified == "NO"} style={{marginTop:'0.5em',marginLeft:'0.75em', marginBottom:'1em'}} variant="outlined" >Kirim Email</Button>
                             
-                            
                             </Box>
                             </TableRow>
                         ))}
@@ -255,6 +276,7 @@ const Tabel = () => {
                     </Table>
                 </TableContainer>
             </Paper>
+            </ThemeProvider>
         </div>
       );
 }

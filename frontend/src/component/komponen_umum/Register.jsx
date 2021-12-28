@@ -16,150 +16,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
   
-/* export default function Form() {
-  
-  // States for registration
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [nomor, setNomor] = useState('');
-  const [sekolah, setSekolah] = useState('');
-  const [jurusan, setJurusan] = useState('');
-  const [alamat, setAlamat] = useState('');
-  const [password, setPassword] = useState('');
-  
-  // States for checking the errors
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
-  
-  // Handling the name change
-  const handleName = (e) => {
-    setName(e.target.value);
-    setSubmitted(false);
-  };
-
-  const handleNomor = (e) => {
-    setNomor(e.target.value);
-    setSubmitted(false);
-  };
-
-  const handleSekolah = (e) => {
-    setSekolah(e.target.value);
-    setSubmitted(false);
-  };
-
-  const handleJurusan = (e) => {
-    setJurusan(e.target.value);
-    setSubmitted(false);
-  };
-
-  const handleAlamat = (e) => {
-    setAlamat(e.target.value);
-    setSubmitted(false);
-  };
-  
-  // Handling the email change
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-    setSubmitted(false);
-  };
-  
-  // Handling the password change
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-    setSubmitted(false);
-  };
-  
-  // Handling the form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (name === '' || email === '' || password === '' || alamat === '' || nomor === '' || sekolah == '' || jurusan == '') {
-      setError(true);
-    } else {
-      setSubmitted(true);
-      setError(false);
-    }
-  };
-  
-  // Showing success message
-  const successMessage = () => {
-    return (
-      <div
-        className="success"
-        style={{
-          display: submitted ? '' : 'none',
-        }}>
-        <h1>User {name} successfully registered!!</h1>
-      </div>
-    );
-  };
-  
-  // Showing error message if error is true
-  const errorMessage = () => {
-    return (
-      <div
-        className="error"
-        style={{
-          display: error ? '' : 'none',
-        }}>
-        <h1>Harap isi semua kolom registrasi</h1>
-      </div>
-    );
-  };
-  
-  return (
-    <div className="formulir">
-      <div>
-        <h1>Registrasi Akun</h1>
-      </div>
-  
-      <div className="messages">
-        {errorMessage()}
-        {successMessage()}
-      </div>
-  
-      <form>
-        <label className="label">Nama</label>
-        <input onChange={handleName} className="input" 
-          value={name} type="text" />
-        <br></br>
-        <br></br>
-        <label className="label">Email</label>
-        <input onChange={handleEmail} className="input" 
-          value={email} type="email" />
-        <br></br>
-        <label className="label">Nomor HP</label>
-        <input onChange={handleNomor} className="input" 
-          value={nomor} type="text" />
-        <br></br>
-        <label className="label">Alamat</label>
-        <input onChange={handleAlamat} className="input" 
-          value={alamat} type="text" />
-        <br></br>
-        <label className="label">Sekolah</label>
-        <input onChange={handleSekolah} className="input" 
-          value={sekolah} type="text" />
-        <br></br>
-        <label className="label">Jurusan</label>
-        <input onChange={handleJurusan} className="input" 
-          value={jurusan} type="jurusan" />
-          <br></br>
-        <label className="label">Password</label>
-        <input onChange={handlePassword} className="input" 
-          value={password} type="password" />
-          <br></br>
-        <button onClick={handleSubmit} className="btn" type="submit">
-          Submit
-        </button>
-      </form>
-    </div>
-  );
-} */
-
+// Data cek line 51
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="">
         KPGTS
       </Link>{' '}
       {new Date().getFullYear()}
@@ -168,12 +30,24 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+    typography: {
+        fontFamily: 'Ramaraja',
+        fontSize: 16
+    },
+    palette: {
+        background: {
+            default: "#F2EBCE"
+        },
+        primary: {
+            main: "#A7B560"
+        }
+    },
+});
 
 export default function Register() {
 
-
-
+// Ambil data dari sini ya :D
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

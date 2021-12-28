@@ -1,6 +1,6 @@
 import Upload_Berita from "./Upload_berita";
 import Tabel from "./Tabel";
-
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -8,6 +8,23 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
+
+
+const theme = createTheme({
+    typography: {
+        fontFamily: 'Ramaraja',
+        fontSize: 16
+    },
+    palette: {
+        background: {
+            default: "#F2EBCE"
+        },
+        primary: {
+            main: "#A7B560"
+        }
+    },
+});
+
 
   TabPanel.propTypes = {
     children: PropTypes.node,
@@ -50,7 +67,8 @@ const Admin = () => {
     };
     
       return (
-        <div>
+        <ThemeProvider theme={theme} >
+        <div className="latar">
             <div style={{marginTop: '5vw'}}>
                 <Box
                 sx={{bgcolor: 'background.paper', display: 'flex', height: '100%' }}
@@ -81,6 +99,7 @@ const Admin = () => {
                 </Box>
             </div>       
         </div>
+        </ThemeProvider>
       );
 }
 
