@@ -101,49 +101,6 @@ export default function Register() {
                 <TextField
                   required
                   fullWidth
-                  id="nomor"
-                  label="Nomor HP"
-                  name="nomor"
-                  autoComplete="nomor"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="alamat"
-                  label="Alamat"
-                  name="alamat"
-                  autoComplete="alamat"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="sekolah"
-                  label="Asal Sekolah"
-                  name="sekolah"
-                  autoComplete="sekolah"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl component="fieldset">
-                    <FormLabel component="legend">Jurusan (ini untuk Try Out)</FormLabel>
-                    <RadioGroup
-                        aria-label="jurusan"
-                        defaultValue="IPA"
-                        name="jurusan"
-                    >
-                        <FormControlLabel value="ipa" control={<Radio />} label="IPA" />
-                        <FormControlLabel value="ips" control={<Radio />} label="IPS" />
-                    </RadioGroup>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
                   name="password"
                   label="Password"
                   type="password"
