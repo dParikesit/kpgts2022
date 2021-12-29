@@ -12,6 +12,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+const InfoLogin = (nama, role) => { return { nama: nama, role: role } }
+
+const LoginContext = React.createContext(InfoLogin);
+
 // Cek data di line 48
 
 function Copyright(props) {
