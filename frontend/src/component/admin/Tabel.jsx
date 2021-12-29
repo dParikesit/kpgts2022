@@ -25,6 +25,7 @@ import EditIcon from "@material-ui/icons/EditOutlined";
 import DoneIcon from "@material-ui/icons/DoneAllTwoTone";
 import RevertIcon from "@material-ui/icons/NotInterestedOutlined";
 import { TableContainer } from "@material-ui/core";
+import {useEffect} from "react";
 
 // Susunan data yg dipakai ada di bawah ini
 // Untuk contoh data dapat dilihat di line 74
@@ -70,14 +71,26 @@ const CustomTableCell = ({ row, name, onChange }) => {
 });
 
 const Tabel = () => {
+    useEffect(async () => {
+        // Update the document title using the browser API
+        let response = await fetch('/api/registration/search',{
+        method: 'GET',
+        mode: 'same-origin',
+        credentials: "same-origin",
+        headers: {
+          'Content-Type': 'application/json'
+        }
+        })
+        response = await response.json()
+        console.log(response)
+        setRows(response.map((item)=>{
+            const verif = item.verified ? 'YES' : 'NO'
+            return createData(item.ID, item.nama, item.sekolah, item.jurusan, item.kontak, item.fileURL, verif)
+        }))
+    }, []);
 
     // Sampel Data, dapat diubah disesuaikan dengan API atau apalah itu
-    const [rows, setRows] = React.useState([
-        createData(1, "Marcellus Michael Herman Kahari", "SMA Kolese Loyola", "IPA", "087700154863", "https://drive.google.com/drive/folders/1YBn4fqs9411yFb5HbZv-OPPxtNFksU6n", "NO"),
-        createData(2, "Michael", "SMA X", "IPA", "087700", "drive", "YES"),
-        createData(3, "Herman", "SMA X", "IPA", "087700", "drive", "NO"),
-        createData(4, "Marcellus", "SMA X", "IPA", "087700", "drive", "YES"),
-      ]);
+    const [rows, setRows] = React.useState([]);
 
 
       const [previous, setPrevious] = React.useState({});
@@ -138,6 +151,7 @@ const Tabel = () => {
             return rows.map(row => {
                 if(row.id === id) {
                     if(row.verified == "NO") {
+                        fetch('/api/registration/verif')
                         return { ...row, verified: "YES" };
                     } else if (row.verified == "YES") {
                         return { ...row, verified: "NO" };
