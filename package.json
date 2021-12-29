@@ -6,10 +6,16 @@
   "author": "dparikesit <dsparikesit@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.2.5",
+    "@mui/styled-engine-sc": "^5.1.0",
+    "add": "^2.0.6",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "knex": "^0.95.14",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "styled-components": "^5.3.3"
   },
   "scripts": {
     "start": "node index.js",
