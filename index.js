@@ -1,30 +1,46 @@
 require('dotenv').config()
+const environment = process.env.NODE_ENV || 'development';
 
-const express = require("express");
 const path = require("path");
+const routes = require('./routes/index')
+const express = require("express");
+const cors = require("cors");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const {store} = require('./database/db');
 const app = express();
 
-const knex = require("knex")({
-  client: "pg",
-  version: "14.1",
-  connection: {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_DATABASE,
-  },
-  debug: true,
-});
-
+app.use( session({
+  secret: process.env.SESSION_SECRET,
+  saveUninitialized:true,
+  store: store,
+  cookie: {
+    httpOnly: true,
+    secure: !(environment==='development'),
+    maxAge: 1000 * 60 * 60 * 24 // Time is in miliseconds
+},
+  resave: false
+})
+);
+app.use(cors({
+  origin: ["http://localhost:3001"],
+  methods: ["GET","POST"],
+  credentials: true
+}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "frontend/build")));
-
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
+app.use("/api", routes);
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
   console.log(`Running on PORT ${PORT}`);
 });
+
+
+
