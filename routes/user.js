@@ -12,29 +12,25 @@ router.post("/signup", (req,res) => {
         res.status(422).json({ errors: errors.array() });
         return;
     }
-
     User.getOneEmail(req.body.email)
         .then(user => {
-            console.log(user)
             if (!user) {
                 bcrypt.hash(req.body.password, 10)
                     .then((hash) => {
                         const user = {
-                            name: req.body.name,
+                            name: req.body.nama,
                             email : req.body.email,
-                            password : hash,
-                            role : req.body.role
+                            password : hash
                         }
                         User.create(user)
                             .then(id => {
                                 res.status(200).json({
-                                    id, //DEBUGGING
                                     message : 'Registration succesful.'
                                 });
                             });
                     });
             } else {
-                res.json({ message: "Email already exist. Please choose another email." });
+                res.status(400).json({ message: "Email already exist. Please choose another email." });
             }
         });
 });
@@ -59,7 +55,7 @@ router.post("/login", (req, res) => {
                         req.session.role = user.role;
                         console.log(req.session);
                         // req.session.save()
-                        res.status(200).json({message : 'Logged in.'});
+                        res.status(200).json({name : user.name});
                     } else {
                         res.json({ message: "Wrong email/password combination!" });
                     }

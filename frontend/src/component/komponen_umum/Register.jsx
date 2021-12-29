@@ -48,16 +48,23 @@ const theme = createTheme({
 export default function Register() {
 
 // Ambil data dari sini ya :D
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-      nama: data.get('nama'),
-      jurusan: data.get('jurusan')
-    });
+    const response = (await fetch('/api/user/signup', {
+        method: 'POST',
+        mode: 'same-origin',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: data.get('email'),
+            password: data.get('password'),
+            nama: data.get('nama')
+        })
+    })).json()
+    console.log(response.status)
   };
 
   return (

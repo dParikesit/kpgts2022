@@ -11,6 +11,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+// TODO gagal import??
+// import {useHistory} from 'react-router-dom'
 
 const InfoLogin = (nama, role) => { return { nama: nama, role: role } }
 
@@ -47,16 +49,30 @@ const theme = createTheme({
 });
 
 export default function Login() {
-
+  // const history = useHistory()
 // Cek data yang masuk di handleSubmit
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+    const response = await fetch('/api/user/login', {
+      method: 'POST',
+      mode: 'same-origin',
+      credentials: "same-origin",
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          email: data.get('email'),
+          password: data.get('password')
+      })
     });
+    console.log(response.status);
+
+    const name = (await response.json()).name
+    console.log(name)
+
+    // TODO history push
+    // await history.push('/')
   };
 
   return (
