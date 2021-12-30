@@ -14,4 +14,8 @@ function create(user) {
     });
 }
 
+function findAndUpdate(colName, query, colNameToUpdate, val) {
+    return db('user').where(colName, query).update({ 'colNameToUpdate': val });
+}
+
 module.exports = {getOne, getOneEmail, create}
