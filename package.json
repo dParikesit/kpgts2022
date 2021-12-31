@@ -6,34 +6,18 @@
   "author": "dparikesit <dsparikesit@gmail.com>",
   "license": "MIT",
   "dependencies": {
-<<<<<<< HEAD
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
-    "@mui/material": "^5.2.5",
-    "@mui/styled-engine-sc": "^5.1.0",
-    "add": "^2.0.6",
-=======
     "bcrypt": "^5.0.1",
     "connect-session-knex": "^2.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
->>>>>>> f6a0aa407509a94056b00f425c948c99ee818990
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "express-session": "^1.17.2",
     "express-validator": "^6.14.0",
     "knex": "^0.95.14",
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "pg": "^8.7.1",
-    "styled-components": "^5.3.3"
-=======
-=======
     "mailer": "^0.6.7",
->>>>>>> f23eb41ee203dec2084fa2f27c35f495fc8c1c4c
     "multer": "^1.4.4",
     "pg": "^8.7.1"
->>>>>>> f6a0aa407509a94056b00f425c948c99ee818990
   },
   "scripts": {
     "start": "nodemon index.js",
