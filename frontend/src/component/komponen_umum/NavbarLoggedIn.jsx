@@ -211,6 +211,13 @@ const NavbarLoggedIn = () => {
                       </Link>
                     </ListItemText>
                 </ListItem>
+                <ListItem onClick={toggleDrawer}>
+                    <ListItemText>
+                      <Link   className={classes.linkDrawer}> {/*onClick do logout*/}
+                        Log Out
+                      </Link>
+                    </ListItemText>
+                </ListItem>
                 </List>
                 </StyledDiv>
             </Drawer>
@@ -268,6 +275,9 @@ const NavbarLoggedIn = () => {
                             </Link>
                             <Link to="/registerTO" className={classes.linkDrawer}>
                               <MenuItem onClick={handleClose}>Register TO</MenuItem>
+                            </Link>
+                            <Link  className={classes.linkDrawer}>
+                              <MenuItem onClick={handleClose}>Log Out</MenuItem>
                             </Link>
                           </Menu>
                         </div>

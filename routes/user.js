@@ -38,7 +38,8 @@ router.post("/signup", (req,res) => {
 
 router.get("/login", (req, res) => {
     if (req.session) {
-        res.send({ loggedIn: true, user: req.session});
+        console.log(req.session.name)
+        res.send({ loggedIn: true, name: req.session.name, role: req.session.role});
     } else {
         res.send({ loggedIn: false });
     }
@@ -53,6 +54,7 @@ router.post("/login", (req, res) => {
                 bcrypt.compare(req.body.password, user.password, (error, response) => {
                     if (response) {
                         req.session.uid = user.id;
+                        req.session.name = user.name;
                         req.session.role = user.role;
                         console.log(req.session);
                         // req.session.save()
