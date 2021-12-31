@@ -1,0 +1,37 @@
+.footer{
+    position: relative;
+}
+.footer-bottom{
+    background: #717A43;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    padding: 8px;
+    font-family: "Quicksand";
+    margin: 0;
+}
+.footer-content{
+    background: #DEEC95;
+    font-family: "Quicksand";
+    margin: 0;
+    padding: 0px;
+    width: 100%;
+    padding-bottom: 10px;
+    padding-top: 1px;
+    text-align: center;
+}
+.footer-content .footer-about{
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+}
+.footer-content .footer-judul{
+    font-weight:bold;
+    font-size: 25px;
+}
+.footer-content .footer-social{
+    text-align:start;
+    padding-top: 20px;
+    font-size: 18px;
+    padding-left: 10px;
+}

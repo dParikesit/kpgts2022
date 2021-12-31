@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\LENOVO\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js run
+  C:\Program Files\nodejs\node.exe C:\Users\LENOVO\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js start
 
 PATH: 
   C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\LENOVO\AppData\Roaming\Python\Python38\Scripts;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\LENOVO\AppData\Local\Programs\Python\Python39\;C:\Users\LENOVO\AppData\Local\Microsoft\WindowsApps;D:\Microsoft VS Code\bin;C:\Program Files (x86)\Avogadro\bin;C:\Users\LENOVO\AppData\Roaming\npm
@@ -48,9 +48,13 @@ npm manifest:
       "express-validator": "^6.14.0",
       "knex": "^0.95.14",
   <<<<<<< HEAD
+  <<<<<<< HEAD
       "pg": "^8.7.1",
       "styled-components": "^5.3.3"
   =======
+  =======
+      "mailer": "^0.6.7",
+  >>>>>>> f23eb41ee203dec2084fa2f27c35f495fc8c1c4c
       "multer": "^1.4.4",
       "pg": "^8.7.1"
   >>>>>>> f6a0aa407509a94056b00f425c948c99ee818990
@@ -812,6 +816,11 @@ Lockfile:
     resolved "https://registry.npmjs.org/colorette/-/colorette-2.0.16.tgz"
     integrity sha512-hUewv7oMjCp+wkBv5Rm0v87eJhq4woh5rSR+42YSQJKecCqgIqNkZ6lAlQms/BwHPJA5NKMRlpxPRv0n8HQW6g==
   
+  "colors@>= 0.3.0":
+    version "1.4.0"
+    resolved "https://registry.yarnpkg.com/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
+    integrity sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
+  
   commander@^7.1.0:
     version "7.2.0"
     resolved "https://registry.npmjs.org/commander/-/commander-7.2.0.tgz"
@@ -1106,16 +1115,6 @@ Lockfile:
     resolved "https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz"
     integrity sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=
   
-  escape-string-regexp@^1.0.5:
-    version "1.0.5"
-    resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
-    integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
-  
-  escape-string-regexp@^4.0.0:
-    version "4.0.0"
-    resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
-    integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
-  
   esm@^3.2.25:
     version "3.2.25"
     resolved "https://registry.npmjs.org/esm/-/esm-3.2.25.tgz"
@@ -1203,11 +1202,6 @@ Lockfile:
       parseurl "~1.3.3"
       statuses "~1.5.0"
       unpipe "~1.0.0"
-  
-  find-root@^1.1.0:
-    version "1.1.0"
-    resolved "https://registry.yarnpkg.com/find-root/-/find-root-1.1.0.tgz#abcfc8ba76f708c42a97b3d685b7e9450bfb9ce4"
-    integrity sha512-NKfW6bec6GfKc0SGx1e07QZY9PE99u0Bft/0rzSD5k3sO/vwkVUpDUKVm5Gpp5Ue3YfShPFTX2070tDs5kB9Ng==
   
   forwarded@0.2.0:
     version "0.2.0"
@@ -1669,6 +1663,14 @@ Lockfile:
     dependencies:
       yallist "^4.0.0"
   
+  mailer@^0.6.7:
+    version "0.6.7"
+    resolved "https://registry.yarnpkg.com/mailer/-/mailer-0.6.7.tgz#012d69b2554864976d9d77f5326b35097653f653"
+    integrity sha1-AS1pslVIZJdtnXf1Mms1CXZT9lM=
+    dependencies:
+      colors ">= 0.3.0"
+      nodemailer "0.1.20"
+  
   make-dir@^3.0.0, make-dir@^3.1.0:
     version "3.1.0"
     resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-3.1.0.tgz#415e967046b3a7f1d185277d84aa58203726a13f"
@@ -1708,6 +1710,11 @@ Lockfile:
     version "1.6.0"
     resolved "https://registry.npmjs.org/mime/-/mime-1.6.0.tgz"
     integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
+  
+  mimelib-noiconv@*:
+    version "0.1.9"
+    resolved "https://registry.yarnpkg.com/mimelib-noiconv/-/mimelib-noiconv-0.1.9.tgz#eadce6f9ce226842501a203e95bcee96af8189f2"
+    integrity sha1-6tzm+c4iaEJQGiA+lbzulq+BifI=
   
   mimic-response@^1.0.0, mimic-response@^1.0.1:
     version "1.0.1"
@@ -1801,6 +1808,13 @@ Lockfile:
     integrity sha512-Z8/6vRlTUChSdIgMa51jxQ4lrw/Jy5SOW10ObaA47/RElsAN2c5Pn8bTgFGWn/ibwzXTE8qwr1Yzx28vsecXEA==
     dependencies:
       whatwg-url "^5.0.0"
+  
+  nodemailer@0.1.20:
+    version "0.1.20"
+    resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-0.1.20.tgz#a91748a448eddf35fe24d7272c8187ddcc38e253"
+    integrity sha1-qRdIpEjt3zX+JNcnLIGH3cw44lM=
+    dependencies:
+      mimelib-noiconv "*"
   
   nodemon@^2.0.15:
     version "2.0.15"
@@ -1901,23 +1915,6 @@ Lockfile:
     resolved "https://registry.npmjs.org/packet-reader/-/packet-reader-1.0.0.tgz"
     integrity sha512-HAKu/fG3HpHFO0AA8WE8q2g+gBJaZ9MG7fcKk+IJPLTGAD6Psw4443l+9DGRbOIh3/aXr7Phy0TjilYivJo5XQ==
   
-  parent-module@^1.0.0:
-    version "1.0.1"
-    resolved "https://registry.yarnpkg.com/parent-module/-/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
-    integrity sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==
-    dependencies:
-      callsites "^3.0.0"
-  
-  parse-json@^5.0.0:
-    version "5.2.0"
-    resolved "https://registry.yarnpkg.com/parse-json/-/parse-json-5.2.0.tgz#c76fc66dee54231c962b22bcc8a72cf2f99753cd"
-    integrity sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==
-    dependencies:
-      "@babel/code-frame" "^7.0.0"
-      error-ex "^1.3.1"
-      json-parse-even-better-errors "^2.3.0"
-      lines-and-columns "^1.1.6"
-  
   parseurl@~1.3.3:
     version "1.3.3"
     resolved "https://registry.npmjs.org/parseurl/-/parseurl-1.3.3.tgz"
@@ -1937,11 +1934,6 @@ Lockfile:
     version "0.1.7"
     resolved "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-0.1.7.tgz"
     integrity sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=
-  
-  path-type@^4.0.0:
-    version "4.0.0"
-    resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
-    integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
   
   pg-connection-string@2.5.0, pg-connection-string@^2.5.0:
     version "2.5.0"
@@ -2211,7 +2203,7 @@ Lockfile:
     resolved "https://registry.npmjs.org/resolve-from/-/resolve-from-5.0.0.tgz"
     integrity sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
   
-  resolve@^1.12.0, resolve@^1.9.0:
+  resolve@^1.9.0:
     version "1.20.0"
     resolved "https://registry.npmjs.org/resolve/-/resolve-1.20.0.tgz"
     integrity sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==
@@ -2239,6 +2231,7 @@ Lockfile:
     integrity sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==
   
   <<<<<<< HEAD
+  <<<<<<< HEAD
   safe-buffer@~5.1.1:
   =======
   <<<<<<< HEAD
@@ -2247,6 +2240,9 @@ Lockfile:
   safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   >>>>>>> 54689524d5569037d94bff8a5b04afed882f92e9
   >>>>>>> f6a0aa407509a94056b00f425c948c99ee818990
+  =======
+  safe-buffer@~5.1.0, safe-buffer@~5.1.1:
+  >>>>>>> f23eb41ee203dec2084fa2f27c35f495fc8c1c4c
     version "5.1.2"
     resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
     integrity sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==
