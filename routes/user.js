@@ -58,7 +58,7 @@ router.post("/login", (req, res) => {
                         req.session.role = user.role;
                         console.log(req.session);
                         // req.session.save()
-                        res.status(200).json({name : user.name});
+                        res.status(200).json({name : user.name, role:user.role});
                     } else {
                         res.json({ message: "Wrong email/password combination!" });
                     }
