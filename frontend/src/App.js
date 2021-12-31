@@ -20,8 +20,8 @@ function App() {
         <Route path='/lupa_password' element={<Lupa_Password/>} />
         <Route path='/register' element={<Registration/>} />
         <Route path='/informasi' element={<InformasiItb/>} />
-        <Route path='/login/peserta' element={<Peserta/>} />
-        <Route path='/login/admin' element={<Admin/>} />
+        <Route path='/registerTO' element={<Peserta/>} />
+        <Route path='/login' element={<Admin/>} />
       </Routes>
     </BrowserRouter>
   );

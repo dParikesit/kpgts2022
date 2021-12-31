@@ -16,7 +16,11 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { Divider } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 
 // Buat tema
 const theme = createTheme({
@@ -51,6 +55,7 @@ const useStyles = makeStyles(theme => ({
     margin: "auto",
     textDecoration: "none",
     color: "#554B3F",
+    fontFamily: "Ramaraja",
     fontSize: "24px",
     marginLeft: theme.spacing(8),
     "&:hover": {
@@ -118,7 +123,8 @@ const StyledDiv = styled('div')(() => ({
   background: '#94D3DA'
 }))
 
-const Navbar = () => {
+const NavbarLoggedIn = () => {
+    const [auth, setAuth] = React.useState(true);
     const classes = useStyles();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -133,7 +139,19 @@ const Navbar = () => {
   
       setOpen(!open);
     };
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
+    const handleChange = (event) => {
+      setAuth(event.target.checked);
+    };
+
+    const handleMenu = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
     return (
       <>
@@ -181,15 +199,15 @@ const Navbar = () => {
                 <Divider sx={{ borderBottomWidth: 1, background: 'black', marginBottom: '10px', marginTop:'10px' }} ></Divider>
                 <ListItem onClick={toggleDrawer}>
                     <ListItemText>
-                      <Link to="/login" className={classes.button}>
-                        <ColorButton size="medium" variant="contained" style={{ width:"30vw" }}>Login</ColorButton>
+                      <Link to="/profile" className={classes.linkDrawer}>
+                        Profile
                       </Link>
                     </ListItemText>
                 </ListItem>
                 <ListItem onClick={toggleDrawer}>
                     <ListItemText>
-                      <Link to="/register"  className={classes.button}>
-                        <ColorButton size="medium" variant="contained" style={{ width:"30vw" }}>Register</ColorButton>
+                      <Link to="/registerTO"  className={classes.linkDrawer}>
+                        Register TO
                       </Link>
                     </ListItemText>
                 </ListItem>
@@ -199,7 +217,7 @@ const Navbar = () => {
           </>
           // Kalo bukan mobile
         ) : (
-            <ThemeProvider theme={theme}>
+          <ThemeProvider theme={theme}>
             <AppBar position="sticky" style={{ background:"#94D3DA", fontFamily: "Ramaraja", borderBottomLeftRadius: "20px", borderBottomRightRadius: "20px" }}>
               <CssBaseline />
               <Toolbar>
@@ -217,22 +235,50 @@ const Navbar = () => {
                       <Link to="/informasi" className={classes.link}>
                         Informasi ITB dan KPGTS
                       </Link>
-                    </div>
-                    <div className={classes.buttonArea}>
-                      <Link to="/login" className={classes.button}>
-                        <ColorButton size="medium" variant="contained">Login</ColorButton>
-                      </Link>
-                      <Link to="/register"  className={classes.button}>
-                        <ColorButton size="medium" variant="contained">Register</ColorButton>
-                      </Link>
-                    </div>
+                    </div >
+                      {auth && (
+                        <div className={classes.buttonArea}>
+                          <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenu}
+                            color="inherit"
+                          >
+                            <AccountCircle />
+                          </IconButton>
+                          <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                              vertical: 'top',
+                              horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                              vertical: 'top',
+                              horizontal: 'right',
+                            }}
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                          >
+                            <Link to="/profile" className={classes.linkDrawer}>
+                              <MenuItem onClick={handleClose}>Profile</MenuItem>
+                            </Link>
+                            <Link to="/registerTO" className={classes.linkDrawer}>
+                              <MenuItem onClick={handleClose}>Register TO</MenuItem>
+                            </Link>
+                          </Menu>
+                        </div>
+                      )}
                   </div> 
               </Toolbar>
             </AppBar>
-            </ThemeProvider>
-          )}
+          </ThemeProvider>
+        )}
       </>
       );
 }
 
-export default Navbar;
+export default NavbarLoggedIn;
