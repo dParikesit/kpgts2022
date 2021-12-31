@@ -23,7 +23,6 @@ function App() {
     setRole("")
   };
   return (
-<<<<<<< HEAD
     <BrowserRouter>
       <Routes>
         <Route path='/' exact element={<Homepage/>} />
@@ -36,22 +35,6 @@ function App() {
         <Route path='/login' element={<Admin/>} />
       </Routes>
     </BrowserRouter>
-=======
-    <AuthContext.Provider value={{name, role, addItem, removeItem }}>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' exact element={<Homepage/>} />
-          <Route path='/berita' element={<Berita/>}/>
-          <Route path='/login' element={<Login/>} />
-          <Route path='/lupa_password' element={<Lupa_Password/>} />
-          <Route path='/register' element={<Registration/>} />
-          <Route path='/informasi' element={<InformasiItb/>} />
-          <Route path='/login/peserta' element={<Peserta/>} />
-          <Route path='/login/admin' element={<Admin/>} />
-        </Routes>
-      </BrowserRouter>
-    </AuthContext.Provider>
->>>>>>> 7d4b2579d0d27225a9ba676aaa4b10bf395a46ca
   );
 }
 

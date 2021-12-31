@@ -24,8 +24,8 @@ const Homepage = () => {
 
     return(
         <div>
-            {/* <NavbarLoggedIn></NavbarLoggedIn> */}
-            <Navbar />
+            <NavbarLoggedIn></NavbarLoggedIn>
+            {/* <Navbar /> */}
             {/* <Peserta></Peserta> */}
             <p>Homepage</p>
         </div>

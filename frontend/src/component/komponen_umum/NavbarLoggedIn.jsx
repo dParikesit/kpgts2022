@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     color: "#554B3F",
-    marginLeft: theme.spacing("4"),
+    marginLeft: theme.spacing(4),
     textDecoration: "none",
   },
   buttonArea: {
@@ -213,7 +213,7 @@ const NavbarLoggedIn = () => {
                 </ListItem>
                 <ListItem onClick={toggleDrawer}>
                     <ListItemText>
-                      <Link   className={classes.linkDrawer}> {/*onClick do logout*/}
+                      <Link to="/" className={classes.linkDrawer}> {/*onClick do logout*/}
                         Log Out
                       </Link>
                     </ListItemText>
@@ -245,6 +245,7 @@ const NavbarLoggedIn = () => {
                     </div >
                       {auth && (
                         <div className={classes.buttonArea}>
+                          
                           <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -253,6 +254,9 @@ const NavbarLoggedIn = () => {
                             onClick={handleMenu}
                             color="inherit"
                           >
+                            <Typography variant="h6" style={{ fontFamily: "Ramaraja", marginRight: "10px" }}>
+                              Nama
+                            </Typography>
                             <AccountCircle />
                           </IconButton>
                           <Menu
@@ -276,7 +280,7 @@ const NavbarLoggedIn = () => {
                             <Link to="/registerTO" className={classes.linkDrawer}>
                               <MenuItem onClick={handleClose}>Register TO</MenuItem>
                             </Link>
-                            <Link  className={classes.linkDrawer}>
+                            <Link to="/" className={classes.linkDrawer}>
                               <MenuItem onClick={handleClose}>Log Out</MenuItem>
                             </Link>
                           </Menu>
