@@ -14,10 +14,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 // TODO gagal import??
 // import {useHistory} from 'react-router-dom'
 
-const InfoLogin = (nama, role) => { return { nama: nama, role: role } }
-
-const LoginContext = React.createContext(InfoLogin);
-
 // Cek data di line 48
 
 function Copyright(props) {

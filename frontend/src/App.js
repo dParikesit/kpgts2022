@@ -7,23 +7,36 @@ import Peserta from './component/peserta/Peserta';
 import Registration from "./component/komponen_umum/Register";
 import Login from "./component/komponen_umum/Login";
 import Lupa_Password from "./component/komponen_umum/Lupa_Password";
-import React from 'react';
+import React, {useState} from 'react';
+import {AuthContext} from "./component/komponen_umum/AuthContext";
 import './App.css';
 
 function App() {
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
+  const addItem = (newName, newRole) => {
+    setName(newName)
+    setRole(newRole)
+  };
+  const removeItem = () => {
+    setName("")
+    setRole("")
+  };
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' exact element={<Homepage/>} />
-        <Route path='/berita' element={<Berita/>}/>
-        <Route path='/login' element={<Login/>} />
-        <Route path='/lupa_password' element={<Lupa_Password/>} />
-        <Route path='/register' element={<Registration/>} />
-        <Route path='/informasi' element={<InformasiItb/>} />
-        <Route path='/login/peserta' element={<Peserta/>} />
-        <Route path='/login/admin' element={<Admin/>} />
-      </Routes>
-    </BrowserRouter>
+    <AuthContext.Provider value={{name, role, addItem, removeItem }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' exact element={<Homepage/>} />
+          <Route path='/berita' element={<Berita/>}/>
+          <Route path='/login' element={<Login/>} />
+          <Route path='/lupa_password' element={<Lupa_Password/>} />
+          <Route path='/register' element={<Registration/>} />
+          <Route path='/informasi' element={<InformasiItb/>} />
+          <Route path='/login/peserta' element={<Peserta/>} />
+          <Route path='/login/admin' element={<Admin/>} />
+        </Routes>
+      </BrowserRouter>
+    </AuthContext.Provider>
   );
 }
 
