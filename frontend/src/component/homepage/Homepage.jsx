@@ -17,7 +17,9 @@ const Homepage = () => {
             }
         })
         response = await response.json()
-        Auth.addItem(response.name, response.role)
+        if(response.loggedIn===true) {
+            Auth.addItem(response.name, response.role)
+        }
     }, []);
 
     return(
