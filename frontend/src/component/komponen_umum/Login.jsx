@@ -11,12 +11,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-// TODO gagal import??
-// import {useHistory} from 'react-router-dom'
-
-const InfoLogin = (nama, role) => { return { nama: nama, role: role } }
-
-const LoginContext = React.createContext(InfoLogin);
+import {useContext} from "react";
+import {AuthContext} from "./AuthContext";
+import {useNavigate} from 'react-router-dom'
 
 // Cek data di line 48
 
@@ -49,12 +46,12 @@ const theme = createTheme({
 });
 
 export default function Login() {
-  // const history = useHistory()
-// Cek data yang masuk di handleSubmit
+  const navigate = useNavigate()
+  const Auth = useContext(AuthContext)
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const response = await fetch('/api/user/login', {
+    let response = await fetch('/api/user/login', {
       method: 'POST',
       mode: 'same-origin',
       credentials: "same-origin",
@@ -67,12 +64,11 @@ export default function Login() {
       })
     });
     console.log(response.status);
-
-    const name = (await response.json()).name
-    console.log(name)
-
-    // TODO history push
-    // await history.push('/')
+    if(response.status===200){
+      response = response.json()
+      Auth.addItem(response.name, response.role)
+      navigate('/')
+    }
   };
 
   return (
