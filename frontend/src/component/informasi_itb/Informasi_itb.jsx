@@ -162,7 +162,9 @@ const InformasiItb = () => {
                                                           <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
                                                       </Box>
                                                   </Box>
-                                                  <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  <Box m={2} px={3}>
+                                                    <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  </Box>
                                                 </ThemeProvider>
                                               </div>
                                               <div>
@@ -173,7 +175,9 @@ const InformasiItb = () => {
                                                           <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
                                                       </Box>
                                                   </Box>
-                                                  <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  <Box m={2} px={3}>
+                                                    <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  </Box>
                                                 </ThemeProvider>
                                               </div>
                                               <div>
@@ -184,7 +188,9 @@ const InformasiItb = () => {
                                                           <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
                                                       </Box>
                                                   </Box>
-                                                  <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  <Box m={2} px={3}>
+                                                    <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  </Box>
                                                 </ThemeProvider>
                                               </div>
                                               <div>
@@ -195,7 +201,9 @@ const InformasiItb = () => {
                                                           <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
                                                       </Box>
                                                   </Box>
-                                                  <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  <Box m={2} px={3}>
+                                                    <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  </Box>
                                                 </ThemeProvider>
                                               </div>
                                               <div>
@@ -206,7 +214,9 @@ const InformasiItb = () => {
                                                           <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
                                                       </Box>
                                                   </Box>
-                                                  <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  <Box m={2} px={3}>
+                                                    <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  </Box>
                                                 </ThemeProvider>
                                               </div>
                                               <div>
@@ -217,7 +227,9 @@ const InformasiItb = () => {
                                                           <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
                                                       </Box>
                                                   </Box>
-                                                  <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  <Box m={2} px={3}>
+                                                    <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  </Box>
                                                 </ThemeProvider>
                                               </div>
                                               <div>
@@ -228,7 +240,9 @@ const InformasiItb = () => {
                                                           <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
                                                       </Box>
                                                   </Box>
-                                                  <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  <Box m={2} px={3}>
+                                                    <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  </Box>
                                                 </ThemeProvider>
                                               </div>
                                               <div>
@@ -239,7 +253,9 @@ const InformasiItb = () => {
                                                           <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
                                                       </Box>
                                                   </Box>
-                                                  <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  <Box m={2} px={3}>
+                                                    <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  </Box>
                                                 </ThemeProvider>
                                               </div>
                                               <div>
@@ -250,7 +266,9 @@ const InformasiItb = () => {
                                                           <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
                                                       </Box>
                                                   </Box>
-                                                  <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  <Box m={2} px={3}>
+                                                    <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  </Box>
                                                 </ThemeProvider>
                                               </div>
                                               <div>
@@ -261,7 +279,9 @@ const InformasiItb = () => {
                                                           <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
                                                       </Box>
                                                   </Box>
-                                                  <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  <Box m={2} px={3}>
+                                                    <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  </Box>
                                                 </ThemeProvider>
                                               </div>
                                               <div>
@@ -272,7 +292,9 @@ const InformasiItb = () => {
                                                           <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
                                                       </Box>
                                                   </Box>
-                                                  <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  <Box m={2} px={3}>
+                                                    <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  </Box>
                                                 </ThemeProvider>
                                               </div>
                                               <div>
@@ -283,7 +305,9 @@ const InformasiItb = () => {
                                                           <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
                                                       </Box>
                                                   </Box>
-                                                  <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  <Box m={2} px={3}>
+                                                    <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                                  </Box>
                                                 </ThemeProvider>
                                               </div>
                                             </Slider>
@@ -297,7 +321,9 @@ const InformasiItb = () => {
                                         <Box sx={{ ...commonStyles1, borderRadius: '16px' }}>
                                           <div>
                                             <ThemeProvider theme={theme2}>                                        
+                                            <Box m={2} px={3}>
                                               <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                            </Box>
                                             </ThemeProvider>
                                           </div>
                                         </Box>
@@ -309,7 +335,9 @@ const InformasiItb = () => {
                                           <Box sx={{ ...commonStyles1, borderRadius: '16px' }}>
                                             <div>
                                               <ThemeProvider theme={theme2}>                                        
+                                              <Box m={2} px={3}>
                                                 <Typography align="center" color="#554B3F">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nemo ipsam corporis molestiae, repellat optio aliquam ea non alias esse cumque adipisci eveniet. Excepturi, quos vero quaerat voluptates ipsa magnam.</Typography>
+                                              </Box>
                                               </ThemeProvider>
                                             </div>
                                           </Box>
