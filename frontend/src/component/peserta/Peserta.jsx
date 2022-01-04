@@ -110,7 +110,11 @@ const Peserta = () => {
     const [kontak, setKontak] = useState({});
 
     // Pake yg ini ya
-    const [data, setData] = useState([])
+    let arr= []
+    for (var i = 0; i < jumlahVal; i++){
+        arr.push({nama: "a", sma: "a", kontak: "a", jurusan: "a", tanggal: "a"})
+    }
+    const [data, setData] = useState(arr)
     // {
     //     nama:
     //     sma:
@@ -126,6 +130,10 @@ const Peserta = () => {
     };
     const handleChange = (event) => {
         setJumlahVal(event.target.value);
+        for (var i = 0; i < jumlahVal; i++){
+            arr.push({nama: "a", sma: "a", kontak: "a", jurusan: "a", tanggal: "a"})
+        };
+        setData(arr);
     };
     const handlePembayaran = (event) => {
         setPembayaran(event.target.value);
@@ -135,7 +143,7 @@ const Peserta = () => {
         let temp = data
         if(temp[idx]===undefined){
             temp[idx] = {}
-        }
+        }   
         temp[idx]["nama"] = event.target.value
         setData(temp)
     };
@@ -169,10 +177,9 @@ const Peserta = () => {
                         fullWidth
                         id={nama}
                         label="Nama Lengkap"
-                        name={i}
+                        name="nama"
                         autoComplete="nama"
-                        value={data[i]}
-                        defaultValue={""}
+                        value={data[i]["nama"]}
                         onChange={handleNama}
                         />
                     </Grid>

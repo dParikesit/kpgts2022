@@ -20,6 +20,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useEffect, useContext} from "react";
+import { AuthContext } from "../komponen_umum/AuthContext";
 
 
 // Buat tema
@@ -106,7 +108,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
   fontFamily: 'Ramaraja',
   fontSize: "18px",
   padding: "auto",
-  backgroundColor: '#554B3F',
+  backgroundColor: 'red',
   margin: "auto",
   borderRadius: "15px",
   justifyContent: "center",
@@ -152,6 +154,24 @@ const NavbarLoggedIn = () => {
     const handleClose = () => {
       setAnchorEl(null);
     };
+    
+    const Auth = useContext(AuthContext)
+    useEffect(async () => {
+        // Update the document title using the browser API
+        let response = await fetch('/api/user/login',{
+            method: 'GET',
+            mode: 'same-origin',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        response = await response.json()
+        if(response.loggedIn===true) {
+            Auth.addItem(response.name, response.role)
+        }
+    }, []);
+    const nama=Auth.name
 
     return (
       <>
@@ -214,7 +234,7 @@ const NavbarLoggedIn = () => {
                 <ListItem onClick={toggleDrawer}>
                     <ListItemText>
                       <Link to="/" className={classes.linkDrawer}> {/*onClick do logout*/}
-                        Log Out
+                        <ColorButton size="medium" variant="contained" style={{ width:"30vw" }}>Log Out</ColorButton>
                       </Link>
                     </ListItemText>
                 </ListItem>
@@ -255,7 +275,7 @@ const NavbarLoggedIn = () => {
                             color="inherit"
                           >
                             <Typography variant="h6" style={{ fontFamily: "Ramaraja", marginRight: "10px" }}>
-                              Nama
+                              {nama}
                             </Typography>
                             <AccountCircle />
                           </IconButton>

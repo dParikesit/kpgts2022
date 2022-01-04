@@ -8,6 +8,8 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 import { Divider } from '@mui/material';
+import {useEffect, useContext} from "react";
+import { AuthContext } from "../komponen_umum/AuthContext";
 
 // Buat tema
 const theme = createTheme({
@@ -46,7 +48,24 @@ const ImgMob = styled('img')({
 
 // Profile buat pc
 const ProfileDesktop = () => {
-  const nama="Aditya"
+  const Auth = useContext(AuthContext)
+  useEffect(async () => {
+      // Update the document title using the browser API
+      let response = await fetch('/api/user/login',{
+          method: 'GET',
+          mode: 'same-origin',
+          credentials: "same-origin",
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+      response = await response.json()
+      if(response.loggedIn===true) {
+          Auth.addItem(response.name, response.role)
+      }
+  }, []);
+
+  const nama=Auth.name
   const email="apn@mail.com"
   return (
     <>
@@ -92,7 +111,23 @@ const ProfileDesktop = () => {
 }
 
 const ProfileMobile = () => {
-  const nama="Aditya"
+  const Auth = useContext(AuthContext)
+  useEffect(async () => {
+      // Update the document title using the browser API
+      let response = await fetch('/api/user/login',{
+          method: 'GET',
+          mode: 'same-origin',
+          credentials: "same-origin",
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+      response = await response.json()
+      if(response.loggedIn===true) {
+          Auth.addItem(response.name, response.role)
+      }
+  }, []);
+  const nama=Auth.name
   const email="apn@mail.com"
   return (
     <>
