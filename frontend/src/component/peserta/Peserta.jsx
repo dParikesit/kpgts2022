@@ -108,6 +108,18 @@ const Peserta = () => {
     const [nama, setNama] = useState([]);
     const [asalSMA, setAsalSMA] = useState({});
     const [kontak, setKontak] = useState({});
+
+    // Pake yg ini ya
+    const [data, setData] = useState([])
+    // {
+    //     nama:
+    //     sma:
+    //     kontak:
+    //     jurusan:
+    //     tanggal:
+    // }
+
+
     // Kurang semua state nama dll
     const handleJurusan = (event) => {
         setJurusan([...jurusan, event.target.value]);
@@ -120,9 +132,12 @@ const Peserta = () => {
     };
     const handleNama = (event) => {
         const idx = event.target.getAttribute('name')
-        let temp = nama
-        temp[idx] = event.target.value
-        setNama(temp)
+        let temp = data
+        if(temp[idx]===undefined){
+            temp[idx] = {}
+        }
+        temp[idx]["nama"] = event.target.value
+        setData(temp)
     };
     const handleAsal = (event) => {
         const asalVal = event.target.value;
@@ -156,7 +171,7 @@ const Peserta = () => {
                         label="Nama Lengkap"
                         name={i}
                         autoComplete="nama"
-                        value={nama[i]}
+                        value={data[i]}
                         defaultValue={""}
                         onChange={handleNama}
                         />
