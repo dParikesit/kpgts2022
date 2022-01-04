@@ -8,6 +8,7 @@ import Registration from "./component/komponen_umum/Register";
 import Login from "./component/komponen_umum/Login";
 import Lupa_Password from "./component/komponen_umum/Lupa_Password";
 import React, {useState} from 'react';
+import Profile from "./component/peserta/Profile";
 import {AuthContext} from "./component/komponen_umum/AuthContext";
 import './App.css';
 
@@ -33,6 +34,7 @@ function App() {
         <Route path='/informasi' element={<InformasiItb/>} />
         <Route path='/registerTO' element={<Peserta/>} />
         <Route path='/login' element={<Admin/>} />
+        <Route path='/profile' element={<Profile/>} />
       </Routes>
     </BrowserRouter>
   );

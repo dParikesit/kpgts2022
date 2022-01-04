@@ -1,4 +1,4 @@
-import Navbar from "../komponen_umum/Navbar";
+import NavbarLoggedIn from "../komponen_umum/NavbarLoggedIn";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -49,29 +49,6 @@ const ColorButton = styled(Button)(({ theme }) => ({
     },
   }));
 
-// Buat date picker
-function Tanggal(){
-    const [value, setValue] = React.useState(new Date());
-    const [startDate, setStartDate] = useState(new Date("2022/01/22"));
-    const [endDate, setEndDate] = useState(new Date("2022/01/25"));
-    return(
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-            label="Pilih Tanggal Try Out"
-            openTo="day"
-            views={['year', 'month', 'day']}
-            value={value}
-            minDate={startDate}
-            maxDate={endDate}
-            onChange={(newValue) => {
-                setValue(newValue);
-            }}
-            renderInput={(params) => <TextField {...params} />}
-            />
-        </LocalizationProvider>
-    )
-}
-
 // Buat pilihan berapa orang regist
 const jumlah = [
     {
@@ -118,98 +95,138 @@ const jumlah = [
     },
   ];
 
-// Buat form data diri
-const FormData = () => {
-    const [jurusan, setJurusan] = useState('');
-    const handleChange = (event) => {
-        setJurusan(event.target.value);
-    };
-    return(
-        <>
-            <Typography component="h1" variant="h6" marginTop={5}>
-                Data Diri Peserta
-            </Typography>
-            {/* Isi data diri */}
-            <Grid item xs={12}>
-                <TextField
-                required
-                fullWidth
-                id="nama"
-                label="Nama Lengkap"
-                name="nama"
-                autoComplete="nama"
-                />
-            </Grid>
-            <Grid item xs={12}>
-                <TextField
-                required
-                fullWidth
-                id="asalSMA"
-                label="Asal SMA"
-                name="asalSMA"
-                autoComplete="SMA N 0 Semarang"
-                />
-            </Grid>
-            <Grid item xs={12}>
-                <TextField
-                required
-                fullWidth
-                id="kontak"
-                label="Nomor HP"
-                name="kontak"
-                type="number"
-                autoComplete="08123456789"
-                helperText="Masukkan angka"
-                />
-            </Grid>
-            <Grid item xs={12}>
-                <TextField
-                select
-                required
-                fullWidth
-                id="jurusan"
-                label="Jurusan Try Out"
-                name="jurusan"
-                value={jurusan}
-                onChange={handleChange}
-                >
-                    {jurusans.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
-                </TextField>
-            </Grid>
-            <Grid item xs={12}>
-                <Tanggal/>
-            </Grid>
-        </>
-    )
-}
-
-// Fungsi render form
-function RenderForm(numrows) {
-    var rows = [];
-    for (var i = 0; i < numrows; i++) {
-        rows.push(<FormData key={i} />);
-    }
-    return <>{rows}</>;
-}
 
 //   Buat rendering peserta
 const Peserta = () => {
+    // state form
     const [jumlahVal, setJumlahVal] = useState('1');
-    const [pembayaran, setPembayaran] = useState('1');
+    const [pembayaran, setPembayaran] = useState('');
+    const [valueDate, setValueDate] = React.useState([]);
+    const [startDate, setStartDate] = useState(new Date("2022/01/22"));
+    const [endDate, setEndDate] = useState(new Date("2022/01/25"));
+    const [jurusan, setJurusan] = useState([]);
+    const [nama, setNama] = useState({});
+    const [asalSMA, setAsalSMA] = useState({});
+    const [kontak, setKontak] = useState({});
+    // Kurang semua state nama dll
+    const handleJurusan = (event) => {
+        setJurusan([...jurusan, event.target.value]);
+    };
     const handleChange = (event) => {
         setJumlahVal(event.target.value);
     };
     const handlePembayaran = (event) => {
         setPembayaran(event.target.value);
     };
+    const handleNama = (event) => {
+        const nameVal = event.target.value;
+        const kunci = event.target.kunci;
+        setNama(changes => ({...changes, [kunci]: nameVal}));
+    };
+    const handleAsal = (event) => {
+        const asalVal = event.target.value;
+        setAsalSMA(changes => ({...changes, asalVal}));
+    };
+    const handleKontak = (event) => {
+        const kontakVal = event.target.value;
+        setKontak(changes => ({...changes, kontakVal}));
+    };
+
+    //handler submit
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(jurusan);
+    }
+
+    const renderForm = () => {
+        var rows = [];
+        for (var i = 0; i < jumlahVal; i++) {
+            rows.push(
+                <>
+                    <Typography component="h1" variant="h6" marginTop={5}>
+                        Data Diri Peserta {i+1}
+                    </Typography>
+                    {/* Isi data diri */}
+                    <Grid item xs={12}>
+                        <TextField
+                        required
+                        fullWidth
+                        id="nama"
+                        label="Nama Lengkap"
+                        name={i}
+                        autoComplete="nama"
+                        value={nama[i]}
+                        onChange={handleNama}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                        required
+                        fullWidth
+                        id="asalSMA"
+                        label="Asal SMA"
+                        name="asalSMA"
+                        autoComplete="SMA N 0 Semarang"
+                        value={asalSMA[i]}
+                        onChange={handleAsal}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                        required
+                        fullWidth
+                        id="kontak"
+                        label="Nomor HP"
+                        name="kontak"
+                        type="number"
+                        autoComplete="08123456789"
+                        helperText="Masukkan angka"
+                        value={kontak[i]}
+                        onChange={handleKontak}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                        select
+                        required
+                        fullWidth
+                        id="jurusan"
+                        label="Jurusan Try Out"
+                        name="jurusan"
+                        value={jurusan[i]}
+                        onChange={handleJurusan}
+                        >
+                            {jurusans.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                            label="Pilih Tanggal Try Out"
+                            openTo="day"
+                            views={['year', 'month', 'day']}
+                            value={new Date(valueDate[i])}
+                            minDate={startDate}
+                            maxDate={endDate}
+                            onChange={(newValue) => {
+                                setValueDate([...valueDate, newValue]);
+                            }}
+                            renderInput={(params) => <TextField {...params} />}
+                            />
+                        </LocalizationProvider>
+                    </Grid>
+                </>);
+                        }
+        return rows.map((row) => row);
+    }
 
     return(
         <ThemeProvider theme={theme}>
-            <Navbar></Navbar>
+            <NavbarLoggedIn></NavbarLoggedIn>
             <CssBaseline />
             <Container component="main" maxWidth="xl" >
                 <Box
@@ -223,7 +240,7 @@ const Peserta = () => {
                         Registrasi Tryout
                     </Typography>
                     {/* Pilih jumlah orang */}
-                    <Box component="form" sx={{ mt: 3, width: "70vw" }}>
+                    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3, width: "70vw" }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} marginBottom={2}>
                                 <TextField
@@ -242,7 +259,8 @@ const Peserta = () => {
                                     ))}
                                 </TextField>
                             </Grid>
-                            {RenderForm(jumlahVal)}
+                            {/* Bagian form */}
+                            {renderForm()}
                             <Typography component="h1" variant="h5" marginTop={5}>
                                 Pembayaran
                             </Typography>
@@ -265,7 +283,7 @@ const Peserta = () => {
                                 </TextField>
                             </Grid>
                             <Grid item xs={12}>
-                                <ColorButton size="medium" variant="contained" style={{ width:"8vw" }}>
+                                <ColorButton type="submit" size="medium" variant="contained" style={{ width:"8vw" }}>
                                     Submit
                                 </ColorButton>
                             </Grid>

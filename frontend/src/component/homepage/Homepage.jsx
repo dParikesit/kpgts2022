@@ -3,6 +3,7 @@ import Peserta from '../peserta/Peserta';
 import NavbarLoggedIn from '../komponen_umum/NavbarLoggedIn';
 import {useEffect, useContext} from "react";
 import { AuthContext } from "../komponen_umum/AuthContext";
+import Footer from '../komponen_umum/Footer';
 
 const Homepage = () => {
     const Auth = useContext(AuthContext)
@@ -36,12 +37,13 @@ const Homepage = () => {
                 </div>
             </div>
             <div class="image">
-                <img src="" alt="Foto lambang KPGTS 2022">
+                <img src="" alt="Foto lambang KPGTS 2022"/>
             </div>
             <div class="button">
                 <button>Register</button>
                 <button>Timeline</button>
             </div>
+            <Footer></Footer>
         </div>
     )
 }
