@@ -105,7 +105,7 @@ const Peserta = () => {
     const [startDate, setStartDate] = useState(new Date("2022/01/22"));
     const [endDate, setEndDate] = useState(new Date("2022/01/25"));
     const [jurusan, setJurusan] = useState([]);
-    const [nama, setNama] = useState({});
+    const [nama, setNama] = useState([]);
     const [asalSMA, setAsalSMA] = useState({});
     const [kontak, setKontak] = useState({});
     // Kurang semua state nama dll
@@ -119,9 +119,10 @@ const Peserta = () => {
         setPembayaran(event.target.value);
     };
     const handleNama = (event) => {
-        const nameVal = event.target.value;
-        const kunci = event.target.kunci;
-        setNama(changes => ({...changes, [kunci]: nameVal}));
+        const idx = event.target.getAttribute('name')
+        let temp = nama
+        temp[idx] = event.target.value
+        setNama(temp)
     };
     const handleAsal = (event) => {
         const asalVal = event.target.value;
@@ -151,74 +152,75 @@ const Peserta = () => {
                         <TextField
                         required
                         fullWidth
-                        id="nama"
+                        id={nama}
                         label="Nama Lengkap"
                         name={i}
                         autoComplete="nama"
                         value={nama[i]}
+                        defaultValue={""}
                         onChange={handleNama}
                         />
                     </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                        required
-                        fullWidth
-                        id="asalSMA"
-                        label="Asal SMA"
-                        name="asalSMA"
-                        autoComplete="SMA N 0 Semarang"
-                        value={asalSMA[i]}
-                        onChange={handleAsal}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                        required
-                        fullWidth
-                        id="kontak"
-                        label="Nomor HP"
-                        name="kontak"
-                        type="number"
-                        autoComplete="08123456789"
-                        helperText="Masukkan angka"
-                        value={kontak[i]}
-                        onChange={handleKontak}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                        select
-                        required
-                        fullWidth
-                        id="jurusan"
-                        label="Jurusan Try Out"
-                        name="jurusan"
-                        value={jurusan[i]}
-                        onChange={handleJurusan}
-                        >
-                            {jurusans.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                            label="Pilih Tanggal Try Out"
-                            openTo="day"
-                            views={['year', 'month', 'day']}
-                            value={new Date(valueDate[i])}
-                            minDate={startDate}
-                            maxDate={endDate}
-                            onChange={(newValue) => {
-                                setValueDate([...valueDate, newValue]);
-                            }}
-                            renderInput={(params) => <TextField {...params} />}
-                            />
-                        </LocalizationProvider>
-                    </Grid>
+                    {/*<Grid item xs={12}>*/}
+                    {/*    <TextField*/}
+                    {/*    required*/}
+                    {/*    fullWidth*/}
+                    {/*    id="asalSMA"*/}
+                    {/*    label="Asal SMA"*/}
+                    {/*    name="asalSMA"*/}
+                    {/*    autoComplete="SMA N 0 Semarang"*/}
+                    {/*    value={asalSMA[i]}*/}
+                    {/*    onChange={handleAsal}*/}
+                    {/*    />*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item xs={12}>*/}
+                    {/*    <TextField*/}
+                    {/*    required*/}
+                    {/*    fullWidth*/}
+                    {/*    id="kontak"*/}
+                    {/*    label="Nomor HP"*/}
+                    {/*    name="kontak"*/}
+                    {/*    type="number"*/}
+                    {/*    autoComplete="08123456789"*/}
+                    {/*    helperText="Masukkan angka"*/}
+                    {/*    value={kontak[i]}*/}
+                    {/*    onChange={handleKontak}*/}
+                    {/*    />*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item xs={12}>*/}
+                    {/*    <TextField*/}
+                    {/*    select*/}
+                    {/*    required*/}
+                    {/*    fullWidth*/}
+                    {/*    id="jurusan"*/}
+                    {/*    label="Jurusan Try Out"*/}
+                    {/*    name="jurusan"*/}
+                    {/*    value={jurusan[i]}*/}
+                    {/*    onChange={handleJurusan}*/}
+                    {/*    >*/}
+                    {/*        {jurusans.map((option) => (*/}
+                    {/*            <MenuItem key={option.value} value={option.value}>*/}
+                    {/*                {option.label}*/}
+                    {/*            </MenuItem>*/}
+                    {/*        ))}*/}
+                    {/*    </TextField>*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item xs={12}>*/}
+                    {/*    <LocalizationProvider dateAdapter={AdapterDateFns}>*/}
+                    {/*        <DatePicker*/}
+                    {/*        label="Pilih Tanggal Try Out"*/}
+                    {/*        openTo="day"*/}
+                    {/*        views={['year', 'month', 'day']}*/}
+                    {/*        value={new Date(valueDate[i])}*/}
+                    {/*        minDate={startDate}*/}
+                    {/*        maxDate={endDate}*/}
+                    {/*        onChange={(newValue) => {*/}
+                    {/*            setValueDate([...valueDate, newValue]);*/}
+                    {/*        }}*/}
+                    {/*        renderInput={(params) => <TextField {...params} />}*/}
+                    {/*        />*/}
+                    {/*    </LocalizationProvider>*/}
+                    {/*</Grid>*/}
                 </>);
                         }
         return rows.map((row) => row);
