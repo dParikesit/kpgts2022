@@ -112,7 +112,7 @@ const Peserta = () => {
     // Pake yg ini ya
     let arr= []
     for (var i = 0; i < jumlahVal; i++){
-        arr.push({nama: "a", sma: "a", kontak: "a", jurusan: "a", tanggal: "a"})
+        arr.push({nama: null, sma: null, kontak: null, jurusan: null, tanggal: null})
     }
     const [data, setData] = useState(arr)
     // {
@@ -130,10 +130,13 @@ const Peserta = () => {
     };
     const handleChange = (event) => {
         setJumlahVal(event.target.value);
-        for (var i = 0; i < jumlahVal; i++){
-            arr.push({nama: "a", sma: "a", kontak: "a", jurusan: "a", tanggal: "a"})
+        let lengthAwal = arr.length;
+        let tempArr = arr;
+        for (var i = lengthAwal - 1; i < jumlahVal; i++){
+            tempArr.push({nama: null, sma: null, kontak: null, jurusan: null, tanggal: null})
         };
-        setData(arr);
+        arr = tempArr;
+        setData(tempArr);
     };
     const handlePembayaran = (event) => {
         setPembayaran(event.target.value);
@@ -141,10 +144,9 @@ const Peserta = () => {
     const handleNama = (event) => {
         const idx = event.target.getAttribute('name')
         let temp = data
-        if(temp[idx]===undefined){
-            temp[idx] = {}
-        }   
+        console.log(temp)
         temp[idx]["nama"] = event.target.value
+        console.log(temp)
         setData(temp)
     };
     const handleAsal = (event) => {
@@ -159,7 +161,7 @@ const Peserta = () => {
     //handler submit
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(jurusan);
+        console.log(arr);
     }
 
     const renderForm = () => {
@@ -177,7 +179,7 @@ const Peserta = () => {
                         fullWidth
                         id={nama}
                         label="Nama Lengkap"
-                        name="nama"
+                        name={i}
                         autoComplete="nama"
                         value={data[i]["nama"]}
                         onChange={handleNama}
