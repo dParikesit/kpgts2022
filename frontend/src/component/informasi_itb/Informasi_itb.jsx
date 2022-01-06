@@ -1,5 +1,5 @@
 import Footer from "../komponen_umum/Footer";
-import Navbar from "../komponen_umum/Navbar";
+import NavbarAuth from "../komponen_umum/NavbarAuth";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
 import PropTypes from 'prop-types';
@@ -139,7 +139,7 @@ const InformasiItb = () => {
         return(
             <div>
                 <ThemeProvider theme={theme1}>
-                    <Navbar></Navbar>
+                    <NavbarAuth></NavbarAuth>
                             <Box sx={{ width: '100%' }}>
                                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                     <Tabs value={value} style={{textTransform:'none'}} onChange={handleChange} centered>

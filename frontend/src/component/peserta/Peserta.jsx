@@ -106,62 +106,44 @@ const Peserta = () => {
     const [endDate, setEndDate] = useState(new Date("2022/01/25"));
     const [jurusan, setJurusan] = useState([]);
     const [nama, setNama] = useState([]);
-    const [asalSMA, setAsalSMA] = useState({});
-    const [kontak, setKontak] = useState({});
-
-    // Pake yg ini ya
-    let arr= []
-    for (var i = 0; i < jumlahVal; i++){
-        arr.push({nama: null, sma: null, kontak: null, jurusan: null, tanggal: null})
-    }
-    const [data, setData] = useState(arr)
-    // {
-    //     nama:
-    //     sma:
-    //     kontak:
-    //     jurusan:
-    //     tanggal:
-    // }
-
-
+    const [asalSMA, setAsalSMA] = useState([]);
+    const [kontak, setKontak] = useState([]);
     // Kurang semua state nama dll
     const handleJurusan = (event) => {
-        setJurusan([...jurusan, event.target.value]);
+        const idx = event.target.getAttribute('name')
+        let temp = jurusan
+        temp[idx] = event.target.value
+        setJurusan(temp)
     };
     const handleChange = (event) => {
         setJumlahVal(event.target.value);
-        let lengthAwal = arr.length;
-        let tempArr = arr;
-        for (var i = lengthAwal - 1; i < jumlahVal; i++){
-            tempArr.push({nama: null, sma: null, kontak: null, jurusan: null, tanggal: null})
-        };
-        arr = tempArr;
-        setData(tempArr);
     };
     const handlePembayaran = (event) => {
         setPembayaran(event.target.value);
     };
     const handleNama = (event) => {
         const idx = event.target.getAttribute('name')
-        let temp = data
-        console.log(temp)
-        temp[idx]["nama"] = event.target.value
-        console.log(temp)
-        setData(temp)
+        let temp = nama
+        temp[idx] = event.target.value
+        setNama(temp)
     };
     const handleAsal = (event) => {
-        const asalVal = event.target.value;
-        setAsalSMA(changes => ({...changes, asalVal}));
+        const idx = event.target.getAttribute('name')
+        let temp = asalSMA
+        temp[idx] = event.target.value
+        setAsalSMA(temp)
     };
     const handleKontak = (event) => {
-        const kontakVal = event.target.value;
-        setKontak(changes => ({...changes, kontakVal}));
+        const idx = event.target.getAttribute('name')
+        let temp = kontak
+        temp[idx] = event.target.value
+        setKontak(temp)
     };
 
     //handler submit
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(arr);
+        console.log(nama, asalSMA, kontak, jurusan, valueDate, pembayaran);
     }
 
     const renderForm = () => {
@@ -181,70 +163,71 @@ const Peserta = () => {
                         label="Nama Lengkap"
                         name={i}
                         autoComplete="nama"
-                        value={data[i]["nama"]}
+                        value={nama[i]}
+                        defaultValue={""}
                         onChange={handleNama}
                         />
                     </Grid>
-                    {/*<Grid item xs={12}>*/}
-                    {/*    <TextField*/}
-                    {/*    required*/}
-                    {/*    fullWidth*/}
-                    {/*    id="asalSMA"*/}
-                    {/*    label="Asal SMA"*/}
-                    {/*    name="asalSMA"*/}
-                    {/*    autoComplete="SMA N 0 Semarang"*/}
-                    {/*    value={asalSMA[i]}*/}
-                    {/*    onChange={handleAsal}*/}
-                    {/*    />*/}
-                    {/*</Grid>*/}
-                    {/*<Grid item xs={12}>*/}
-                    {/*    <TextField*/}
-                    {/*    required*/}
-                    {/*    fullWidth*/}
-                    {/*    id="kontak"*/}
-                    {/*    label="Nomor HP"*/}
-                    {/*    name="kontak"*/}
-                    {/*    type="number"*/}
-                    {/*    autoComplete="08123456789"*/}
-                    {/*    helperText="Masukkan angka"*/}
-                    {/*    value={kontak[i]}*/}
-                    {/*    onChange={handleKontak}*/}
-                    {/*    />*/}
-                    {/*</Grid>*/}
-                    {/*<Grid item xs={12}>*/}
-                    {/*    <TextField*/}
-                    {/*    select*/}
-                    {/*    required*/}
-                    {/*    fullWidth*/}
-                    {/*    id="jurusan"*/}
-                    {/*    label="Jurusan Try Out"*/}
-                    {/*    name="jurusan"*/}
-                    {/*    value={jurusan[i]}*/}
-                    {/*    onChange={handleJurusan}*/}
-                    {/*    >*/}
-                    {/*        {jurusans.map((option) => (*/}
-                    {/*            <MenuItem key={option.value} value={option.value}>*/}
-                    {/*                {option.label}*/}
-                    {/*            </MenuItem>*/}
-                    {/*        ))}*/}
-                    {/*    </TextField>*/}
-                    {/*</Grid>*/}
-                    {/*<Grid item xs={12}>*/}
-                    {/*    <LocalizationProvider dateAdapter={AdapterDateFns}>*/}
-                    {/*        <DatePicker*/}
-                    {/*        label="Pilih Tanggal Try Out"*/}
-                    {/*        openTo="day"*/}
-                    {/*        views={['year', 'month', 'day']}*/}
-                    {/*        value={new Date(valueDate[i])}*/}
-                    {/*        minDate={startDate}*/}
-                    {/*        maxDate={endDate}*/}
-                    {/*        onChange={(newValue) => {*/}
-                    {/*            setValueDate([...valueDate, newValue]);*/}
-                    {/*        }}*/}
-                    {/*        renderInput={(params) => <TextField {...params} />}*/}
-                    {/*        />*/}
-                    {/*    </LocalizationProvider>*/}
-                    {/*</Grid>*/}
+                    <Grid item xs={12}>
+                       <TextField
+                        required
+                        fullWidth
+                        id="asalSMA"
+                        label="Asal SMA"
+                        name={i}
+                        autoComplete="SMA N 0 Semarang"
+                        value={asalSMA[i]}
+                        onChange={handleAsal}
+                        />
+                    </Grid> 
+                    <Grid item xs={12}>
+                        <TextField
+                        required
+                        fullWidth
+                        id="kontak"
+                        label="Nomor HP"
+                        name={i}
+                        type="number"
+                        autoComplete="08123456789"
+                        helperText="Masukkan angka"
+                        value={kontak[i]}
+                        onChange={handleKontak}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                        select
+                        required
+                        fullWidth
+                        id="jurusan"
+                        label="Jurusan Try Out"
+                        name={i}
+                        value={jurusan[i]}
+                        onChange={handleJurusan}
+                        >
+                            {jurusans.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                            label="Pilih Tanggal Try Out"
+                            openTo="day"
+                            views={['year', 'month', 'day']}
+                            value={new Date(valueDate[i])}
+                            minDate={startDate}
+                            maxDate={endDate}
+                            onChange={(newValue) => {
+                                setValueDate([...valueDate, newValue]);
+                            }}
+                            renderInput={(params) => <TextField {...params} />}
+                            />
+                        </LocalizationProvider>
+                    </Grid>
                 </>);
                         }
         return rows.map((row) => row);

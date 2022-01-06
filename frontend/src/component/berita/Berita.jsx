@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Navbar from '../komponen_umum/Navbar';
+import NavbarAuth from '../komponen_umum/NavbarAuth';
 import Footer from '../komponen_umum/Footer';
 import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -54,7 +54,7 @@ export default function Berita() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Navbar></Navbar>
+      <NavbarAuth></NavbarAuth>
       <main>
         <Box
           sx={{
