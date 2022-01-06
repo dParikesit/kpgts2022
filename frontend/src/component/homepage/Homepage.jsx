@@ -36,7 +36,7 @@ const Homepage = () => {
                 </div>
             </div>
             <div class="image">
-                <img src="" alt="Foto lambang KPGTS 2022">
+                <img src="" alt="Foto lambang KPGTS 2022"/>
             </div>
             <div class="button">
                 <button>Register</button>
