@@ -1,8 +1,7 @@
-import Navbar from '../komponen_umum/Navbar'
-import Peserta from '../peserta/Peserta';
-import NavbarLoggedIn from '../komponen_umum/NavbarLoggedIn';
+import NavbarAuth from "../komponen_umum/NavbarAuth";
 import {useEffect, useContext} from "react";
 import { AuthContext } from "../komponen_umum/AuthContext";
+import Footer from '../komponen_umum/Footer';
 
 const Homepage = () => {
     const Auth = useContext(AuthContext)
@@ -24,9 +23,7 @@ const Homepage = () => {
 
     return(
         <div>
-            <NavbarLoggedIn></NavbarLoggedIn>
-            {/* <Navbar /> */}
-            {/* <Peserta></Peserta> */}
+            <NavbarAuth></NavbarAuth>
             <div class="tulisan">
                 <div class="judul">
                     <h1>KPGTS 2022</h1>
@@ -42,6 +39,7 @@ const Homepage = () => {
                 <button>Register</button>
                 <button>Timeline</button>
             </div>
+            <Footer></Footer>
         </div>
     )
 }
