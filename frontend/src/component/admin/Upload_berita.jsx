@@ -9,37 +9,49 @@ const myTheme = createTheme({
     // Set up your custom MUI theme here
 })
 
-const save = (data) => {
-    console.log(data)
-}
-
-const change = (state) => {
-    // More info about EditorState object at
-    // https://draftjs.org/docs/api-reference-editor-state
-    //
-    // Get current selection
-    console.log(state.getSelection())
-    // Get current content
-    console.log(JSON.stringify(convertToRaw(state.getCurrentContent())))
-    // Get current text
-    console.log(state.getCurrentContent().getPlainText())
-    // Check if editor is empty
-    if (!state.getCurrentContent().hasText()) {
-        console.log("empty")
-    }
-}
-
 const Upload_Berita = () => {
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
+        const formdata = new FormData();
+        formdata.append('image', selectedFile)
+        const response = await fetch('/api/post/pict', {
+            method: 'POST',
+            mode: 'same-origin',
+            credentials: "same-origin",
+            body: formdata
+        })
+        if(response.status===200){
+            setFileName(await response.json())
+        }
       };
+
+    const save = async (data) => {
+        console.log(JSON.parse(data))
+        const content = JSON.parse(data)
+        let response = await fetch('/api/post/add', {
+            method: 'POST',
+            mode: 'same-origin',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: JSON.stringify(content.blocks[0].text),
+                content: JSON.stringify(content),
+                picturePath: fileName
+            })
+        })
+        if(response.status===200){
+            response = await response.json()
+            await alert(response.title + " berhasil ditambahkan")
+        } else{
+            await alert(response.json())
+        }
+    }
     
     const [selectedFile, setSelectedFile] = useState(null);
-
-    const submitForm = () => {};
+    const [fileName, setFileName] = useState("")
 
     return(
         <div>
@@ -47,17 +59,17 @@ const Upload_Berita = () => {
                 <input
                 style={{marginRight:'2vw', marginTop:'1vw', fontFamily:'Ramaraja'}}
                 type="file"
-                value={selectedFile}
-                onChange={(e) => setSelectedFile(e.target.files[0])}
+                onChange={(e) => {
+                    setSelectedFile(e.target.files[0])
+                }}
                 />
-                <Button style={{marginRight:'2vw'}} type="submit" variant="outlined">Convert ke URL</Button> 
-                <p>state</p>
+                <Button style={{marginRight:'2vw'}} type="submit" variant="outlined" onClick={handleSubmit}>Convert ke URL</Button>
+                <p>{fileName}</p>
             </FormGroup>
             <ThemeProvider theme={myTheme}>
                 <MUIRichTextEditor 
                     label="Start typing..."
                     onSave={save}
-                    onChange={change}
                 />
             </ThemeProvider>
         </div>

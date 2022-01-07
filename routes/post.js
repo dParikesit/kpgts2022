@@ -3,6 +3,7 @@ const multer = require('multer');
 const {body, validationResult} = require('express-validator');
 const router = require('express').Router();
 const postController = require('../controller/post');
+const path = require("path");
 
 
 // Berarti api ada di /api/post/
@@ -33,12 +34,12 @@ const fileStorage = multer.diskStorage({
         cb(null, `./${process.env.IMAGE_FOLDER}`);
     },
     filename: (req,file,cb) =>{
-        cb(null, `post-${path.extname(file.originalname)}`);
+        cb(null, `post-${(file.originalname)}`);
     }
 });
 const upload = multer({storage: fileStorage});
 
-router.post("/add", upload.single('image'),  async (req, res) => {
+router.post("/add",  async (req, res) => {
     body('title','Please fill in the title.').notEmpty();
     body('content','Please fill in the content.').notEmpty();
     const errors = validationResult(req); // Finds the validation errors in this request and wraps them in an object with handy functions
@@ -47,19 +48,18 @@ router.post("/add", upload.single('image'),  async (req, res) => {
         return;
     }
     const post = await postController.getOne('title', req.body.title);
-    if (!(post.title.length > 0)) {
+    console.log(post)
+    if (post.length===0) {
         try {
             let data = {
                 title: req.body.title,
                 content: req.body.content,
-                picture:'',
+                picturePath :req.body.picturePath,
                 user_id: req.session.uid // FIX INI
             }
-            if(req.file)
-                picture = `post-${path.extname(req.file.originalname)}`;
-            data.picture = picture;
 
             await postController.insert(data);
+            res.status(200).json({title: req.body.title})
         } catch(e) {
             res.status(500).json({error: e});
         }
@@ -67,5 +67,10 @@ router.post("/add", upload.single('image'),  async (req, res) => {
         res.status(500).json({msg: 'Title is already used. Please try another title name.'});
     }
 });
+
+router.post("/pict", upload.single('image'), async(req,res)=>{
+    console.log(req.file)
+    res.status(200).json(`post-${req.file.originalname}`)
+})
 
 module.exports = router
