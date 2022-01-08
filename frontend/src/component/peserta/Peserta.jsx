@@ -8,7 +8,7 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -43,7 +43,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
     fontSize: "18px",
     padding: "auto",
     backgroundColor: '#554B3F',
-    margin: "auto",
+    marginTop: "10px",
     borderRadius: "15px",
     justifyContent: "center",
     textAlign: "center",
@@ -106,10 +106,35 @@ const jumlah = [
           "GOPAY": "GOPAY: NAMA, NOMOR"
       }
 
+export function useFileUpload({ onStarting } = {}) {
+    const [fileName, setFileName] = useState(undefined)
+
+    const fileId = '12345'
+
+    const uploadFile = useCallback((file) => {
+        if (!file) {
+            return
+        }
+        setFileName(file.name)
+        onStarting(file)
+    }, [onStarting])
+
+    return [uploadFile]
+}
+
 //   Buat rendering peserta
 const Peserta = () => {
     // variabel variabel
     const harga = 50000;
+    // Buat foto
+    const [photoToUpload, setPhotoToUpload] = useState()
+	const [uploadPhoto] = useFileUpload({
+		onStarting: (file) => {
+			var reader = new FileReader();
+			reader.readAsDataURL(file)
+			reader.onloadend = () => setPhotoToUpload(reader.result)
+		}
+	})
     // state form
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const [jumlahVal, setJumlahVal] = useState('1');
@@ -121,6 +146,8 @@ const Peserta = () => {
     const [nama, setNama] = useState([]);
     const [asalSMA, setAsalSMA] = useState([]);
     const [kontak, setKontak] = useState([]);
+    const [jenisBank, setJenisBank] = useState('');
+    const [namaDiRek, setNamaDiRek] = useState('');
     const handleJurusan = (event) => {
         let temp = jurusan;
         const idx = event.target.getAttribute('name');
@@ -132,6 +159,12 @@ const Peserta = () => {
     };
     const handlePembayaran = (event) => {
         setPembayaran(event.target.value);
+    };
+    const handleJenisBank = (event) => {
+        setJenisBank(event.target.value);
+    };
+    const handleNamaDiRek = (event) => {
+        setNamaDiRek(event.target.value);
     };
     const handleNama = (event) => {
         const idx = event.target.getAttribute('name')
@@ -155,7 +188,7 @@ const Peserta = () => {
     //handler submit
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(nama, asalSMA, kontak, jurusan, valueDate, pembayaran);
+        console.log(nama, asalSMA, kontak, jurusan, valueDate, pembayaran, jenisBank, namaDiRek);
     }
 
     // BUAT RENDER FORM
@@ -211,18 +244,18 @@ const Peserta = () => {
                         <FormControl
                         fullWidth
                         >
-                            <InputLabel id="demo-simple-select-label">Jurusan</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Saintek/Soshum</InputLabel>
                             <NativeSelect
                             onChange={handleJurusan}
                             name={i}
                             value={jurusan[i]}
                             inputProps={{
                                 id:"jurusan",
-                                label:"jurusan",
+                                label:"Saintek/Soshum",
                             }}
                             >
-                                <option value={'IPA'}>IPA</option>
-                                <option value={'IPS'}>IPS</option>
+                                <option value={'Saintek'}>Saintek</option>
+                                <option value={'Soshum'}>Soshum</option>
                             </NativeSelect>
                         </FormControl>
                     </Grid>
@@ -252,7 +285,7 @@ const Peserta = () => {
         return (
             <>
                 {isMobile ? (
-                    <Grid item xs={12} >
+                    <Grid item xs={12} marginTop={0} >
                         <Box sx={{ color:"black", fontSize: "6vw" }} >
                             {noRek[pembayaran]}
                         </Box>
@@ -305,9 +338,34 @@ const Peserta = () => {
                             </Grid>
                             {/* Bagian form */}
                             {renderForm()}
+                            {/* BAGIAN PEMBAYARAN */}
                             <Typography component="h1" variant="h5" marginTop={5}>
                                 Pembayaran
                             </Typography>
+                            <Grid item xs={12}>
+                                <TextField
+                                required
+                                fullWidth
+                                id="namaPemilikBank"
+                                label="Nama di Rekening"
+                                name="namaPemilikBankank"
+                                autoComplete="Nama"
+                                value={namaDiRek}
+                                onChange={handleNamaDiRek}
+                                />
+                            </Grid> 
+                            <Grid item xs={12}>
+                                <TextField
+                                required
+                                fullWidth
+                                id="jenisBank"
+                                label="Jenis Bank"
+                                name="jenisBank"
+                                autoComplete="BCA"
+                                value={jenisBank}
+                                onChange={handleJenisBank}
+                                />
+                            </Grid> 
                            <Grid item xs={12}>
                                 <TextField
                                 select
@@ -341,6 +399,19 @@ const Peserta = () => {
                             )}
                             
                             {renderDetail()}
+                            
+                            <Typography component="h1" variant="h5" marginTop={2}>
+                                Upload Bukti Pembayaran
+                            </Typography>
+                            {/* upload foto */}
+                            <Grid item xs={12}>
+                                <input
+                                accept="image/*"
+                                id="raised-button-file"
+                                type="file"
+                                />
+                            </Grid>
+                           {/* SUBMIT BUTTON */}
                             <Grid item xs={12}>
                                 <ColorButton type="submit" size="medium" variant="contained" style={{ width:"8vw" }}>
                                     Submit
