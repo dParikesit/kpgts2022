@@ -39,7 +39,7 @@ router.post("/signup", (req,res) => {
 router.get("/login", (req, res) => {
     if (req.session.name!==undefined) {
         console.log(req.session.name)
-        res.send({ loggedIn: true, name: req.session.name, role: req.session.role});
+        res.send({ loggedIn: true, name: req.session.name, role: req.session.role,email: req.session.email});
     } else {
         res.send({ loggedIn: false });
     }
@@ -56,6 +56,7 @@ router.post("/login", (req, res) => {
                         req.session.uid = user.id;
                         req.session.name = user.name;
                         req.session.role = user.role;
+                        req.session.email = user.email;
                         console.log(req.session);
                         // req.session.save()
                         res.status(200).json({name : user.name, role:user.role});
