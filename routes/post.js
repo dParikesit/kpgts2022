@@ -10,6 +10,7 @@ const path = require("path");
 // router.get("/", (req,res)=>{
 //     res.json({"test": "Halo"})
 // })
+
 router.get("/", async (req,res) => {
     try {
         const data = await postController.getAll();
@@ -55,9 +56,8 @@ router.post("/add",  async (req, res) => {
                 title: req.body.title,
                 content: req.body.content,
                 picturePath :req.body.picturePath,
-                user_id: req.session.uid // FIX INI
+                name: req.session.name
             }
-
             await postController.insert(data);
             res.status(200).json({title: req.body.title})
         } catch(e) {

@@ -27,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.use('/static', express.static('uploads'))
 app.use("/api", routes);
 
 app.use(express.static(path.join(__dirname, "frontend/build")));
