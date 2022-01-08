@@ -15,6 +15,9 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import * as React from 'react';
+import NativeSelect from '@mui/material/NativeSelect';
+import { FormControl } from "@mui/material";
+import InputLabel from '@mui/material/InputLabel';
 
 // Buat tema
 const theme = createTheme({
@@ -111,10 +114,10 @@ const Peserta = () => {
     const [asalSMA, setAsalSMA] = useState([]);
     const [kontak, setKontak] = useState([]);
     const handleJurusan = (event) => {
-        const idx = event.target.getAttribute('name')
-        let temp = jurusan
-        temp[idx] = event.target.value
-        setJurusan(temp)
+        let temp = jurusan;
+        const idx = event.target.getAttribute('name');
+        temp[idx] = event.target.value;
+        setJurusan(jurusan);
     };
     const handleChange = (event) => {
         setJumlahVal(event.target.value);
@@ -197,19 +200,23 @@ const Peserta = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField
-                        select
-                        required
+                        <FormControl
                         fullWidth
-                        id="jurusan"
-                        label="Jurusan Try Out"
                         >
-                            {jurusans.map((option) => (
-                                <MenuItem key={option.value} value={option.value} onChange={handleJurusan} name={i}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
+                            <InputLabel id="demo-simple-select-label">Jurusan</InputLabel>
+                            <NativeSelect
+                            onChange={handleJurusan}
+                            name={i}
+                            value={jurusan[i]}
+                            inputProps={{
+                                id:"jurusan",
+                                label:"jurusan",
+                            }}
+                            >
+                                <option value={'IPA'}>IPA</option>
+                                <option value={'IPS'}>IPS</option>
+                            </NativeSelect>
+                        </FormControl>
                     </Grid>
                     <Grid item xs={12}>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
