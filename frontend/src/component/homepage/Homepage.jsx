@@ -20,23 +20,6 @@ const theme = createTheme({
 });
 
 const Homepage = () => {
-    const Auth = useContext(AuthContext)
-    useEffect(async () => {
-        // Update the document title using the browser API
-        let response = await fetch('/api/user/login',{
-            method: 'GET',
-            mode: 'same-origin',
-            credentials: "same-origin",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        response = await response.json()
-        if(response.loggedIn===true) {
-            Auth.addItem(response.name, response.role)
-        }
-    }, []);
-
     return(
         <ThemeProvider theme={theme}>
             <NavbarAuth></NavbarAuth>

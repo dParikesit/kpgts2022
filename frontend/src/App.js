@@ -13,15 +13,15 @@ import {AuthContext} from "./component/komponen_umum/AuthContext";
 import './App.css';
 
 function App() {
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("");
+  const [name, setName] = useState(null);
+  const [role, setRole] = useState(null);
   const addItem = (newName, newRole) => {
     setName(newName)
     setRole(newRole)
   };
   const removeItem = () => {
-    setName("")
-    setRole("")
+    setName(null)
+    setRole(null)
   };
   return (
     <BrowserRouter>
@@ -33,7 +33,7 @@ function App() {
         <Route path='/register' element={<Registration/>} />
         <Route path='/informasi' element={<InformasiItb/>} />
         <Route path='/registerTO' element={<Peserta/>} />
-        <Route path='/login' element={<Admin/>} />
+        <Route path='/admin' element={<Admin/>} />
         <Route path='/profile' element={<Profile/>} />
       </Routes>
     </BrowserRouter>

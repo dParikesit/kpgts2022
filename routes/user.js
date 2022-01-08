@@ -37,7 +37,7 @@ router.post("/signup", (req,res) => {
 });
 
 router.get("/login", (req, res) => {
-    if (req.session) {
+    if (req.session.name!==undefined) {
         console.log(req.session.name)
         res.send({ loggedIn: true, name: req.session.name, role: req.session.role});
     } else {
@@ -76,6 +76,7 @@ router.post("/login", (req, res) => {
 router.post('/logout',(req,res) => {
     req.session.destroy(function() {
         res.clearCookie('connect.sid', { path: '/' }).status(200).json('Cookie deleted.');
+        console.log(req.session)
     });
 });
 

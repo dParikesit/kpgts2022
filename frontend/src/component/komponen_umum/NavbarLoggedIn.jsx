@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -172,6 +172,20 @@ const NavbarLoggedIn = () => {
         }
     }, []);
     const nama=Auth.name
+  const navigate = useNavigate()
+  const logoutHandler = async(e)=>{
+    e.preventDefault()
+    const response = await fetch('api/user/logout', {
+      method: 'POST',
+      mode: 'same-origin',
+      credentials: "same-origin",
+    })
+    if(response.status===200){
+      await Auth.removeItem()
+      await navigate("/", {replace: true})
+      await window.location.reload()
+    }
+  }
 
     return (
       <>
@@ -234,7 +248,7 @@ const NavbarLoggedIn = () => {
                 <ListItem onClick={toggleDrawer}>
                     <ListItemText>
                       <Link to="/" className={classes.linkDrawer}> {/*onClick do logout*/}
-                        <ColorButton size="medium" variant="contained" style={{ width:"30vw" }}>Log Out</ColorButton>
+                        <ColorButton size="medium" variant="contained" style={{ width:"30vw" }} onClick={logoutHandler}>Log Out</ColorButton>
                       </Link>
                     </ListItemText>
                 </ListItem>
