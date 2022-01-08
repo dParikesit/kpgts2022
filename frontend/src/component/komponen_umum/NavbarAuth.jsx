@@ -17,7 +17,6 @@ const NavbarAuth = () => {
           }
       })
       response = await response.json()
-      console.log(response)
       if(response.loggedIn===true) {
           Auth.addItem(response.name, response.role)
           setLoggedIn(true)
@@ -25,7 +24,6 @@ const NavbarAuth = () => {
           Auth.removeItem()
           setLoggedIn(false)
       }
-      console.log({Auth})
   }, []);
 
   if (loggedIn === true) {

@@ -27,8 +27,11 @@ const Upload_Berita = () => {
       };
 
     const save = async (data) => {
-        console.log(JSON.parse(data))
-        const content = JSON.parse(data)
+        let content = JSON.parse(data)
+
+        const title = content.blocks[0].text
+        content.blocks.shift()
+
         let response = await fetch('/api/post/add', {
             method: 'POST',
             mode: 'same-origin',
@@ -37,7 +40,7 @@ const Upload_Berita = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                title: JSON.stringify(content.blocks[0].text),
+                title: JSON.stringify(title),
                 content: JSON.stringify(content),
                 picturePath: fileName
             })

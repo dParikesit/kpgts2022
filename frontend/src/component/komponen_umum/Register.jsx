@@ -15,6 +15,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useNavigate} from "react-router-dom";
   
 // Data cek line 51
 function Copyright(props) {
@@ -46,7 +47,7 @@ const theme = createTheme({
 });
 
 export default function Register() {
-
+  const navigate = useNavigate()
 // Ambil data dari sini ya :D
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -63,8 +64,10 @@ export default function Register() {
             password: data.get('password'),
             nama: data.get('nama')
         })
-    })).json()
-    console.log(response.status)
+    }))
+    if(response.status===200){
+      navigate('/login')
+    }
   };
 
   return (
@@ -80,7 +83,7 @@ export default function Register() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Form Pendaftaran
+            Registrasi Akun
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>

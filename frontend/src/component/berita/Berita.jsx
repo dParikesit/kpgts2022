@@ -18,6 +18,8 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import Dialog from '@mui/material/Dialog';
+import {useEffect, useState} from "react";
+import MUIRichTextEditor from "mui-rte";
 
 // Tambahin data disini dims
 const createData = (id, gambar, judul, ringkasan, penulis, slug) => ({
@@ -26,10 +28,10 @@ const createData = (id, gambar, judul, ringkasan, penulis, slug) => ({
   });
 
 // Ini untuk contoh datanya
-const data = ([
-    createData(1, "https://cf.shopee.co.id/file/1740a66d75c848b38c85ade20a2505e2", "judul1","lorem",  "michael", "contohslug1"),
-    createData(2, "https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg", "judul2","Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", "michael1", "contohslug2"),
-])
+// const data = ([
+//     createData(1, "https://cf.shopee.co.id/file/1740a66d75c848b38c85ade20a2505e2", "judul1","lorem",  "michael", "contohslug1"),
+//     createData(2, "https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg", "judul2","Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", "michael1", "contohslug2"),
+// ])
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -51,6 +53,27 @@ const theme = createTheme({
 });
 
 export default function Berita() {
+  const [data, setData] = useState([
+    createData(0, "https://image.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg", "","",  "", ""),
+    createData(1, "https://image.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg", "","",  "", ""),
+  ])
+
+  useEffect(async () => {
+    // Update the document title using the browser API
+    let response = await fetch('/api/post/',{
+      method: 'GET',
+      mode: 'same-origin',
+      credentials: "same-origin",
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    response = await response.json()
+    setData(
+      response.map(data => createData(data.id, "/static/"+data.picturePath, data.title, data.content, data.name, ""))
+    )
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -146,10 +169,16 @@ function ShowContent (card) {
                                 component="img"
                                 image={card.card.gambar}
                                 alt="random"
+                                style={{marginBottom:"3vw"}}
                             />
-                            <Typography style={{marginTop:"3vw"}}>
-                                {card.card.ringkasan}
-                            </Typography>
+                            {/*<Typography style={{marginTop:"3vw"}}>*/}
+                            {/*    {card.card.ringkasan}*/}
+                            {/*</Typography>*/}
+                            <MUIRichTextEditor
+                                defaultValue={card.card.ringkasan}
+                                readOnly={true}
+                                controls={[]}
+                            />
                         </Grid>
                         <Grid item xs={3}></Grid>
                         </Grid>

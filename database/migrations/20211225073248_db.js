@@ -25,7 +25,8 @@ exports.up = function(knex) {
           table.string('title').notNullable()
           table.string('content').notNullable()
           table.string('picturePath')
-          table.uuid('user_id').references('id').inTable('user')
+          // table.uuid('user_id').references('id').inTable('user')
+          table.string('name').notNullable()
           table.timestamps(true,true)
       })
       .createTable('sessions', function (table) {
