@@ -98,6 +98,8 @@ const jumlah = [
 
 //   Buat rendering peserta
 const Peserta = () => {
+    // variabel variabel
+    const harga = 50000;
     // state form
     const [jumlahVal, setJumlahVal] = useState('1');
     const [pembayaran, setPembayaran] = useState('');
@@ -108,7 +110,6 @@ const Peserta = () => {
     const [nama, setNama] = useState([]);
     const [asalSMA, setAsalSMA] = useState([]);
     const [kontak, setKontak] = useState([]);
-    // Kurang semua state nama dll
     const handleJurusan = (event) => {
         const idx = event.target.getAttribute('name')
         let temp = jurusan
@@ -146,6 +147,7 @@ const Peserta = () => {
         console.log(nama, asalSMA, kontak, jurusan, valueDate, pembayaran);
     }
 
+    // BUAT RENDER FORM
     const renderForm = () => {
         var rows = [];
         for (var i = 0; i < jumlahVal; i++) {
@@ -201,12 +203,9 @@ const Peserta = () => {
                         fullWidth
                         id="jurusan"
                         label="Jurusan Try Out"
-                        name={i}
-                        value={jurusan[i]}
-                        onChange={handleJurusan}
                         >
                             {jurusans.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
+                                <MenuItem key={option.value} value={option.value} onChange={handleJurusan} name={i}>
                                     {option.label}
                                 </MenuItem>
                             ))}
@@ -231,6 +230,21 @@ const Peserta = () => {
                 </>);
                         }
         return rows.map((row) => row);
+    }
+
+    // Buat render detail pembayaran
+    const renderDetail = () => {
+        if (pembayaran == "BCA") {
+            return (
+                <>
+                    <Grid item xs={12} >
+                        <Box sx={{ color:"black", fontSize: "1.3vw" }} >
+                            BCA: Aditya Prawira, 15135456
+                        </Box>
+                    </Grid>
+                </>
+            );
+        }
     }
 
     return(
@@ -273,7 +287,12 @@ const Peserta = () => {
                             <Typography component="h1" variant="h5" marginTop={5}>
                                 Pembayaran
                             </Typography>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} >
+                                <Box sx={{ color:"black", fontSize: "1.3vw" }} >
+                                    Total: {harga*jumlahVal}
+                                </Box>
+                            </Grid>
+                           <Grid item xs={12}>
                                 <TextField
                                 select
                                 required
@@ -291,6 +310,7 @@ const Peserta = () => {
                                     ))}
                                 </TextField>
                             </Grid>
+                            {renderDetail()}
                             <Grid item xs={12}>
                                 <ColorButton type="submit" size="medium" variant="contained" style={{ width:"8vw" }}>
                                     Submit

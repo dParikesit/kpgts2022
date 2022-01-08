@@ -2,6 +2,22 @@ import NavbarAuth from "../komponen_umum/NavbarAuth";
 import {useEffect, useContext} from "react";
 import { AuthContext } from "../komponen_umum/AuthContext";
 import Footer from '../komponen_umum/Footer';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+    typography: {
+        fontFamily: 'Ramaraja',
+        fontSize: 16
+    },
+    palette: {
+        background: {
+            default: "#F2EBCE"
+        },
+        primary: {
+            main: "#A7B560"
+        }
+    },
+});
 
 const Homepage = () => {
     const Auth = useContext(AuthContext)
@@ -22,7 +38,7 @@ const Homepage = () => {
     }, []);
 
     return(
-        <div>
+        <ThemeProvider theme={theme}>
             <NavbarAuth></NavbarAuth>
             <div class="tulisan">
                 <div class="judul">
@@ -40,7 +56,7 @@ const Homepage = () => {
                 <button>Timeline</button>
             </div>
             <Footer></Footer>
-        </div>
+        </ThemeProvider>
     )
 }
 
