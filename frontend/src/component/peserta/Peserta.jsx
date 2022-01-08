@@ -18,6 +18,7 @@ import * as React from 'react';
 import NativeSelect from '@mui/material/NativeSelect';
 import { FormControl } from "@mui/material";
 import InputLabel from '@mui/material/InputLabel';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 // Buat tema
 const theme = createTheme({
@@ -98,12 +99,19 @@ const jumlah = [
     },
   ];
 
+//   Buat data pembayaran
+  const noRek = 
+      {
+          "BCA": "BCA: Aditya Prawira Nugroho, 0095499321",
+          "GOPAY": "GOPAY: NAMA, NOMOR"
+      }
 
 //   Buat rendering peserta
 const Peserta = () => {
     // variabel variabel
     const harga = 50000;
     // state form
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const [jumlahVal, setJumlahVal] = useState('1');
     const [pembayaran, setPembayaran] = useState('');
     const [valueDate, setValueDate] = React.useState([]);
@@ -241,17 +249,23 @@ const Peserta = () => {
 
     // Buat render detail pembayaran
     const renderDetail = () => {
-        if (pembayaran == "BCA") {
-            return (
-                <>
+        return (
+            <>
+                {isMobile ? (
                     <Grid item xs={12} >
-                        <Box sx={{ color:"black", fontSize: "1.3vw" }} >
-                            BCA: Aditya Prawira, 15135456
+                        <Box sx={{ color:"black", fontSize: "6vw" }} >
+                            {noRek[pembayaran]}
                         </Box>
                     </Grid>
-                </>
-            );
-        }
+                ) : (
+                    <Grid item xs={12} >
+                        <Box sx={{ color:"black", fontSize: "1.6vw" }} >
+                            {noRek[pembayaran]}
+                        </Box>
+                    </Grid>
+                )}
+            </>
+        );
     }
 
     return(
@@ -294,11 +308,6 @@ const Peserta = () => {
                             <Typography component="h1" variant="h5" marginTop={5}>
                                 Pembayaran
                             </Typography>
-                            <Grid item xs={12} >
-                                <Box sx={{ color:"black", fontSize: "1.3vw" }} >
-                                    Total: {harga*jumlahVal}
-                                </Box>
-                            </Grid>
                            <Grid item xs={12}>
                                 <TextField
                                 select
@@ -317,6 +326,20 @@ const Peserta = () => {
                                     ))}
                                 </TextField>
                             </Grid>
+                            {isMobile ? (
+                                <Grid item xs={12} >
+                                    <Box sx={{ color:"black", fontSize: "6vw" }} >
+                                        Total: {harga*jumlahVal}
+                                    </Box>
+                                </Grid>
+                            ) : (
+                                <Grid item xs={12} >
+                                    <Box sx={{ color:"black", fontSize: "1.6vw" }} >
+                                        Total: {harga*jumlahVal}
+                                    </Box>
+                                </Grid>
+                            )}
+                            
                             {renderDetail()}
                             <Grid item xs={12}>
                                 <ColorButton type="submit" size="medium" variant="contained" style={{ width:"8vw" }}>

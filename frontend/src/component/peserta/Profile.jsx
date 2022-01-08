@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Navbar from '../komponen_umum/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -8,8 +7,11 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 import { Divider } from '@mui/material';
-import {useEffect, useContext} from "react";
+import {useEffect, useContext, useState} from "react";
 import { AuthContext } from "../komponen_umum/AuthContext";
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import NavbarLoggedIn from '../komponen_umum/NavbarLoggedIn';
 
 // Buat tema
 const theme = createTheme({
@@ -46,8 +48,26 @@ const ImgMob = styled('img')({
   borderRadius: "20px",
 });
 
+// Buat button
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText('#554B3F'),
+  fontFamily: 'Ramaraja',
+  fontSize: "18px",
+  padding: "auto",
+  backgroundColor: '#554B3F',
+  margin: "auto",
+  borderRadius: "15px",
+  justifyContent: "center",
+  textAlign: "center",
+  padding: "auto",
+  '&:hover': {
+    backgroundColor: '#726454',
+  },
+}));
+
 // Profile buat pc
 const ProfileDesktop = () => {
+  const [email, setEmail] = useState("");
   const Auth = useContext(AuthContext)
   useEffect(async () => {
       // Update the document title using the browser API
@@ -62,15 +82,34 @@ const ProfileDesktop = () => {
       response = await response.json()
       if(response.loggedIn===true) {
           Auth.addItem(response.name, response.role)
+          setEmail(response.email)
       }
   }, []);
 
+  // Nanti buat api status verif disini ya dim
+  const statusVerif = true
+
   const nama=Auth.name
-  const email="apn@mail.com"
+
+  const renderStatus = () => {
+    if (statusVerif == false) {
+      return (
+        <Typography fontSize="1.5vw" sx={{ backgroundColor: "red" }}>
+          Status Registrasi: Belum Terverifikasi
+        </Typography>
+      )
+    } else if (statusVerif == true) {
+      return(
+        <Typography fontSize="1.5vw" sx={{ backgroundColor:"green" }}>
+          Status Registrasi: Berhasil Terverifikasi
+        </Typography>
+      )
+    }
+  }
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Navbar></Navbar>
+        <NavbarLoggedIn></NavbarLoggedIn>
         <CssBaseline />
         <Box
           sx={{
@@ -100,6 +139,10 @@ const ProfileDesktop = () => {
                   <Typography fontSize="1.5vw" >
                     Email: {email}
                   </Typography>
+                  {renderStatus()}
+                  <Link to="/lupa_password" style={{textDecoration: "none",}}>
+                    <ColorButton size="medium" variant="contained" style={{ width:"15vw", marginTop:"10px" }}>Ganti Password</ColorButton>
+                  </Link>
                 </Grid>
               </Grid>
             </Grid>
@@ -110,7 +153,11 @@ const ProfileDesktop = () => {
   )
 }
 
+// *************************************
+// ********** BUAT MOBILEE *************
+// *************************************
 const ProfileMobile = () => {
+  const [email, setEmail] = useState("");
   const Auth = useContext(AuthContext)
   useEffect(async () => {
       // Update the document title using the browser API
@@ -125,14 +172,35 @@ const ProfileMobile = () => {
       response = await response.json()
       if(response.loggedIn===true) {
           Auth.addItem(response.name, response.role)
+          setEmail(response.email)
       }
   }, []);
+
+  // Nanti buat api status verif disini ya dim
+  const statusVerif = true
+
+  const renderStatus = () => {
+    if (statusVerif == false) {
+      return (
+        <Typography fontSize="6vw" sx={{ backgroundColor: "red" }}>
+          Status Registrasi: Belum Terverifikasi
+        </Typography>
+      )
+    } else if (statusVerif == true) {
+      return(
+        <Typography fontSize="6vw" sx={{ backgroundColor:"green" }}>
+          Status Registrasi: Berhasil Terverifikasi
+        </Typography>
+      )
+    }
+  }
+
   const nama=Auth.name
-  const email="apn@mail.com"
+
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Navbar></Navbar>
+        <NavbarLoggedIn></NavbarLoggedIn>
         <CssBaseline />
         <Box
           sx={{
@@ -150,12 +218,16 @@ const ProfileMobile = () => {
                     <Grid item xs={12}>
                       <ImgMob alt="profile picture" src="https://www.freeiconspng.com/uploads/account-profile-icon-2.png"/>
                     </Grid>
-                    <Typography fontSize="10vw" >
+                    <Typography fontSize="6vw" >
                       Nama: {nama}
                     </Typography>
-                    <Typography fontSize="10vw" >
+                    <Typography fontSize="6vw" >
                       Email: {email}
                     </Typography>
+                    {renderStatus()}
+                    <Link to="/lupa_password" style={{textDecoration: "none",}}>
+                      <ColorButton size="medium" variant="contained" style={{ width:"50vw", marginTop:"10px" }}>Ganti Password</ColorButton>
+                    </Link>
                   </Grid>
               </Grid>
             </Grid>
