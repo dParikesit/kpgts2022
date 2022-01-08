@@ -44,6 +44,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
     padding: "auto",
     backgroundColor: '#554B3F',
     marginTop: "10px",
+    marginBottom: "20px",
     borderRadius: "15px",
     justifyContent: "center",
     textAlign: "center",
@@ -106,35 +107,27 @@ const jumlah = [
           "GOPAY": "GOPAY: NAMA, NOMOR"
       }
 
-export function useFileUpload({ onStarting } = {}) {
-    const [fileName, setFileName] = useState(undefined)
-
-    const fileId = '12345'
-
-    const uploadFile = useCallback((file) => {
-        if (!file) {
-            return
-        }
-        setFileName(file.name)
-        onStarting(file)
-    }, [onStarting])
-
-    return [uploadFile]
-}
-
 //   Buat rendering peserta
 const Peserta = () => {
     // variabel variabel
     const harga = 50000;
     // Buat foto
-    const [photoToUpload, setPhotoToUpload] = useState()
-	const [uploadPhoto] = useFileUpload({
-		onStarting: (file) => {
-			var reader = new FileReader();
-			reader.readAsDataURL(file)
-			reader.onloadend = () => setPhotoToUpload(reader.result)
-		}
-	})
+    const handleUploadFoto = async(event) => {
+        event.preventDefault();
+        const formdata = new FormData();
+        formdata.append('image', selectedFile)
+        const response = await fetch('/api/post/pict', {
+            method: 'POST',
+            mode: 'same-origin',
+            credentials: "same-origin",
+            body: formdata
+        })
+        if(response.status===200){
+            setFileName(await response.json())
+        }
+    };
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [fileName, setFileName] = useState("")
     // state form
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const [jumlahVal, setJumlahVal] = useState('1');
@@ -406,10 +399,14 @@ const Peserta = () => {
                             {/* upload foto */}
                             <Grid item xs={12}>
                                 <input
-                                accept="image/*"
-                                id="raised-button-file"
+                                style={{marginRight:'1vw', marginTop:'1vw', fontFamily:'Ramaraja'}}
                                 type="file"
+                                onChange={(e) => {
+                                    setSelectedFile(e.target.files[0])
+                                }}
                                 />
+                                <Button style={{marginRight:'2vw', color: 'black'}} type="submit" variant="outlined" onClick={handleUploadFoto}>Upload Foto</Button>
+                                <p>{fileName}</p>
                             </Grid>
                            {/* SUBMIT BUTTON */}
                             <Grid item xs={12}>
