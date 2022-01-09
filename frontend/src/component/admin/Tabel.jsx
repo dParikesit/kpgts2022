@@ -343,7 +343,8 @@ const Tabel = () => {
                             <CustomTableCell {...{ row, name: "sekolah", onChange }} />
                             <CustomTableCell {...{ row, name: "jurusan", onChange }} />
                             <CustomTableCell {...{ row, name: "kontak", onChange }} />
-                            <CustomTableCell {...{ row, name: "bukti_transfer", onChange }} />
+                            {/*<CustomTableCell {...{ row, name: "bukti_transfer", onChange }} />*/}
+                            <TableCell component={"a"} href={row.bukti_transfer}>Link</TableCell>
                             <CustomTableCell {...{ row, name: "verified", onChange }} />
                             <Box
                                 component="div"
