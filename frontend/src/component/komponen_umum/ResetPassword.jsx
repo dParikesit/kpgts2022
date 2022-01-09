@@ -1,22 +1,21 @@
 import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-import {useNavigate} from "react-router-dom";
+import {useContext} from "react";
+import {AuthContext} from "./AuthContext";
+import {useNavigate, useParams} from 'react-router-dom'
 
-// Ambil data dari line 54 
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+// Cek data di line 48
 
 function Copyright(props) {
   return (
@@ -31,40 +30,39 @@ function Copyright(props) {
   );
 }
 
-
 const theme = createTheme({
-    typography: {
-        fontFamily: 'Ramaraja',
-        fontSize: 16
+  typography: {
+    fontFamily: 'Ramaraja',
+    fontSize: 16
+  },
+  palette: {
+    background: {
+      default: "#F2EBCE"
     },
-    palette: {
-        background: {
-            default: "#F2EBCE"
-        },
-        primary: {
-            main: "#A7B560"
-        }
-    },
+    primary: {
+      main: "#A7B560"
+    }
+  },
 });
 
+export default function ResetPassword() {
+  const navigate = useNavigate()
+  const Auth = useContext(AuthContext)
+  let {token} = useParams()
 
-export default function Lupa_Password() {
-    const [open, setOpen] = React.useState(false);
-    const navigate = useNavigate()
-
-// Ambil data dari bawah ini
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    let response = await fetch('/api/user/resetpassword/', {
-      method: 'POST',
+    let response = await fetch('/api/user/resetpassword/'+token, {
+      method: 'PUT',
       mode: 'same-origin',
       credentials: "same-origin",
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: data.get('email'),
+        newPass: data.get('newpassword'),
+        confirmPass: data.get('conpassword')
       })
     });
     console.log(response.status);
@@ -75,16 +73,8 @@ export default function Lupa_Password() {
     }
   };
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
-
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} >
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -96,18 +86,29 @@ export default function Lupa_Password() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Lupa Password
+            Reset Password
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Masukkan alamat email"
-              name="email"
-              autoComplete="email"
+              name="newpassword"
+              label="New Password"
+              type="password"
+              id="newpassword"
+              autoComplete="current-password"
               autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="conpassword"
+              label=" Confirm Password"
+              type="password"
+              id="conpassword"
+              autoComplete="current-password"
             />
             <Button
               type="submit"
@@ -115,20 +116,8 @@ export default function Lupa_Password() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Submit
+              Reset Password
             </Button>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                Anda akan dikirimi link untuk mengubah password anda ke email anda
-                </Alert>
-            </Snackbar>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/login" variant="body2">
-                  Udah ingat passwordnya? Yuk Login
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

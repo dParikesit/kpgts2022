@@ -10,6 +10,7 @@ import Lupa_Password from "./component/komponen_umum/Lupa_Password";
 import React, {useState} from 'react';
 import Profile from "./component/peserta/Profile";
 import {AuthContext} from "./component/komponen_umum/AuthContext";
+import ResetPassword from "./component/komponen_umum/ResetPassword";
 import './App.css';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path='/registerTO' element={<Peserta/>} />
         <Route path='/admin' element={<Admin/>} />
         <Route path='/profile' element={<Profile/>} />
+        <Route path='/reset_password/:token' element={<ResetPassword />} />
       </Routes>
     </BrowserRouter>
   );
