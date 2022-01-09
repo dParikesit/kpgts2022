@@ -151,15 +151,15 @@ const InformasiItb = () => {
                                 <TabPanel value={value} index={0}>
                                     <Typography align="center" color="#554B3F">Informasi ITB</Typography>
                                       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                                        <Box sx={{ ...commonStyles1, borderRadius: '16px' }}>                                                                                                                                                 
+                                        <Box sx={{ ...commonStyles1, borderRadius: '16px' }}>
                                           <div>                                        
                                             <Slider {...settings}>
                                               <div>
-                                                <Typography align="center" color="#554B3F">FITB</Typography>
+                                                <Typography variant={"h2"} align="center" color="#554B3F">FITB</Typography>
                                                 <ThemeProvider theme={theme2}>
                                                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                       <Box sx={{ ...commonStyles2, borderRadius: 0 }}>
-                                                          <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
+                                                          <Image src={process.env.PUBLIC_URL + '/assets/fakultas/fitb.png'}/>
                                                       </Box>
                                                   </Box>
                                                   <Box m={2} px={3}>
@@ -174,11 +174,11 @@ const InformasiItb = () => {
                                                 </ThemeProvider>
                                               </div>
                                               <div>
-                                                <Typography align="center" color="#554B3F">FMIPA</Typography>
+                                                <Typography variant={"h2"} align="center" color="#554B3F">FMIPA</Typography>
                                                 <ThemeProvider theme={theme2}>
                                                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                       <Box sx={{ ...commonStyles2, borderRadius: 0 }}>
-                                                          <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
+                                                        <Image src={process.env.PUBLIC_URL + '/assets/fakultas/fmipa.png'}/>
                                                       </Box>
                                                   </Box>
                                                   <Box m={2} px={3}>
@@ -199,11 +199,11 @@ const InformasiItb = () => {
                                                 </ThemeProvider>
                                               </div>
                                               <div>
-                                                <Typography align="center" color="#554B3F">FTI</Typography>
+                                                <Typography variant={"h2"} align="center" color="#554B3F">FTI</Typography>
                                                 <ThemeProvider theme={theme2}>
                                                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                       <Box sx={{ ...commonStyles2, borderRadius: 0 }}>
-                                                          <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
+                                                        <Image src={process.env.PUBLIC_URL + '/assets/fakultas/fti.png'}/>
                                                       </Box>
                                                   </Box>
                                                   <Box m={2} px={3}>
@@ -218,11 +218,11 @@ const InformasiItb = () => {
                                                 </ThemeProvider>
                                               </div>
                                               <div>
-                                                <Typography align="center" color="#554B3F">FTMD</Typography>
+                                                <Typography variant={"h2"} align="center" color="#554B3F">FTMD</Typography>
                                                 <ThemeProvider theme={theme2}>
                                                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                       <Box sx={{ ...commonStyles2, borderRadius: 0 }}>
-                                                          <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
+                                                        <Image src={process.env.PUBLIC_URL + '/assets/fakultas/ftmd.png'}/>
                                                       </Box>
                                                   </Box>
                                                   <Box m={2} px={3}>
@@ -241,11 +241,11 @@ const InformasiItb = () => {
                                                 </ThemeProvider>
                                               </div>
                                               <div>
-                                                <Typography align="center" color="#554B3F">FTTM</Typography>
+                                                <Typography variant={"h2"} align="center" color="#554B3F">FTTM</Typography>
                                                 <ThemeProvider theme={theme2}>
                                                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                       <Box sx={{ ...commonStyles2, borderRadius: 0 }}>
-                                                          <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
+                                                        <Image src={process.env.PUBLIC_URL + '/assets/fakultas/fttm.png'}/>
                                                       </Box>
                                                   </Box>
                                                   <Box m={2} px={3}>
@@ -266,11 +266,11 @@ const InformasiItb = () => {
                                                 </ThemeProvider>
                                               </div>
                                               <div>
-                                                <Typography align="center" color="#554B3F">FTSL</Typography>
+                                                <Typography variant={"h2"} align="center" color="#554B3F">FTSL</Typography>
                                                 <ThemeProvider theme={theme2}>
                                                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                       <Box sx={{ ...commonStyles2, borderRadius: 0 }}>
-                                                          <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
+                                                        <Image src={process.env.PUBLIC_URL + '/assets/fakultas/ftsl.png'}/>
                                                       </Box>
                                                   </Box>
                                                   <Box m={2} px={3}>
@@ -285,11 +285,11 @@ const InformasiItb = () => {
                                                 </ThemeProvider>
                                               </div>
                                               <div>
-                                                <Typography align="center" color="#554B3F">SAPPK</Typography>
+                                                <Typography variant={"h2"} align="center" color="#554B3F">SAPPK</Typography>
                                                 <ThemeProvider theme={theme2}>
                                                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                       <Box sx={{ ...commonStyles2, borderRadius: 0 }}>
-                                                          <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
+                                                        <Image src={process.env.PUBLIC_URL + '/assets/fakultas/sappk.png'}/>
                                                       </Box>
                                                   </Box>
                                                   <Box m={2} px={3}>
@@ -304,11 +304,11 @@ const InformasiItb = () => {
                                                 </ThemeProvider>
                                               </div>
                                               <div>
-                                                <Typography align="center" color="#554B3F">SF</Typography>
+                                                <Typography variant={"h2"} align="center" color="#554B3F">SF</Typography>
                                                 <ThemeProvider theme={theme2}>
                                                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                       <Box sx={{ ...commonStyles2, borderRadius: 0 }}>
-                                                          <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
+                                                        <Image src={process.env.PUBLIC_URL + '/assets/fakultas/sf.png'}/>
                                                       </Box>
                                                   </Box>
                                                   <Box m={2} px={3}>
@@ -320,11 +320,12 @@ const InformasiItb = () => {
                                                 </ThemeProvider>
                                               </div>
                                               <div>
-                                                <Typography align="center" color="#554B3F">SITH</Typography>
+                                                <Typography variant={"h2"} align="center" color="#554B3F">SITH</Typography>
                                                 <ThemeProvider theme={theme2}>
                                                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                       <Box sx={{ ...commonStyles2, borderRadius: 0 }}>
-                                                          <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
+                                                        <Image src={process.env.PUBLIC_URL + '/assets/fakultas/sithr.png'}/>
+                                                        <Image src={process.env.PUBLIC_URL + '/assets/fakultas/siths.png'}/>
                                                       </Box>
                                                   </Box>
                                                   <Box m={2} px={3}>
@@ -348,11 +349,11 @@ const InformasiItb = () => {
                                                 </ThemeProvider>
                                               </div>
                                               <div>
-                                                <Typography align="center" color="#554B3F">STEI</Typography>
+                                                <Typography variant={"h2"} align="center" color="#554B3F">STEI</Typography>
                                                 <ThemeProvider theme={theme2}>
                                                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                       <Box sx={{ ...commonStyles2, borderRadius: 0 }}>
-                                                          <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
+                                                        <Image src={process.env.PUBLIC_URL + '/assets/fakultas/stei.png'}/>
                                                       </Box>
                                                   </Box>
                                                   <Box m={2} px={3}>
@@ -375,11 +376,11 @@ const InformasiItb = () => {
                                                 </ThemeProvider>
                                               </div>
                                               <div>
-                                                <Typography align="center" color="#554B3F">FSRD</Typography>
+                                                <Typography variant={"h2"} align="center" color="#554B3F">FSRD</Typography>
                                                 <ThemeProvider theme={theme2}>
                                                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                       <Box sx={{ ...commonStyles2, borderRadius: 0 }}>
-                                                          <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
+                                                        <Image src={process.env.PUBLIC_URL + '/assets/fakultas/fsrd.png'}/>
                                                       </Box>
                                                   </Box>
                                                   <Box m={2} px={3}>
@@ -402,11 +403,11 @@ const InformasiItb = () => {
                                                 </ThemeProvider>
                                               </div>
                                               <div>
-                                                <Typography align="center" color="#554B3F">SBM</Typography>
+                                                <Typography variant={"h2"} align="center" color="#554B3F">SBM</Typography>
                                                 <ThemeProvider theme={theme2}>
                                                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                       <Box sx={{ ...commonStyles2, borderRadius: 0 }}>
-                                                          <Image src="https://saintif.com/wp-content/uploads/2020/07/kartun2.jpg"/>
+                                                        <Image src={process.env.PUBLIC_URL + '/assets/fakultas/sbm.png'}/>
                                                       </Box>
                                                   </Box>
                                                   <Box m={2} px={3}>
