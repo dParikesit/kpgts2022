@@ -3,6 +3,7 @@ import {useEffect, useContext} from "react";
 import { AuthContext } from "../komponen_umum/AuthContext";
 import Footer from '../komponen_umum/Footer';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import './Jumbotron.css';
 
 const theme = createTheme({
     typography: {
