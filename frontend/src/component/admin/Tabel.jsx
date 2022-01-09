@@ -27,7 +27,9 @@ import EditIcon from "@material-ui/icons/EditOutlined";
 import DoneIcon from "@material-ui/icons/DoneAllTwoTone";
 import RevertIcon from "@material-ui/icons/NotInterestedOutlined";
 import { TableContainer } from "@material-ui/core";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import {AuthContext} from "../komponen_umum/AuthContext";
+import {useNavigate} from "react-router-dom";
 
 // Susunan data yg dipakai ada di bawah ini
 // Untuk contoh data dapat dilihat di line 74
@@ -73,7 +75,17 @@ const CustomTableCell = ({ row, name, onChange }) => {
 });
 
 const Tabel = () => {
+    const Auth = useContext(AuthContext)
+    const navigate = useNavigate()
+    if (Auth.role!=="admin"){
+      navigate('/', {replace: true})
+    }
+
     useEffect(async () => {
+        if (Auth.role!=="admin"){
+          navigate('/', {replace: true})
+        }
+
         // Update the document title using the browser API
         let response = await fetch('/api/registration/search',{
         method: 'GET',

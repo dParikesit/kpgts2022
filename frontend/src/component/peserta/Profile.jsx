@@ -10,7 +10,7 @@ import { Divider } from '@mui/material';
 import {useEffect, useContext, useState} from "react";
 import { AuthContext } from "../komponen_umum/AuthContext";
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import NavbarLoggedIn from '../komponen_umum/NavbarLoggedIn';
 
 // Buat tema
@@ -67,9 +67,14 @@ const ColorButton = styled(Button)(({ theme }) => ({
 
 // Profile buat pc
 const ProfileDesktop = () => {
-  const [email, setEmail] = useState("");
   const Auth = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const [email, setEmail] = useState("");
   useEffect(async () => {
+      if (Auth.role!=="user"){
+        navigate('/', {replace: true})
+      }
       // Update the document title using the browser API
       let response = await fetch('/api/user/login',{
           method: 'GET',
@@ -157,8 +162,12 @@ const ProfileDesktop = () => {
 // ********** BUAT MOBILEE *************
 // *************************************
 const ProfileMobile = () => {
-  const [email, setEmail] = useState("");
   const Auth = useContext(AuthContext)
+  const navigate = useNavigate()
+  if (Auth.role!=="user"){
+    navigate('/', {replace: true})
+  }
+  const [email, setEmail] = useState("");
   useEffect(async () => {
       // Update the document title using the browser API
       let response = await fetch('/api/user/login',{

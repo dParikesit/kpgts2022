@@ -8,7 +8,7 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
-import { useState, useCallback } from 'react';
+import {useState, useCallback, useContext, useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -19,6 +19,8 @@ import NativeSelect from '@mui/material/NativeSelect';
 import { FormControl } from "@mui/material";
 import InputLabel from '@mui/material/InputLabel';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import {AuthContext} from "../komponen_umum/AuthContext";
+import {useNavigate} from "react-router-dom";
 
 // Buat tema
 const theme = createTheme({
@@ -109,6 +111,14 @@ const jumlah = [
 
 //   Buat rendering peserta
 const Peserta = () => {
+    const Auth = useContext(AuthContext)
+    const navigate = useNavigate()
+    useEffect(()=>{
+      if (Auth.role!=="user"){
+        navigate('/', {replace: true})
+      }
+    })
+
     // variabel variabel
     const harga = 50000;
     // Buat foto

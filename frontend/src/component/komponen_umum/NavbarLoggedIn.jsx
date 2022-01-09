@@ -312,7 +312,7 @@ const NavbarLoggedIn = () => {
                               <MenuItem onClick={handleClose}>Register TO</MenuItem>
                             </Link>
                             <Link to="/" className={classes.linkDrawer}>
-                              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+                              <MenuItem onClick={logoutHandler}>Log Out</MenuItem>
                             </Link>
                           </Menu>
                         </div>
