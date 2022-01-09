@@ -92,15 +92,16 @@ router.post('/resetpassword', async(req, res) => {
     }
 
     const user = await User.getOneEmail(req.body.email)
-    if(user.length!==0){
+    if(user){
         const token = crypto.randomBytes(64).toString('hex');
         await mailer.send ({
-            template: 'reset_pass',
+            template: 'reset_password',
             message: {
                 to: req.body.email
             },
             locals: {
-                link: `${process.env.ORIGIN_URL}/reset_password/${token}` // token perlu diubah
+                link: `${process.env.ORIGIN_URL}/reset_password/${token}`,
+                image: `${process.env.ORIGIN_URL}/assets/logo.png`
             }
         });
         try{
