@@ -54,8 +54,8 @@ const theme = createTheme({
 
 export default function Berita() {
   const [data, setData] = useState([
-    createData(0, "https://image.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg", "","",  "", ""),
-    createData(1, "https://image.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg", "","",  "", ""),
+    createData(0, "https://image.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg", "Tes","",  "admin", ""),
+    createData(1, "https://image.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg", "Tes","",  "admin", ""),
   ])
 
   useEffect(async () => {
@@ -69,9 +69,9 @@ export default function Berita() {
       }
     })
     response = await response.json()
-    setData(
-      response.map(data => createData(data.id, "/static/"+data.picturePath, data.title, data.content, data.name, ""))
-    )
+    // setData(
+    //   response.map(data => createData(data.id, "/static/"+data.picturePath, data.title, data.content, data.name, ""))
+    // )
   }, []);
 
   return (
@@ -156,7 +156,7 @@ function ShowContent (card) {
                             </Typography>
                         </Toolbar>
                         {/* Isi kontek berita */}
-                        <Grid container spacing={2} style={{backgroundColor:"#F2EBCE"}}>
+                        <Grid container spacing={2} style={{backgroundColor:"#F2EBCE", height: "100%"}}>
                         <Grid item xs={4}></Grid>
                         <Grid item xs={6} md={4} style={{textAlign:'left'}}>
                             <Paper elevation={0} style={{textAlign:'center', backgroundColor:"#F2EBCE", marginTop:"3vw"}}>

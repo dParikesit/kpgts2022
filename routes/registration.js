@@ -5,7 +5,6 @@ const {adminChecker, userChecker} = require('../middleware/role-checker')
 // Create TO Participant
 router.post("/", userChecker, async (req,res)=>{
     try{
-        console.log('Halo')
         if (!Array.isArray(req.body)){
             req.body.user_id = req.session.uid
         }else{
@@ -40,10 +39,32 @@ router.get("/search", adminChecker, async (req,res)=>{
     try{
         if(req.query.nama){
             const data = await registController.getFiltered('nama', req.query.nama)
-            res.status(200).json(data)
+            if(data.length===0){
+                res.status(404).json(data)
+            } else{
+                res.status(200).json(data)
+            }
+        }else if(req.query.jurusan){
+            const data = await registController.getFiltered('jurusan', req.query.jurusan)
+            if(data.length===0){
+                res.status(404).json(data)
+            } else{
+                res.status(200).json(data)
+            }
+        }else if(req.query.verif){
+            const data = await registController.getFiltered('verified', req.query.verif)
+            if(data.length===0){
+                res.status(404).json(data)
+            } else{
+                res.status(200).json(data)
+            }
         }else{
             const data = await registController.getAll()
-            res.status(200).json(data)
+            if(data.length===0){
+                res.status(404).json(data)
+            } else{
+                res.status(200).json(data)
+            }
         }
     }catch (e) {
         res.status(500).json({error: e})
@@ -53,6 +74,7 @@ router.get("/search", adminChecker, async (req,res)=>{
 // Verifikasi semua dengan user_id tertentu
 router.put("/verif/:id", adminChecker, async (req, res) => {
     try {
+        console.log(req.params.id)
         const data = await registController.invertVerifBool(req.params.id)
         res.status(200).json(data);
     } catch(e) {
