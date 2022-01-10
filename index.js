@@ -10,9 +10,9 @@ const cookieParser = require("cookie-parser");
 const {store} = require('./database/db');
 const app = express();
 
-if (environment === 'production') {
-  app.set('trust proxy', 1); // trust first proxy, crucial
-}
+// if (environment === 'production') {
+//   app.set('trust proxy', 1); // trust first proxy, crucial
+// }
 
 app.use( session({
   secret: process.env.SESSION_SECRET,
