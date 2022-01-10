@@ -53,8 +53,8 @@ export default function Login() {
     const data = new FormData(event.currentTarget);
     let response = await fetch('/api/user/login', {
       method: 'POST',
-      mode: 'same-origin',
-      credentials: "same-origin",
+      mode: 'cors',
+      credentials: "include",
       headers: {
           'Content-Type': 'application/json'
       },
