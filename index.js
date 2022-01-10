@@ -16,7 +16,8 @@ app.use( session({
   store: store,
   cookie: {
     httpOnly: true,
-    secure: !(environment==='development'),
+    // secure: !(environment==='development'),
+    secure: true,
     maxAge: 1000 * 60 * 60 * 24 // Time is in miliseconds
 },
   resave: false
