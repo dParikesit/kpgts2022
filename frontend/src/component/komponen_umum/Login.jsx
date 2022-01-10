@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {AuthContext} from "./AuthContext";
 import {useNavigate} from 'react-router-dom'
 
