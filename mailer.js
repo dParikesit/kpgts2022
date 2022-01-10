@@ -4,7 +4,7 @@ const Email = require('email-templates');
 const transporter = nodemailer.createTransport({
     host: process.env.MAILER_HOST,
     port: process.env.MAILER_PORT,
-    secure: (process.env.SECURE == 'true'),
+    secure: !(process.env.NODE_ENV==='development'),
     auth: {
         user: process.env.MAILER_USERNAME,
         pass: process.env.MAILER_PASSWORD
