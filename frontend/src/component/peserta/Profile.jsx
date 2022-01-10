@@ -147,22 +147,8 @@ const ProfileDesktop = () => {
 
   const [email, setEmail] = useState("");
   useEffect(async () => {
-      // if (Auth.role!=="user"){
-      //   navigate('/', {replace: true})
-      // }
-      // Update the document title using the browser API
-      let response = await fetch('/api/user/login',{
-          method: 'GET',
-          mode: 'same-origin',
-          credentials: "same-origin",
-          headers: {
-              'Content-Type': 'application/json'
-          }
-      })
-      response = await response.json()
-      if(response.loggedIn===true) {
-          Auth.addItem(response.name, response.role)
-          setEmail(response.email)
+      if (Auth.role!=="user"){
+        navigate('/', {replace: true})
       }
   }, []);
 

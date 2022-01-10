@@ -5,28 +5,28 @@ import {useEffect, useContext, useState} from "react";
 
 const NavbarAuth = () => {
   const Auth = useContext(AuthContext)
-  const [loggedIn, setLoggedIn] = useState(false)
-  useEffect(async () => {
-      // Update the document title using the browser API
-      let response = await fetch('/api/user/login',{
-          method: 'GET',
-          mode: 'same-origin',
-          credentials: "same-origin",
-          headers: {
-              'Content-Type': 'application/json'
-          }
-      })
-      response = await response.json()
-      if(response.loggedIn===true) {
-          Auth.addItem(response.name, response.role)
-          setLoggedIn(true)
-      } else{
-          Auth.removeItem()
-          setLoggedIn(false)
-      }
-  }, []);
+  // const [loggedIn, setLoggedIn] = useState(false)
+  // useEffect(async () => {
+  //     // Update the document title using the browser API
+  //     let response = await fetch('/api/user/login',{
+  //         method: 'GET',
+  //         mode: 'same-origin',
+  //         credentials: "same-origin",
+  //         headers: {
+  //             'Content-Type': 'application/json'
+  //         }
+  //     })
+  //     response = await response.json()
+  //     if(response.loggedIn===true) {
+  //         Auth.addItem(response.name, response.role)
+  //         setLoggedIn(true)
+  //     } else{
+  //         Auth.removeItem()
+  //         setLoggedIn(false)
+  //     }
+  // }, []);
 
-  if (loggedIn === true) {
+  if (Auth.loggedIn === true) {
     return(<NavbarLoggedIn></NavbarLoggedIn>)
   } else {
     return(<Navbar></Navbar>)

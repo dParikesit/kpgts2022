@@ -1,10 +1,16 @@
 const router = require('express').Router();
 const registController = require('../controller/registration')
+const userController = require('../controller/user')
 const {adminChecker, userChecker} = require('../middleware/role-checker')
 
 // Create TO Participant
 router.post("/", userChecker, async (req,res)=>{
     try{
+        const user = userController.getOne(req.session.uid)
+        if(user.registered===true){
+            throw "Already registered"
+        }
+
         if (!Array.isArray(req.body)){
             req.body.user_id = req.session.uid
         }else{
@@ -13,6 +19,7 @@ router.post("/", userChecker, async (req,res)=>{
             })
         }
         await registController.insert(req.body)
+        await userController.setRegistered(req.session.uid)
         res.status(200).json('Yey berhasil')
     }catch (e) {
         res.status(500).json({error: e})
@@ -45,7 +52,7 @@ router.get("/search", adminChecker, async (req,res)=>{
                 res.status(200).json(data)
             }
         }else if(req.query.jurusan){
-            const data = await registController.getFiltered('jurusan', req.query.jurusan)
+            const data = await registController.getFiltered('rumpun', req.query.jurusan)
             if(data.length===0){
                 res.status(404).json(data)
             } else{
@@ -82,5 +89,14 @@ router.put("/verif/:id", adminChecker, async (req, res) => {
     }
 });
 
+router.get('/registered', async(req,res)=>{
+    const data = await registController.getById(req.session.uid)
+    console.log(data)
+    if(data.length===0){
+        res.status(404)
+    } else{
+        res.status(200).json(data)
+    }
+})
 
 module.exports = router
