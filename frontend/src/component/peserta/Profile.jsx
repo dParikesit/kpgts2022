@@ -52,7 +52,7 @@ const ImgMob = styled('img')({
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText('#554B3F'),
   fontFamily: 'Ramaraja',
-  fontSize: "18px",
+  fontSize: "1.5vw",
   padding: "auto",
   backgroundColor: '#554B3F',
   margin: "auto",
@@ -64,6 +64,81 @@ const ColorButton = styled(Button)(({ theme }) => ({
     backgroundColor: '#726454',
   },
 }));
+const ColorButtonMobile = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText('#554B3F'),
+  fontFamily: 'Ramaraja',
+  fontSize: "4vw",
+  padding: "auto",
+  backgroundColor: '#554B3F',
+  margin: "auto",
+  borderRadius: "15px",
+  justifyContent: "center",
+  textAlign: "center",
+  padding: "auto",
+  '&:hover': {
+    backgroundColor: '#726454',
+  },
+}));
+const ColorButton2 = styled(Button)(({ theme }) => ({
+  color: "white",
+  fontFamily: 'Ramaraja',
+  fontSize: "1.5vw",
+  padding: "auto",
+  backgroundColor: 'green',
+  margin: "auto",
+  borderRadius: "15px",
+  justifyContent: "center",
+  textAlign: "center",
+  padding: "auto",
+  '&:hover': {
+    backgroundColor: 'green',
+  },
+}));
+const ColorButton3 = styled(Button)(({ theme }) => ({
+  color: 'white',
+  fontFamily: 'Ramaraja',
+  fontSize: "1.5vw",
+  padding: "auto",
+  backgroundColor: 'red',
+  margin: "auto",
+  borderRadius: "15px",
+  justifyContent: "center",
+  textAlign: "center",
+  padding: "auto",
+  '&:hover': {
+    backgroundColor: 'red',
+  },
+}));
+const ColorButton2Mobile = styled(Button)(({ theme }) => ({
+  color: "white",
+  fontFamily: 'Ramaraja',
+  fontSize: "4vw",
+  padding: "auto",
+  backgroundColor: 'green',
+  margin: "auto",
+  borderRadius: "15px",
+  justifyContent: "center",
+  textAlign: "center",
+  padding: "auto",
+  '&:hover': {
+    backgroundColor: 'green',
+  },
+}));
+const ColorButton3Mobile = styled(Button)(({ theme }) => ({
+  color: 'white',
+  fontFamily: 'Ramaraja',
+  fontSize: "4vw",
+  padding: "auto",
+  backgroundColor: 'red',
+  margin: "auto",
+  borderRadius: "15px",
+  justifyContent: "center",
+  textAlign: "center",
+  padding: "auto",
+  '&:hover': {
+    backgroundColor: 'red',
+  },
+}));
 
 // Profile buat pc
 const ProfileDesktop = () => {
@@ -72,9 +147,9 @@ const ProfileDesktop = () => {
 
   const [email, setEmail] = useState("");
   useEffect(async () => {
-      if (Auth.role!=="user"){
-        navigate('/', {replace: true})
-      }
+      // if (Auth.role!=="user"){
+      //   navigate('/', {replace: true})
+      // }
       // Update the document title using the browser API
       let response = await fetch('/api/user/login',{
           method: 'GET',
@@ -99,15 +174,33 @@ const ProfileDesktop = () => {
   const renderStatus = () => {
     if (statusVerif == false) {
       return (
-        <Typography fontSize="1.5vw" sx={{ backgroundColor: "red" }}>
-          Status Registrasi: Belum Terverifikasi
-        </Typography>
+        <Grid container>
+          <Grid item xs={3}>
+            <Typography fontSize="2vw" >
+              Status Registrasi
+            </Typography>
+          </Grid>
+          <Grid item xs={5}>
+            <Typography fontSize="2vw">
+              : <ColorButton3 >Belum Terverifikasi</ColorButton3>
+            </Typography>
+          </Grid>
+        </Grid>
       )
     } else if (statusVerif == true) {
       return(
-        <Typography fontSize="1.5vw" sx={{ backgroundColor:"green" }}>
-          Status Registrasi: Berhasil Terverifikasi
-        </Typography>
+        <Grid container>
+          <Grid item xs={3}>
+            <Typography fontSize="2vw" >
+              Status Registrasi
+            </Typography>
+          </Grid>
+          <Grid item xs={5}>
+            <Typography fontSize="2vw">
+              : <ColorButton2 >Berhasil Terverifikasi</ColorButton2>
+            </Typography>
+          </Grid>
+        </Grid>
       )
     }
   }
@@ -128,9 +221,6 @@ const ProfileDesktop = () => {
             padding: "1vw"
           }}>
           <Grid container spacing={2}>
-            <Grid item>
-              <ImgDesk alt="profile picture" src="https://www.freeiconspng.com/uploads/account-profile-icon-2.png"/>
-            </Grid>
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
@@ -138,12 +228,30 @@ const ProfileDesktop = () => {
                     Profile
                   </Typography>
                   <Divider sx={{ borderBottomWidth: 1, background: 'black', mb: "15px"}} ></Divider>
-                  <Typography fontSize="1.5vw" >
-                    Nama: {nama}
-                  </Typography>
-                  <Typography fontSize="1.5vw" >
-                    Email: {email}
-                  </Typography>
+                  <Grid container>
+                    <Grid item xs={3}>
+                      <Typography fontSize="2vw" >
+                        Nama
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <Typography fontSize="2vw" >
+                        : {nama}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container>
+                    <Grid item xs={3}>
+                      <Typography fontSize="2vw" >
+                        Email
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <Typography fontSize="2vw" >
+                        : {email}
+                      </Typography>
+                    </Grid>
+                  </Grid>
                   {renderStatus()}
                   <Link to="/lupa_password" style={{textDecoration: "none",}}>
                     <ColorButton size="medium" variant="contained" style={{ width:"15vw", marginTop:"10px" }}>Ganti Password</ColorButton>
@@ -164,9 +272,9 @@ const ProfileDesktop = () => {
 const ProfileMobile = () => {
   const Auth = useContext(AuthContext)
   const navigate = useNavigate()
-  if (Auth.role!=="user"){
-    navigate('/', {replace: true})
-  }
+  // if (Auth.role!=="user"){
+  //   navigate('/', {replace: true})
+  // }
   const [email, setEmail] = useState("");
   useEffect(async () => {
       // Update the document title using the browser API
@@ -191,15 +299,33 @@ const ProfileMobile = () => {
   const renderStatus = () => {
     if (statusVerif == false) {
       return (
-        <Typography fontSize="6vw" sx={{ backgroundColor: "red" }}>
-          Status Registrasi: Belum Terverifikasi
-        </Typography>
+        <Grid container>
+          <Grid item xs={4}>
+            <Typography fontSize="6vw" >
+              Status Registrasi
+            </Typography>
+          </Grid>
+          <Grid item xs={8}>
+            <Typography fontSize="6vw">
+              : <ColorButton3Mobile>Belum Terverifikasi</ColorButton3Mobile>
+            </Typography>
+          </Grid>
+        </Grid>
       )
     } else if (statusVerif == true) {
       return(
-        <Typography fontSize="6vw" sx={{ backgroundColor:"green" }}>
-          Status Registrasi: Berhasil Terverifikasi
-        </Typography>
+        <Grid container>
+          <Grid item xs={4}>
+            <Typography fontSize="6vw" >
+              Status Registrasi
+            </Typography>
+          </Grid>
+          <Grid item xs={8}>
+            <Typography fontSize="6vw">
+              : <ColorButton2Mobile >Berhasil Terverifikasi</ColorButton2Mobile>
+            </Typography>
+          </Grid>
+        </Grid>
       )
     }
   }
@@ -224,18 +350,33 @@ const ProfileMobile = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm container>
                   <Grid item xs>
-                    <Grid item xs={12}>
-                      <ImgMob alt="profile picture" src="https://www.freeiconspng.com/uploads/account-profile-icon-2.png"/>
+                    <Grid container>
+                      <Grid item xs={4}>
+                        <Typography fontSize="6vw" >
+                          Nama
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={8}>
+                        <Typography fontSize="6vw" >
+                          : {nama}
+                        </Typography>
+                      </Grid>
                     </Grid>
-                    <Typography fontSize="6vw" >
-                      Nama: {nama}
-                    </Typography>
-                    <Typography fontSize="6vw" >
-                      Email: {email}
-                    </Typography>
+                    <Grid container>
+                      <Grid item xs={4}>
+                        <Typography fontSize="6vw" >
+                          Email
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={8}>
+                        <Typography fontSize="6vw" >
+                          : {email}
+                        </Typography>
+                      </Grid>
+                    </Grid>
                     {renderStatus()}
                     <Link to="/lupa_password" style={{textDecoration: "none",}}>
-                      <ColorButton size="medium" variant="contained" style={{ width:"50vw", marginTop:"10px" }}>Ganti Password</ColorButton>
+                      <ColorButtonMobile size="medium" variant="contained" style={{ width:"50vw", marginTop:"10px" }}>Ganti Password</ColorButtonMobile>
                     </Link>
                   </Grid>
               </Grid>
