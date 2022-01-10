@@ -36,25 +36,29 @@ function App() {
       }
     })
     response = await response.json()
+    console.log(response)
     if(response.loggedIn===true) {
       addItem(response.name, response.role)
     }
   }, []);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' exact element={<Homepage/>} />
-        <Route path='/berita' element={<Berita/>}/>
-        <Route path='/login' element={<Login/>} />
-        <Route path='/lupa_password' element={<Lupa_Password/>} />
-        <Route path='/register' element={<Registration/>} />
-        <Route path='/informasi' element={<InformasiItb/>} />
-        <Route path='/registerTO' element={<Peserta/>} />
-        <Route path='/admin' element={<Admin/>} />
-        <Route path='/profile' element={<Profile/>} />
-        <Route path='/reset_password/:token' element={<ResetPassword />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthContext.Provider value={{ name, role, addItem, removeItem }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' exact element={<Homepage/>} />
+          <Route path='/berita' element={<Berita/>}/>
+          <Route path='/login' element={<Login/>} />
+          <Route path='/lupa_password' element={<Lupa_Password/>} />
+          <Route path='/register' element={<Registration/>} />
+          <Route path='/informasi' element={<InformasiItb/>} />
+          <Route path='/registerTO' element={<Peserta/>} />
+          <Route path='/admin' element={<Admin/>} />
+          <Route path='/profile' element={<Profile/>} />
+          <Route path='/reset_password/:token' element={<ResetPassword />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthContext.Provider>
+
   );
 }
 

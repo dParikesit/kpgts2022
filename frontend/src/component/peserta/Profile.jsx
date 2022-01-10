@@ -227,16 +227,16 @@ const ProfileDesktop = () => {
                     </Grid>
                   </Grid>
                   <Grid container>
-                    <Grid item xs={3}>
-                      <Typography fontSize="2vw" >
-                        Email
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={5}>
-                      <Typography fontSize="2vw" >
-                        : {email}
-                      </Typography>
-                    </Grid>
+                    {/*<Grid item xs={3}>*/}
+                    {/*  <Typography fontSize="2vw" >*/}
+                    {/*    Email*/}
+                    {/*  </Typography>*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item xs={5}>*/}
+                    {/*  <Typography fontSize="2vw" >*/}
+                    {/*    : {email}*/}
+                    {/*  </Typography>*/}
+                    {/*</Grid>*/}
                   </Grid>
                   {renderStatus()}
                   <Link to="/lupa_password" style={{textDecoration: "none",}}>
