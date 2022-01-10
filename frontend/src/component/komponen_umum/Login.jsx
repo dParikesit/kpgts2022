@@ -55,7 +55,6 @@ export default function Login() {
       method: 'POST',
       mode: 'same-origin',
       credentials: "same-origin",
-      referrerPolicy: "origin",
       headers: {
           'Content-Type': 'application/json'
       },
