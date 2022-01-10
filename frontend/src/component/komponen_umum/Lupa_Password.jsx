@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import {useNavigate} from "react-router-dom";
 
 // Ambil data dari line 54 
 
@@ -49,16 +50,29 @@ const theme = createTheme({
 
 export default function Lupa_Password() {
     const [open, setOpen] = React.useState(false);
+    const navigate = useNavigate()
 
 // Ambil data dari bawah ini
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
+    let response = await fetch('/api/user/resetpassword/', {
+      method: 'POST',
+      mode: 'same-origin',
+      credentials: "same-origin",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: data.get('email'),
+      })
     });
-    setOpen(true);
+    console.log(response.status);
+    if(response.status===200){
+      navigate('/')
+    } else{
+      alert("Error")
+    }
   };
 
   const handleClose = (event, reason) => {

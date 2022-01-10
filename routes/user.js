@@ -3,6 +3,8 @@ const User = require("../controller/user");
 const mailer = require("../mailer");
 const {body, validationResult} = require('express-validator');
 const bcrypt = require("bcrypt");
+const crypto = require('crypto')
+const Reset = require("../controller/reset")
 
 // Signup, akses dengan endpoint /api/user/signup
 router.post("/signup", (req,res) => {
@@ -81,7 +83,7 @@ router.post('/logout',(req,res) => {
     });
 });
 
-router.post('/resetpassword', (req, res) => {
+router.post('/resetpassword', async(req, res) => {
     body('email','Email is invalid. Please input a valid email address.').exists().isEmail();
     const errors = validationResult(req); // Finds the validation errors in this request and wraps them in an object with handy functions
     if (!errors.isEmpty()) {
@@ -89,28 +91,34 @@ router.post('/resetpassword', (req, res) => {
         return;
     }
 
-    User.getOneEmail(req.body.email)
-        .then(user => {
-            if (user) {
-                mailer.send ({
-                    template: 'reset_pass',
-                    message: {
-                        to: req.body.email
-                    },
-                    locals: {
-                        link: `${process.env.ORIGIN_URL}/sso/reset/${token}?email=${req.body.email}` // token perlu diubah
-                    }
-                });
-            } else {
-                res.status(400).json({ message: "Email doesn't exist. Please fill in a valid email." });
-            }
-        });
+    const user = await User.getOneEmail(req.body.email)
+    if(user){
+        const token = crypto.randomBytes(64).toString('hex');
+        try{
+            await mailer.send ({
+                template: 'reset_password',
+                message: {
+                    to: req.body.email
+                },
+                locals: {
+                    link: `${process.env.ORIGIN_URL}/reset_password/${token}`,
+                    image: `${process.env.ORIGIN_URL}/assets/logo.png`
+                }
+            });
+            await Reset.insert(token, user.id)
+        }catch(e){
+            res.status(500).json(e)
+        }
+        console.log(`${process.env.ORIGIN_URL}/reset_password/${token}`)
+        res.status(200).json(`${process.env.ORIGIN_URL}/reset_password/${token}`)
+    } else{
+        res.status(400).json({ message: "Email doesn't exist. Please fill in a valid email." });
+    }
 });
 
-router.put('/resetpassword', (req,res) => {
+router.put('/resetpassword/:token', async(req,res) => {
     body('newPass','Password is invalid (empty or length less than 8 characters).').notEmpty().isLength({min:8});
     body('confirmPass','Password confirmation is required.').notEmpty();
-    body("email", "Team email is required!").exists().isEmail();
 
     let errors = validationResult(req);
     if (req.body.confirmPass !== req.body.newPass) {
@@ -121,22 +129,21 @@ router.put('/resetpassword', (req,res) => {
         res.status(422).json({ errors: errors.array() });
         return;
     }
-    User.getOneEmail(req.body.email)
-        .then(user => {
-            if (user) {
-                bcrypt.hash(req.body.newPass, 10)
-                    .then((hash) => {
-                        User.findAndUpdate('email', req.body.email, 'password', hash)
-                            .then(user => {
-                                res.status(200).json({
-                                    message : 'Registration succesful.'
-                                });
-                            });
-                    });
-            } else {
-                res.status(400).json({ message: "Email doesn't exist. Please fill in a valid email." });
-            }
-        });
+
+    try{
+        const id = (await Reset.getOne(req.params.token)).user_id
+
+        if(id){
+            const hashed = await bcrypt.hash(req.body.newPass, 10)
+            await User.findAndUpdate('id', id, 'password', hashed)
+            await Reset.remove(req.params.token)
+            res.status(200).json("Sukses")
+        } else{
+            throw "Not found"
+        }
+    } catch (e) {
+        res.status(500).json(e)
+    }
 });
 
 module.exports = router

@@ -21,7 +21,7 @@ function findAndUpdate(colName, query, colNameToUpdate, val) {
 }
 
 function invertVerifBool(id){
-    return db('registration').where({user_id: id}).update({
+    return db('registration').where({id: id}).update({
         verified: db.raw('NOT ??',  ['verified'])
     })
 }

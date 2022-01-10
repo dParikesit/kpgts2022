@@ -9,6 +9,11 @@ exports.up = function(knex) {
           table.string('role').notNullable().defaultTo('user')
           table.timestamps(true,true)
       })
+      .createTable('reset', function (table) {
+        table.string('token').notNullable()
+        table.uuid('user_id').references('id').inTable('user')
+        table.timestamps(true, true)
+      })
       .createTable('registration', function (table) {
           table.increments('id').primary()
           table.string('nama').notNullable()
@@ -40,6 +45,7 @@ exports.down = function(knex) {
   return knex.schema
       .dropTable('sessions')
       .dropTable('registration')
+      .dropTable('reset')
       .dropTable('post')
       .dropTable('user')
 };

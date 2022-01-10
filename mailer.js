@@ -4,7 +4,7 @@ const Email = require('email-templates');
 const transporter = nodemailer.createTransport({
     host: process.env.MAILER_HOST,
     port: process.env.MAILER_PORT,
-    secure: (process.env.SECURE == 'true'),
+    secure: !(process.env.NODE_ENV==='development'),
     auth: {
         user: process.env.MAILER_USERNAME,
         pass: process.env.MAILER_PASSWORD
@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 const email = new Email({
     views: { root:'./templates', options: { extension: 'ejs' } },
     message: {
-        from: 'KPGTS 2021 no-reply@kpgts.com'
+        from: 'noreply@kpgts2022.com'
     },
     preview: process.env.NODE_ENV === 'development',
     send: !(process.env.NODE_ENV === 'development'),

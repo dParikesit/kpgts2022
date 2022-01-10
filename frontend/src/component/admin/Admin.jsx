@@ -8,6 +8,9 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
+import {useContext, useEffect} from "react";
+import {AuthContext} from "../komponen_umum/AuthContext";
+import {useNavigate} from "react-router-dom";
 
 
 const theme = createTheme({
@@ -60,6 +63,14 @@ const theme = createTheme({
   }
 
 const Admin = () => {
+    const Auth = useContext(AuthContext)
+    const navigate = useNavigate()
+    useEffect(()=>{
+      if (Auth.role!=="admin"){
+        navigate('/', {replace: true})
+      }
+    })
+
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {

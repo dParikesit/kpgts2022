@@ -11,6 +11,8 @@ import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 
 // Import untuk checkbox
 import Checkbox from '@mui/material/Checkbox';
@@ -25,16 +27,18 @@ import EditIcon from "@material-ui/icons/EditOutlined";
 import DoneIcon from "@material-ui/icons/DoneAllTwoTone";
 import RevertIcon from "@material-ui/icons/NotInterestedOutlined";
 import { TableContainer } from "@material-ui/core";
-import {useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
+import {AuthContext} from "../komponen_umum/AuthContext";
+import {useNavigate} from "react-router-dom";
 
 // Susunan data yg dipakai ada di bawah ini
 // Untuk contoh data dapat dilihat di line 74
 // Untuk kirim email dapat dilihat pada line 270
 // Semangat
 
-  const createData = (ID, nama, sekolah, jurusan, kontak, bukti_transfer, verified) => ({
+  const createData = (ID, nama, sekolah, jurusan, kontak, bukti_transfer, verified, uuid) => ({
     id: ID,
-    ID, nama, sekolah, jurusan, kontak, bukti_transfer, verified,
+    ID, nama, sekolah, jurusan, kontak, bukti_transfer, verified, uuid,
     isEditMode: false
   });
   
@@ -71,7 +75,17 @@ const CustomTableCell = ({ row, name, onChange }) => {
 });
 
 const Tabel = () => {
+    const Auth = useContext(AuthContext)
+    const navigate = useNavigate()
+    if (Auth.role!=="admin"){
+      navigate('/', {replace: true})
+    }
+
     useEffect(async () => {
+        if (Auth.role!=="admin"){
+          navigate('/', {replace: true})
+        }
+
         // Update the document title using the browser API
         let response = await fetch('/api/registration/search',{
         method: 'GET',
@@ -85,7 +99,8 @@ const Tabel = () => {
         console.log(response)
         setRows(response.map((item)=>{
             const verif = item.verified ? 'YES' : 'NO'
-            return createData(item.ID, item.nama, item.sekolah, item.jurusan, item.kontak, item.fileURL, verif)
+            console.log(item.user_id)
+            return createData(item.id, item.nama, item.sekolah, item.jurusan, item.kontak, item.fileURL, verif, item.user_id)
         }))
     }, []);
 
@@ -151,10 +166,35 @@ const Tabel = () => {
             return rows.map(row => {
                 if(row.id === id) {
                     if(row.verified == "NO") {
-                        fetch('/api/registration/verif')
-                        return { ...row, verified: "YES" };
+                        fetch('/api/registration/verif/'+row.id, {
+                          method: 'PUT',
+                          mode: 'same-origin',
+                          credentials: "same-origin",
+                          headers: {
+                            'Content-Type': 'application/json'
+                          }
+                        }).then(res => {
+                          console.log(res.status)
+                          if(res.status===200){
+                            // return { ...row, verified: "YES" };
+                            window.location.reload()
+                          }
+                        })
                     } else if (row.verified == "YES") {
-                        return { ...row, verified: "NO" };
+                      fetch('/api/registration/verif/'+row.id, {
+                        method: 'PUT',
+                        mode: 'same-origin',
+                        credentials: "same-origin",
+                        headers: {
+                          'Content-Type': 'application/json'
+                        }
+                      }).then(res => {
+                        console.log(res.status)
+                        if(res.status===200){
+                          // return { ...row, verified: "NO" };
+                          window.location.reload()
+                        }
+                      })
                     }
                 }
               return row;
@@ -165,6 +205,62 @@ const Tabel = () => {
       const onClickNewData = () => {
 
       }
+
+      const [radValue, setRadValue] = useState("Saintek")
+      const handleRadChange = (e)=>{
+        setRadValue(e.target.value);
+      }
+      const submitRad = async (e) => {
+        e.preventDefault()
+        let mode = ""
+        if(radValue==="Saintek"||radValue==="Soshum"){
+          mode = "jurusan"
+        } else{
+          mode = "verif"
+        }
+        let response = await fetch('/api/registration/search?'+mode+"="+radValue,{
+          method: 'GET',
+          mode: 'same-origin',
+          credentials: "same-origin",
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        if(response.status===404){
+          alert("Not Found")
+        }
+        response = await response.json()
+        console.log(response)
+        setRows(response.map((item)=>{
+          const verif = item.verified ? 'YES' : 'NO'
+          return createData(item.id, item.nama, item.sekolah, item.jurusan, item.kontak, item.fileURL, verif, item.user_id)
+        }))
+      }
+
+      const [nama, setNama]=useState("")
+      const handleNamaChange = (e)=>{
+        setNama(e.target.value);
+      }
+      const submitNama = async (e) => {
+        e.preventDefault()
+        let response = await fetch('/api/registration/search?nama='+nama,{
+          method: 'GET',
+          mode: 'same-origin',
+          credentials: "same-origin",
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        if(response.status===404){
+          alert("Not Found")
+        }
+        response = await response.json()
+        console.log(response)
+        setRows(response.map((item)=>{
+          const verif = item.verified ? 'YES' : 'NO'
+          return createData(item.id, item.nama, item.sekolah, item.jurusan, item.kontak, item.fileURL, verif, item.user_id)
+        }))
+      }
     
       return (
         <div>
@@ -173,36 +269,36 @@ const Tabel = () => {
                 <div style={{marginLeft:'3vw', marginTop:'0'}}>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Filter</FormLabel>
-                    <FormGroup aria-label="position" row>
+                    <RadioGroup aria-label="position" value={radValue} onChange={handleRadChange} row>
                         <FormControlLabel
-                        value="ipa"
-                        control={<Checkbox />}
-                        label="IPA"
+                        value="Saintek"
+                        control={<Radio />}
+                        label="Saintek"
                         labelPlacement="end"
                         />
                         <FormControlLabel
-                        value="ips"
-                        control={<Checkbox />}
-                        label="IPS"
+                        value="Soshum"
+                        control={<Radio />}
+                        label="Soshum"
                         labelPlacement="end"
                         />
                         <FormControlLabel
-                        value="yes"
-                        control={<Checkbox />}
+                        value="true"
+                        control={<Radio />}
                         label="Terverifikasi"
                         labelPlacement="end"
                         />
                         <FormControlLabel
-                        value="no"
-                        control={<Checkbox />}
+                        value="false"
+                        control={<Radio />}
                         label="Belum Terverifikasi"
                         labelPlacement="end"
                         />
-                        <Button variant="outlined">Apply</Button> 
-                    </FormGroup>
+                        <Button variant="outlined" onClick={submitRad}>Apply</Button>
+                    </RadioGroup>
                     <FormGroup aria-label="position" row style={{marginTop:'1em'}}>
-                        <TextField style={{marginRight:'2em'}} id="outlined-basic" label="Masukkan yang ingin dicari" variant="outlined" />
-                        <Button variant="outlined">Cari</Button> 
+                        <TextField style={{marginRight:'2em'}} id="outlined-basic" label="Masukkan yang ingin dicari" variant="outlined" value={nama} onChange={handleNamaChange}/>
+                        <Button variant="outlined" onClick={submitNama}>Cari</Button>
                     </FormGroup>
                     
                 </FormControl>
@@ -232,12 +328,14 @@ const Tabel = () => {
                                     <IconButton
                                     aria-label="done"
                                     onClick={() => onToggleEditMode(row.id)}
+                                    disabled
                                     >
                                     <DoneIcon />
                                     </IconButton>
                                     <IconButton
                                     aria-label="revert"
                                     onClick={() => onRevert(row.id)}
+                                    disabled
                                     >
                                     <RevertIcon />
                                     </IconButton>
@@ -246,17 +344,19 @@ const Tabel = () => {
                                 <IconButton
                                     aria-label="delete"
                                     onClick={() => onToggleEditMode(row.id)}
+                                    disabled
                                 >
                                     <EditIcon />
                                 </IconButton>
                                 )}
                             </TableCell>
-                            <CustomTableCell {...{ row, name: "ID", onChange }} />
+                            <CustomTableCell {...{ row, name: "id", onChange }} />
                             <CustomTableCell {...{ row, name: "nama", onChange }} />
                             <CustomTableCell {...{ row, name: "sekolah", onChange }} />
                             <CustomTableCell {...{ row, name: "jurusan", onChange }} />
                             <CustomTableCell {...{ row, name: "kontak", onChange }} />
-                            <CustomTableCell {...{ row, name: "bukti_transfer", onChange }} />
+                            {/*<CustomTableCell {...{ row, name: "bukti_transfer", onChange }} />*/}
+                            <TableCell component={"a"} href={row.bukti_transfer}>Link</TableCell>
                             <CustomTableCell {...{ row, name: "verified", onChange }} />
                             <Box
                                 component="div"

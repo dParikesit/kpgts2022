@@ -15,13 +15,14 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { Divider } from '@mui/material';
+import {Avatar, Divider} from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useEffect, useContext} from "react";
 import { AuthContext } from "../komponen_umum/AuthContext";
+import Image from "mui-image";
 
 
 // Buat tema
@@ -194,9 +195,7 @@ const NavbarLoggedIn = () => {
             <CssBaseline />
             <AppBar position="sticky" style={{ background:"#94D3DA", fontFamily: "Ramaraja", borderBottomLeftRadius: "20px", borderBottomRightRadius: "20px" }}>
               <Toolbar>
-                <Typography variant="h4" className={classes.logoMobile} noWrap>
-                  Logo
-                </Typography>
+                <Avatar src={process.env.PUBLIC_URL + '/assets/gajah-logo-trans.png'} variant={"square"} sx={{ width: 56, height: 56, bgcolor: "#95d3db"}}/>
                 <IconButton 
                     onClick={toggleDrawer}
                     color="inherit"
@@ -262,9 +261,7 @@ const NavbarLoggedIn = () => {
             <AppBar position="sticky" style={{ background:"#94D3DA", fontFamily: "Ramaraja", borderBottomLeftRadius: "20px", borderBottomRightRadius: "20px" }}>
               <CssBaseline />
               <Toolbar>
-                <Typography variant="h4" className={classes.logo} noWrap>
-                  Logo
-                </Typography>
+                <Avatar src={process.env.PUBLIC_URL + '/assets/gajah-logo-trans.png'} variant={"square"} sx={{ width: 56, height: 56, bgcolor: "#95d3db"}}/>
                 <div className={classes.navlinks}>
                     <div className={classes.linkArea}>
                       <Link to="/" className={classes.link}>
@@ -315,7 +312,7 @@ const NavbarLoggedIn = () => {
                               <MenuItem onClick={handleClose}>Register TO</MenuItem>
                             </Link>
                             <Link to="/" className={classes.linkDrawer}>
-                              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+                              <MenuItem onClick={logoutHandler}>Log Out</MenuItem>
                             </Link>
                           </Menu>
                         </div>

@@ -4,6 +4,7 @@ const {body, validationResult} = require('express-validator');
 const router = require('express').Router();
 const postController = require('../controller/post');
 const path = require("path");
+const {adminChecker} = require("../middleware/role-checker");
 
 
 // Berarti api ada di /api/post/
@@ -40,7 +41,7 @@ const fileStorage = multer.diskStorage({
 });
 const upload = multer({storage: fileStorage});
 
-router.post("/add",  async (req, res) => {
+router.post("/add",  adminChecker, async (req, res) => {
     body('title','Please fill in the title.').notEmpty();
     body('content','Please fill in the content.').notEmpty();
     const errors = validationResult(req); // Finds the validation errors in this request and wraps them in an object with handy functions
@@ -68,7 +69,7 @@ router.post("/add",  async (req, res) => {
     }
 });
 
-router.post("/pict", upload.single('image'), async(req,res)=>{
+router.post("/pict", adminChecker, upload.single('image'), async(req,res)=>{
     console.log(req.file)
     res.status(200).json(`post-${req.file.originalname}`)
 })

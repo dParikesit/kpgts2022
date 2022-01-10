@@ -10,9 +10,13 @@ const cookieParser = require("cookie-parser");
 const {store} = require('./database/db');
 const app = express();
 
+if (environment === 'production') {
+  app.set('trust proxy', 1); // trust first proxy, crucial
+}
+
 app.use( session({
   secret: process.env.SESSION_SECRET,
-  saveUninitialized:true,
+  saveUninitialized:false,
   store: store,
   cookie: {
     httpOnly: true,
@@ -28,11 +32,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/static', express.static('uploads'))
+app.use('/assets', express.static('public'))
 app.use("/api", routes);
 
 app.use(express.static(path.join(__dirname, "frontend/build")));
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
 });
 
 

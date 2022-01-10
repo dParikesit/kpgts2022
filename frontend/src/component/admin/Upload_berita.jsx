@@ -1,15 +1,24 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import MUIRichTextEditor from 'mui-rte'
-import React, { useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import FormGroup from '@mui/material/FormGroup';
 import Button from '@mui/material/Button';
 import { convertToRaw, convertFromRaw, EditorState, Editor } from 'draft-js';
+import {AuthContext} from "../komponen_umum/AuthContext";
+import {useNavigate} from "react-router-dom";
 
 const myTheme = createTheme({
     // Set up your custom MUI theme here
 })
 
 const Upload_Berita = () => {
+    const Auth = useContext(AuthContext)
+    const navigate = useNavigate()
+    useEffect(()=>{
+        if (Auth.role!=="admin"){
+            navigate('/', {replace: true})
+        }
+    })
 
     const handleSubmit = async(event) => {
         event.preventDefault();
