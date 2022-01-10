@@ -18,7 +18,7 @@ app.use( session({
   secret: process.env.SESSION_SECRET,
   saveUninitialized:false,
   store: store,
-  proxy: true,
+  // proxy: true,
   cookie: {
     httpOnly: true,
     // secure: !(environment==='development'),
