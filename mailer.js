@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 const email = new Email({
     views: { root:'./templates', options: { extension: 'ejs' } },
     message: {
-        from: '"KPGTS 2022"noreply@kpgts.com'
+        from: '"KPGTS 2022"noreply@kpgts2022.com'
     },
     preview: process.env.NODE_ENV === 'development',
     send: !(process.env.NODE_ENV === 'development'),
