@@ -78,17 +78,6 @@ const jumlah = [
     },
   ];
 
-  const jurusans = [
-    {
-      value: 'IPA',
-      label: 'IPA'
-    },
-    {
-      value: 'IPS',
-      label: 'IPS',
-    },
-  ];
-
   const pembayarans = [
     {
       value: 'BCA',
@@ -111,41 +100,55 @@ const jumlah = [
 const Peserta = () => {
     // variabel variabel
     const harga = 50000;
-    // Buat foto
-    const handleUploadFoto = async(event) => {
-        event.preventDefault();
-        const formdata = new FormData();
-        formdata.append('image', selectedFile)
-        const response = await fetch('/api/post/pict', {
-            method: 'POST',
-            mode: 'same-origin',
-            credentials: "same-origin",
-            body: formdata
-        })
-        if(response.status===200){
-            setFileName(await response.json())
-        }
-    };
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [fileName, setFileName] = useState("")
     // state form
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const [jumlahVal, setJumlahVal] = useState('1');
+    // buat loop state jurusan
+    var stateJurusan = [];
+    for (var i=0; i<jumlahVal; i++) {
+        stateJurusan.push('Saintek')
+    };
+    // buat loop state sesi
+    var stateSesi = [];
+    for (var i=0; i<jumlahVal; i++) {
+        stateJurusan.push('A')
+    };
+    // Buat foto
+    const [fileLink, setFileLink] = useState('')
     const [pembayaran, setPembayaran] = useState('');
     const [valueDate, setValueDate] = React.useState([]);
     const [startDate, setStartDate] = useState(new Date("2022/01/22"));
     const [endDate, setEndDate] = useState(new Date("2022/01/25"));
-    const [jurusan, setJurusan] = useState([]);
+    const [jurusan, setJurusan] = useState(stateJurusan);
+    const [sesi, setSesi] = useState(stateSesi);
+    const [fakjur, setFakjur] = useState([]);
+    const [univ, setUniv] = useState([]);
     const [nama, setNama] = useState([]);
+    const [namaPaguyuban, setNamaPaguyuban] = useState([]);
     const [asalSMA, setAsalSMA] = useState([]);
+    const [asalKota, setAsalKota] = useState([]);
+    const [asalProv, setAsalProv] = useState([]);
+    const [kelas, setKelas] = useState([]);
     const [kontak, setKontak] = useState([]);
+    const [surel, setSurel] = useState([]);
     const [jenisBank, setJenisBank] = useState('');
-    const [namaDiRek, setNamaDiRek] = useState('');
+    const [namaDiRek, setNamaDiRek] = useState('');    
+    
+    const handleUploadFoto = async(event) => {
+        setFileLink(event.target.value)
+    };
+    
     const handleJurusan = (event) => {
-        let temp = jurusan;
         const idx = event.target.getAttribute('name');
+        let temp = jurusan;
         temp[idx] = event.target.value;
-        setJurusan(jurusan);
+        setJurusan(temp);
+    };
+    const handleSesi = (event) => {
+        const idx = event.target.getAttribute('name');
+        let temp = sesi;
+        temp[idx] = event.target.value;
+        setSesi(temp);
     };
     const handleChange = (event) => {
         setJumlahVal(event.target.value);
@@ -159,11 +162,29 @@ const Peserta = () => {
     const handleNamaDiRek = (event) => {
         setNamaDiRek(event.target.value);
     };
+    const handleFakjur = (event) => {
+        const idx = event.target.getAttribute('name')
+        let temp = fakjur
+        temp[idx] = event.target.value
+        setFakjur(temp)
+    };
+    const handleUniv = (event) => {
+        const idx = event.target.getAttribute('name')
+        let temp = univ
+        temp[idx] = event.target.value
+        setUniv(temp)
+    };
     const handleNama = (event) => {
         const idx = event.target.getAttribute('name')
         let temp = nama
         temp[idx] = event.target.value
         setNama(temp)
+    };
+    const handleNamaPaguyuban = (event) => {
+        const idx = event.target.getAttribute('name')
+        let temp = namaPaguyuban
+        temp[idx] = event.target.value
+        setNamaPaguyuban(temp)
     };
     const handleAsal = (event) => {
         const idx = event.target.getAttribute('name')
@@ -171,17 +192,41 @@ const Peserta = () => {
         temp[idx] = event.target.value
         setAsalSMA(temp)
     };
+    const handleAsalKota = (event) => {
+        const idx = event.target.getAttribute('name')
+        let temp = asalKota
+        temp[idx] = event.target.value
+        setAsalKota(temp)
+    };
+    const handleAsalProv = (event) => {
+        const idx = event.target.getAttribute('name')
+        let temp = asalProv
+        temp[idx] = event.target.value
+        setAsalProv(temp)
+    };
+    const handleKelas = (event) => {
+        const idx = event.target.getAttribute('name')
+        let temp = kelas
+        temp[idx] = event.target.value
+        setKelas(temp)
+    };
     const handleKontak = (event) => {
         const idx = event.target.getAttribute('name')
         let temp = kontak
         temp[idx] = event.target.value
         setKontak(temp)
     };
+    const handleSurel = (event) => {
+        const idx = event.target.getAttribute('name')
+        let temp = surel
+        temp[idx] = event.target.value
+        setSurel(temp)
+    };
 
     //handler submit
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(nama, asalSMA, kontak, jurusan, valueDate, pembayaran, jenisBank, namaDiRek);
+        console.log(nama, asalSMA, kontak, jurusan, valueDate, sesi, surel, kelas, fakjur, univ, pembayaran, jenisBank, namaDiRek);
     }
 
     // BUAT RENDER FORM
@@ -191,7 +236,7 @@ const Peserta = () => {
             rows.push(
                 <>
                     <Typography component="h1" variant="h6" marginTop={5}>
-                        Data Diri Peserta {i+1}
+                        Data Peserta {i+1}
                     </Typography>
                     {/* Isi data diri */}
                     <Grid item xs={12}>
@@ -208,6 +253,20 @@ const Peserta = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
+                        <TextField
+                        required
+                        fullWidth
+                        id="namaPaguyuban"
+                        label="Nama Paguyuban"
+                        name={i}
+                        autoComplete="KPGTS"
+                        helperText="Contoh: Karang Praga"
+                        value={namaPaguyuban[i]}
+                        defaultValue={""}
+                        onChange={handleNamaPaguyuban}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
                        <TextField
                         required
                         fullWidth
@@ -219,6 +278,55 @@ const Peserta = () => {
                         onChange={handleAsal}
                         />
                     </Grid> 
+                    <Grid item xs={12}>
+                       <TextField
+                        required
+                        fullWidth
+                        id="asalKota"
+                        label="Asal Kota/Kab"
+                        name={i}
+                        autoComplete="Semarang"
+                        value={asalKota[i]}
+                        onChange={handleAsalKota}
+                        />
+                    </Grid> 
+                    <Grid item xs={12}>
+                       <TextField
+                        required
+                        fullWidth
+                        id="asalProv"
+                        label="Asal Provinsi"
+                        name={i}
+                        autoComplete="Jawa Tengah"
+                        value={asalProv[i]}
+                        onChange={handleAsalProv}
+                        />
+                    </Grid> 
+                    <Grid item xs={12}>
+                       <TextField
+                        required
+                        fullWidth
+                        id="kelas"
+                        label="Kelas"
+                        name={i}
+                        autoComplete="10"
+                        helperText="Contoh: 10, 11, 12, alumni"
+                        value={kelas[i]}
+                        onChange={handleKelas}
+                        />
+                    </Grid> 
+                    <Grid item xs={12}>
+                        <TextField
+                        required
+                        fullWidth
+                        id="surel"
+                        label="Email"
+                        name={i}
+                        autoComplete="example@domain.com"
+                        value={surel[i]}
+                        onChange={handleSurel}
+                        />
+                    </Grid>
                     <Grid item xs={12}>
                         <TextField
                         required
@@ -233,15 +341,14 @@ const Peserta = () => {
                         onChange={handleKontak}
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sx={{marginTop:'10px'}}>
                         <FormControl
                         fullWidth
                         >
-                            <InputLabel id="demo-simple-select-label">Saintek/Soshum</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Rumpun TO</InputLabel>
                             <NativeSelect
                             onChange={handleJurusan}
                             name={i}
-                            value={jurusan[i]}
                             inputProps={{
                                 id:"jurusan",
                                 label:"Saintek/Soshum",
@@ -268,6 +375,49 @@ const Peserta = () => {
                             />
                         </LocalizationProvider>
                     </Grid>
+                    <Grid item xs={12} sx={{marginTop:'10px'}}>
+                        <FormControl
+                        fullWidth
+                        >
+                            <InputLabel id="demo-simple-select-label">Sesi TO</InputLabel>
+                            <NativeSelect
+                            onChange={handleSesi}
+                            name={i}
+                            inputProps={{
+                                id:"sesi",
+                                label:"Sesi",
+                            }}
+                            >
+                                <option value={'A'}>A</option>
+                                <option value={'B'}>B</option>
+                                <option value={'C'}>C</option>
+                            </NativeSelect>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                       <TextField
+                        required
+                        fullWidth
+                        id="FakJur"
+                        label="Fakultas/Jurusan pilihan"
+                        name={i}
+                        autoComplete="STEI"
+                        value={fakjur[i]}
+                        onChange={handleFakjur}
+                        />
+                    </Grid> 
+                    <Grid item xs={12}>
+                       <TextField
+                        required
+                        fullWidth
+                        id="univ"
+                        label="Universitas pilihan"
+                        name={i}
+                        autoComplete="ITB"
+                        value={univ[i]}
+                        onChange={handleUniv}
+                        />
+                    </Grid> 
                 </>);
                         }
         return rows.map((row) => row);
@@ -398,16 +548,18 @@ const Peserta = () => {
                             </Typography>
                             {/* upload foto */}
                             <Grid item xs={12}>
-                                <input
-                                style={{marginRight:'1vw', marginTop:'1vw', fontFamily:'Ramaraja'}}
-                                type="file"
-                                onChange={(e) => {
-                                    setSelectedFile(e.target.files[0])
-                                }}
+                                <TextField
+                                required
+                                fullWidth
+                                id="linkBukti"
+                                label="Link Foto Bukti Pembayaran"
+                                name="linkBukti"
+                                autoComplete="BCA"
+                                helperText="Upload bukti ke drive atau yang lain, pastikan link dapat diakses"
+                                value={fileLink}
+                                onChange={handleUploadFoto}
                                 />
-                                <Button style={{marginRight:'2vw', color: 'black'}} type="submit" variant="outlined" onClick={handleUploadFoto}>Upload Foto</Button>
-                                <p>{fileName}</p>
-                            </Grid>
+                            </Grid> 
                            {/* SUBMIT BUTTON */}
                             <Grid item xs={12}>
                                 <ColorButton type="submit" size="medium" variant="contained" style={{ width:"8vw" }}>
