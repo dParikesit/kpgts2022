@@ -12,13 +12,13 @@ const app = express();
 
 app.use( session({
   secret: process.env.SESSION_SECRET,
-  saveUninitialized:true,
+  saveUninitialized:false,
   store: store,
   cookie: {
     httpOnly: true,
     // secure: !(environment==='development'),
     secure: true,
-    sameSite: "none",
+    sameSite: "None",
     maxAge: 1000 * 60 * 60 * 24 // Time is in miliseconds
 },
   resave: false
