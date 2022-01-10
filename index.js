@@ -18,6 +18,7 @@ app.use( session({
     httpOnly: true,
     // secure: !(environment==='development'),
     secure: true,
+    sameSite: "strict",
     maxAge: 1000 * 60 * 60 * 24 // Time is in miliseconds
 },
   resave: false
