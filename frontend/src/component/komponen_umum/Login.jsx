@@ -68,6 +68,9 @@ export default function Login() {
       response = response.json()
       Auth.addItem(response.name, response.role)
       navigate('/')
+    } else{
+        response = await response.json()
+        await alert(response)
     }
   };
 

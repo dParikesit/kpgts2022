@@ -63,11 +63,11 @@ router.post("/login", (req, res) => {
                         // req.session.save()
                         res.status(200).json({name : user.name, role:user.role});
                     } else {
-                        res.json({ message: "Wrong email/password combination!" });
+                        res.status(404).json("Wrong email/password combination!");
                     }
                 });
             } else {
-                res.json({ message: "User doesn't exist. Please try to login again." });
+                res.status(404).json("User doesn't exist. Please try to login again.");
             }
         });
     } catch (e) {
