@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require("../controller/user");
+const Registration = require("../controller/registration");
 const mailer = require("../mailer");
 const {body, validationResult} = require('express-validator');
 const bcrypt = require("bcrypt");
@@ -144,5 +145,20 @@ router.put('/resetpassword/:token', async(req,res) => {
         res.status(500).json(e)
     }
 });
+
+router.get('/profile', async(req,res)=>{
+    try{
+        const data = await Registration.getById(req.session.uid)
+        if(data.length===0){
+            res.status(404)
+        } else{
+            const total = data.length
+            const verified = (data.filter(item=>item.verified===true)).length
+            res.status(200).json({verified, total})
+        }
+    }catch (e) {
+        res.status(500).json(e)
+    }
+})
 
 module.exports = router

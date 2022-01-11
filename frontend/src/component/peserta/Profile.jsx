@@ -24,7 +24,8 @@ const theme = createTheme({
           default: "#F2EBCE"
       },
       primary: {
-          main: "#A7B560"
+          // main: "#A7B560"
+          main: "#C2BC9B"
       }
   },
 });
@@ -147,18 +148,41 @@ const ProfileDesktop = () => {
 
   const [email, setEmail] = useState("");
   useEffect(async () => {
-      if (Auth.role!=="user"){
-        navigate('/', {replace: true})
+    if (Auth.role!=="user"){
+      navigate('/', {replace: true})
+    }
+
+    let data = await fetch('/api/user/profile', {
+        method: 'GET',
+        mode: 'same-origin',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+
+    if(data.status===404){
+      await setBerapa("Belum Registrasi")
+    } else if(data.status===200){
+      data = await data.json()
+      if(data.verified === 0 ){
+        await setBerapa("Belum Terverifikasi")
+      } else{
+        await setStatusVerif(true)
+        await setBerapa(String(data.verified) + "/" + String(data.total) + " terverifikasi")
       }
+    }
   }, []);
 
   // Nanti buat api status verif disini ya dim
-  const statusVerif = true
+
+  const [berapa, setBerapa] = useState("")
+  const [statusVerif, setStatusVerif] = useState(false)
 
   const nama=Auth.name
 
   const renderStatus = () => {
-    if (statusVerif == false) {
+    if (statusVerif === false) {
       return (
         <Grid container>
           <Grid item xs={3}>
@@ -168,7 +192,7 @@ const ProfileDesktop = () => {
           </Grid>
           <Grid item xs={5}>
             <Typography fontSize="2vw">
-              : <ColorButton3 >Belum Terverifikasi</ColorButton3>
+              : <ColorButton3 >{berapa}</ColorButton3>
             </Typography>
           </Grid>
         </Grid>
@@ -183,7 +207,7 @@ const ProfileDesktop = () => {
           </Grid>
           <Grid item xs={5}>
             <Typography fontSize="2vw">
-              : <ColorButton2 >Berhasil Terverifikasi</ColorButton2>
+              : <ColorButton2 >{berapa}</ColorButton2>
             </Typography>
           </Grid>
         </Grid>
@@ -199,7 +223,7 @@ const ProfileDesktop = () => {
           sx={{
             width: "90vw",
             height: "35vw",
-            backgroundColor: "#EBA871",
+            backgroundColor: "#C2BC9B",
             margin: "auto",
             marginTop:"3vw",
             borderRadius: "20px",

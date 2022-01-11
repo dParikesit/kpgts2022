@@ -78,7 +78,8 @@ const Item = styled(Paper)(({ theme1 }) => ({
 }));
 
 const commonStyles1 = {
-  bgcolor: '#EBA871',
+  // bgcolor: '#EBA871',
+  bgcolor: '#C2BC9B',
   borderColor: 'text.primary',
   m: 1,
   border: 0,
@@ -144,8 +145,9 @@ const InformasiItb = () => {
                                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                     <Tabs value={value} style={{textTransform:'none'}} onChange={handleChange} centered>
                                         <Tab label="Informasi ITB" {...a11yProps(0)} />
-                                        <Tab label="Info KP" {...a11yProps(1)} />
-                                        <Tab label="Info KPGTS" {...a11yProps(2)} />
+                                        {/* Un comment kalo mau ditambahin*/}
+                                        {/*<Tab label="Info KP" {...a11yProps(1)} />*/}
+                                        {/*<Tab label="Info KPGTS" {...a11yProps(2)} />*/}
                                     </Tabs>
                                 </Box>
                                 <TabPanel value={value} index={0}>

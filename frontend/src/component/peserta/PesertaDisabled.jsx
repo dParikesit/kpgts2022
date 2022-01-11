@@ -125,7 +125,7 @@ const PesertaDisabled = () => {
         await console.log(data)
         await setJumlahVal(data.length)
         // await setTempData(data)
-        data.forEach(item =>{
+        await data.forEach(item =>{
           setNama(added => [...added, item.nama])
           setAsalSMA(added => [...added, item.sekolah])
           setAsalKota(added => [...added, item.kota])

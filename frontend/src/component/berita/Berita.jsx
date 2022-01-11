@@ -91,7 +91,7 @@ export default function Berita() {
             {data.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
                 <Card
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: '#A7B560' }}
+                  sx={{ height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: '#C2BC9B' }}
                 >
                   <CardMedia
                     component="img"

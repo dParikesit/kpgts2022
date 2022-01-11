@@ -12,47 +12,47 @@ export default function TimelineKegiatan() {
   return (
     <React.Fragment>
     <Box style={{backgroundColor: '#C2BC9A', paddingBottom:'5vh', paddingTop: '5vh', borderTopLeftRadius: "20px", borderTopRightRadius: "20px", borderBottomLeftRadius: "20px", borderBottomRightRadius: "20px", color:'#554B3F'}}>
-        <div style={{textAlign:'center', fontSize:'4rem'}}>Timeline KPGTS 2021/2022</div>
+        <div style={{textAlign:'center', fontSize:'4rem'}}>Timeline KPGTS 2022</div>
       <Timeline position="alternate">
         <TimelineItem>
           <TimelineOppositeContent color="text.secondary" style={{fontSize:'2rem'}}>
-            09:30 am
+            22 Januari 2022
           </TimelineOppositeContent>
           <TimelineSeparator>
             <TimelineDot/>
             <TimelineConnector />
           </TimelineSeparator>
-          <TimelineContent style={{fontSize:'2rem'}}>Over Bufferflow</TimelineContent>
+          <TimelineContent style={{fontSize:'1.5rem'}}>Roadshow AMI</TimelineContent>
         </TimelineItem>
         <TimelineItem>
           <TimelineOppositeContent color="text.secondary" style={{fontSize:'2rem'}}>
-            10:00 am
+            TBD
           </TimelineOppositeContent>
           <TimelineSeparator>
             <TimelineDot />
             <TimelineConnector />
           </TimelineSeparator>
-          <TimelineContent style={{fontSize:'2rem'}}>Turing Machine</TimelineContent>
+          <TimelineContent style={{fontSize:'1.5rem'}}>Open Registration</TimelineContent>
         </TimelineItem>
         <TimelineItem>
           <TimelineOppositeContent color="text.secondary" style={{fontSize:'2rem'}}>
-            12:00 am
+            TBD
           </TimelineOppositeContent>
           <TimelineSeparator>
             <TimelineDot />
             <TimelineConnector />
           </TimelineSeparator>
-          <TimelineContent style={{fontSize:'2rem'}}>Memory Fountain</TimelineContent>
+          <TimelineContent style={{fontSize:'1.5rem'}}>Close Registration</TimelineContent>
         </TimelineItem>
         <TimelineItem>
           <TimelineOppositeContent color="text.secondary" style={{fontSize:'2rem'}}>
-            9:00 am
+            TBD
           </TimelineOppositeContent>
           <TimelineSeparator>
             <TimelineDot />
             <TimelineConnector />
           </TimelineSeparator>
-          <TimelineContent style={{fontSize:'2rem'}}>Die</TimelineContent>
+          <TimelineContent style={{fontSize:'1.5rem'}}>Pelaksanaan Try Out</TimelineContent>
         </TimelineItem>
       </Timeline>
     </Box>
