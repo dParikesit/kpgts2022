@@ -12,14 +12,6 @@ const myTheme = createTheme({
 })
 
 const Upload_Berita = () => {
-    const Auth = useContext(AuthContext)
-    const navigate = useNavigate()
-    useEffect(()=>{
-        if (Auth.role!=="admin"){
-            navigate('/', {replace: true})
-        }
-    })
-
     const handleSubmit = async(event) => {
         event.preventDefault();
         const formdata = new FormData();

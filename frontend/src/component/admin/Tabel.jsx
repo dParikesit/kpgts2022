@@ -77,15 +77,8 @@ const CustomTableCell = ({ row, name, onChange }) => {
 const Tabel = () => {
     const Auth = useContext(AuthContext)
     const navigate = useNavigate()
-    if (Auth.role!=="admin"){
-      navigate('/', {replace: true})
-    }
 
     useEffect(async () => {
-        if (Auth.role!=="admin"){
-          navigate('/', {replace: true})
-        }
-
         // Update the document title using the browser API
         let response = await fetch('/api/registration/search',{
         method: 'GET',
