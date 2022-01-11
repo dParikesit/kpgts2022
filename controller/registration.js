@@ -9,7 +9,7 @@ function getAll(){
 }
 
 function getOne(id){
-    return db('user').where('id', id).first();
+    return db('registration').where('id', id).first();
 }
 
 function getFiltered(colName, query){
