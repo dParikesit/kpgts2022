@@ -1,7 +1,28 @@
-
-.test {
-    color: blue;
-    font-size: larger;
-    text-align: center;
+*{
+    padding: 0;
+    margin: 0;
+}
+.judul{
+    font-size: 2rem;
 }
 
+.content{
+    font-size: 1.5rem;
+}
+.button{
+    font-family: "Quicksand";
+    padding: 14px;
+    width: 100px;
+}
+
+.test {
+    margin-top: 500px;
+}
+
+@media only screen and (max-width: 769px) { 
+    .gambarutama{visibility:hidden;}
+    .test{
+        margin-right: -100px;
+        margin-bottom: 120px;
+    }
+}

@@ -82,10 +82,11 @@ export default function Berita() {
         <Box
           sx={{
             bgcolor: 'background.paper',
+            height: '100%'
           }}
         >
         </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container sx={{ py: 8, minHeight: '86.2vh' }} maxWidth="md">
           <Grid container spacing={4}>
             {data.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
