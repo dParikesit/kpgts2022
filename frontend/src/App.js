@@ -4,6 +4,7 @@ import Homepage from './component/homepage/Homepage';
 import Berita from './component/berita/Berita';
 import InformasiItb from './component/informasi_itb/Informasi_itb';
 import Peserta from './component/peserta/Peserta';
+import PesertaDisabled from './component/peserta/PesertaDisabled';
 import Registration from "./component/komponen_umum/Register";
 import Login from "./component/komponen_umum/Login";
 import Lupa_Password from "./component/komponen_umum/Lupa_Password";

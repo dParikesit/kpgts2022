@@ -99,7 +99,7 @@ const jumlah = [
       }
 
 //   Buat rendering peserta
-const Peserta = () => {
+const PesertaDisabled = () => {
     const Auth = useContext(AuthContext)
     const navigate = useNavigate()
     // useEffect(()=>{
@@ -251,6 +251,7 @@ const Peserta = () => {
                     {/* Isi data diri */}
                     <Grid item xs={12}>
                         <TextField
+                        disabled
                         required
                         fullWidth
                         id={nama}
@@ -264,6 +265,7 @@ const Peserta = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
+                        disabled
                         required
                         fullWidth
                         id="namaPaguyuban"
@@ -278,6 +280,7 @@ const Peserta = () => {
                     </Grid>
                     <Grid item xs={12}>
                        <TextField
+                        disabled
                         required
                         fullWidth
                         id="asalSMA"
@@ -290,6 +293,7 @@ const Peserta = () => {
                     </Grid> 
                     <Grid item xs={12}>
                        <TextField
+                        disabled
                         required
                         fullWidth
                         id="asalKota"
@@ -302,6 +306,7 @@ const Peserta = () => {
                     </Grid> 
                     <Grid item xs={12}>
                        <TextField
+                        disabled
                         required
                         fullWidth
                         id="asalProv"
@@ -314,6 +319,7 @@ const Peserta = () => {
                     </Grid> 
                     <Grid item xs={12}>
                        <TextField
+                        disabled
                         required
                         fullWidth
                         id="kelas"
@@ -327,6 +333,7 @@ const Peserta = () => {
                     </Grid> 
                     <Grid item xs={12}>
                         <TextField
+                        disabled
                         required
                         fullWidth
                         id="surel"
@@ -339,6 +346,7 @@ const Peserta = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
+                        disabled
                         required
                         fullWidth
                         id="kontak"
@@ -357,6 +365,7 @@ const Peserta = () => {
                         >
                             <InputLabel id="demo-simple-select-label">Rumpun TO</InputLabel>
                             <NativeSelect
+                            disabled
                             onChange={handleJurusan}
                             name={i}
                             inputProps={{
@@ -372,6 +381,7 @@ const Peserta = () => {
                     <Grid item xs={12}>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker
+                            disabled
                             label="Pilih Tanggal Try Out"
                             openTo="day"
                             views={['year', 'month', 'day']}
@@ -391,6 +401,7 @@ const Peserta = () => {
                         >
                             <InputLabel id="demo-simple-select-label">Sesi TO</InputLabel>
                             <NativeSelect
+                            disabled
                             onChange={handleSesi}
                             name={i}
                             inputProps={{
@@ -406,6 +417,7 @@ const Peserta = () => {
                     </Grid>
                     <Grid item xs={12}>
                        <TextField
+                        disabled
                         required
                         fullWidth
                         id="FakJur"
@@ -418,6 +430,7 @@ const Peserta = () => {
                     </Grid> 
                     <Grid item xs={12}>
                        <TextField
+                        disabled
                         required
                         fullWidth
                         id="univ"
@@ -475,10 +488,11 @@ const Peserta = () => {
                             <Grid item xs={12} marginBottom={2}>
                                 <Grid item xs={12}>
                                     <Typography variant="h6" marginBottom={3} color={'red'}>
-                                        Perhatian! Form ini hanya bisa diisi satu kali, pastikan data yang diisi sudah benar. Hubungi admin apabila ada masalah.
+                                        Hubungi admin apabila ada masalah.
                                     </Typography>
                                 </Grid>
                                 <TextField
+                                    disabled
                                     fullWidth
                                     id="outlined-select-jumlah"
                                     select
@@ -502,6 +516,7 @@ const Peserta = () => {
                             </Typography>
                             <Grid item xs={12}>
                                 <TextField
+                                disabled
                                 required
                                 fullWidth
                                 id="namaPemilikBank"
@@ -514,6 +529,7 @@ const Peserta = () => {
                             </Grid> 
                             <Grid item xs={12}>
                                 <TextField
+                                disabled
                                 required
                                 fullWidth
                                 id="jenisBank"
@@ -526,6 +542,7 @@ const Peserta = () => {
                             </Grid> 
                            <Grid item xs={12}>
                                 <TextField
+                                disabled
                                 select
                                 required
                                 fullWidth
@@ -562,8 +579,9 @@ const Peserta = () => {
                                 Upload Bukti Pembayaran
                             </Typography>
                             {/* upload foto */}
-                            <Grid item xs={12}>
+                            <Grid item xs={12} marginBottom={'30px'}>
                                 <TextField
+                                disabled
                                 required
                                 fullWidth
                                 id="linkBukti"
@@ -575,12 +593,6 @@ const Peserta = () => {
                                 onChange={handleUploadFoto}
                                 />
                             </Grid> 
-                           {/* SUBMIT BUTTON */}
-                            <Grid item xs={12}>
-                                <ColorButton type="submit" size="medium" variant="contained" style={{ width:"8vw" }}>
-                                    Submit
-                                </ColorButton>
-                            </Grid>
                         </Grid>
                     </Box>
                 </Box>
@@ -589,4 +601,4 @@ const Peserta = () => {
     )
 }
 
-export default Peserta;
+export default PesertaDisabled;
