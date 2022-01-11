@@ -11,7 +11,7 @@ import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 export default function TimelineKegiatan() {
   return (
     <React.Fragment>
-    <Box style={{backgroundColor: '#C2BC9A', paddingBottom:'5vh', paddingTop: '5vh', borderTopLeftRadius: "20px", borderTopRightRadius: "20px", color:'#554B3F'}}>
+    <Box style={{backgroundColor: '#C2BC9A', paddingBottom:'5vh', paddingTop: '5vh', borderTopLeftRadius: "20px", borderTopRightRadius: "20px", borderBottomLeftRadius: "20px", borderBottomRightRadius: "20px", color:'#554B3F'}}>
         <div style={{textAlign:'center', fontSize:'4rem'}}>Timeline KPGTS 2021/2022</div>
       <Timeline position="alternate">
         <TimelineItem>

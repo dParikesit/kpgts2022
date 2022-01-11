@@ -22,7 +22,7 @@
 @media only screen and (max-width: 769px) { 
     .gambarutama{visibility:hidden;}
     .test{
-        margin-right: -100px;
+        margin-left: -100px;
         margin-bottom: 120px;
     }
 }
