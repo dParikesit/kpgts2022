@@ -394,7 +394,7 @@ const Tabel = () => {
 
                                 {/* Ini diubah, disesuaikan dengan kebutuhan, ini untuk kirim email */}
                                 
-                                <Button disabled={row.verified == "NO"} style={{marginTop:'0.5em',marginLeft:'0.75em', marginBottom:'1em'}} variant="outlined" >Kirim Email</Button>
+                                <Button disabled={row.verified == "NO"} style={{marginTop:'0.5em',marginLeft:'0.75em', marginBottom:'1em'}} variant="outlined" onClick={() => onClickEmail(row.id)}>Kirim Email</Button>
                             
                             </Box>
                             </TableRow>
