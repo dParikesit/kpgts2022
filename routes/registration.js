@@ -91,11 +91,25 @@ router.put("/verif/:id", adminChecker, async (req, res) => {
 
 router.get('/registered', async(req,res)=>{
     const data = await registController.getById(req.session.uid)
-    console.log(data)
     if(data.length===0){
         res.status(404)
     } else{
         res.status(200).json(data)
+    }
+})
+
+router.get('/registeredCheck', async(req,res)=>{
+    try{
+        const data = await userController.getOne(req.session.uid)
+        console.log(data.registered)
+        if(data.registered===false){
+            res.status(404)
+        } else{
+            console.log("Here")
+            res.status(200).json("Sukses")
+        }
+    }catch (e) {
+        res.status(500).json(e)
     }
 })
 

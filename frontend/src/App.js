@@ -53,6 +53,7 @@ function App() {
           <Route path='/register' element={<Registration/>} />
           <Route path='/informasi' element={<InformasiItb/>} />
           <Route path='/registerTO' element={<Peserta/>} />
+          <Route path='/cekdata' element={<PesertaDisabled/>} />
           <Route path='/admin' element={<Admin/>} />
           <Route path='/profile' element={<Profile/>} />
           <Route path='/reset_password/:token' element={<ResetPassword />} />

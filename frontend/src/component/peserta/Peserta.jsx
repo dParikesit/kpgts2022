@@ -102,11 +102,22 @@ const jumlah = [
 const Peserta = () => {
     const Auth = useContext(AuthContext)
     const navigate = useNavigate()
-    // useEffect(()=>{
-    //   if (Auth.role!=="user"){
-    //     navigate('/', {replace: true})
-    //   }
-    // })
+    useEffect(async()=>{
+      // if (Auth.role!=="user"){
+      //   navigate('/', {replace: true})
+      // }
+      const data = await fetch('/api/registration/registeredCheck', {
+          method: 'GET',
+          mode: 'same-origin',
+          credentials: "same-origin",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+      })
+      if(data.status === 200){
+          navigate('/cekdata', {replace: true})
+      }
+    })
 
     // variabel variabel
     const harga = 50000;
@@ -134,7 +145,6 @@ const Peserta = () => {
     const [fakjur, setFakjur] = useState([]);
     const [univ, setUniv] = useState([]);
     const [nama, setNama] = useState([]);
-    const [namaPaguyuban, setNamaPaguyuban] = useState([]);
     const [asalSMA, setAsalSMA] = useState([]);
     const [asalKota, setAsalKota] = useState([]);
     const [asalProv, setAsalProv] = useState([]);
@@ -189,12 +199,6 @@ const Peserta = () => {
         let temp = nama
         temp[idx] = event.target.value
         setNama(temp)
-    };
-    const handleNamaPaguyuban = (event) => {
-        const idx = event.target.getAttribute('name')
-        let temp = namaPaguyuban
-        temp[idx] = event.target.value
-        setNamaPaguyuban(temp)
     };
     const handleAsal = (event) => {
         const idx = event.target.getAttribute('name')
@@ -260,20 +264,6 @@ const Peserta = () => {
                         value={nama[i]}
                         defaultValue={""}
                         onChange={handleNama}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                        required
-                        fullWidth
-                        id="namaPaguyuban"
-                        label="Nama Paguyuban"
-                        name={i}
-                        autoComplete="KPGTS"
-                        helperText="Contoh: Karang Praga"
-                        value={namaPaguyuban[i]}
-                        defaultValue={""}
-                        onChange={handleNamaPaguyuban}
                         />
                     </Grid>
                     <Grid item xs={12}>
