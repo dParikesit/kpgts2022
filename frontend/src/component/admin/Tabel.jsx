@@ -207,7 +207,7 @@ const Tabel = () => {
       return rows.map(row => {
         if(row.id === id) {
           fetch('/api/registration/verifmail/'+row.id, {
-            method: 'PoST',
+            method: 'POST',
             mode: 'same-origin',
             credentials: "same-origin",
             headers: {

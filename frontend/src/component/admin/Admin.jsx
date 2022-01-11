@@ -65,8 +65,21 @@ const theme = createTheme({
 const Admin = () => {
     const Auth = useContext(AuthContext)
     const navigate = useNavigate()
-    useEffect(()=>{
-      if (Auth.role!=="admin"){
+    useEffect(async()=>{
+      let response = await fetch('/api/user/login',{
+        method: 'GET',
+        mode: 'same-origin',
+        credentials: "same-origin",
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      response = await response.json()
+      console.log(response)
+      if(response.loggedIn===true) {
+        Auth.addItem(response.name, response.role)
+      }
+      if(response.role!=='admin'){
         navigate('/', {replace: true})
       }
     })
