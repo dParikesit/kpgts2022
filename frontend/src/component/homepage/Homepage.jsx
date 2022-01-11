@@ -29,10 +29,10 @@ const Homepage = () => {
             <div className="jumbotron">
             <Grid container spacing={2}>
                 <Grid item xs={3}>
-                    <img src="/assets/tuguyoung.png" height="500vh" style={{marginTop:'10vh', marginLeft:'2vw', marginBottom:'5vh'}} ></img>
+                    <img className="gambarutama" src="/assets/tuguyoung.png" height="500rem" style={{marginTop:'6.5vw', marginLeft:'2vw', marginBottom:'5vw'}} ></img>
                 </Grid>
                 <Grid item xs={9}>
-                <div style={{marginTop: '20vh', marginRight:'10vh'}}>
+            <div className="test" style={{marginTop: '10vw', marginRight:'10vw'}}>
                 <div className="judul">
                     <h1>KPGTS 2022</h1>
                 </div>
