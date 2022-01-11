@@ -117,7 +117,7 @@ const Peserta = () => {
       if(data.status === 200){
           navigate('/cekdata', {replace: true})
       }
-    })
+    }, [])
 
     // variabel variabel
     const harga = 50000;
@@ -172,6 +172,18 @@ const Peserta = () => {
     };
     const handleChange = (event) => {
         setJumlahVal(event.target.value);
+        setValueDate([])
+        setFakjur([])
+        setUniv([])
+        setNama([])
+        setAsalSMA([])
+        setAsalKota([])
+        setAsalProv([])
+        setKelas([])
+        setKontak([])
+        setSurel([])
+        stateJurusan = []
+        stateSesi = []
     };
     const handlePembayaran = (event) => {
         setPembayaran(event.target.value);
@@ -238,9 +250,44 @@ const Peserta = () => {
     };
 
     //handler submit
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
-        console.log(nama, asalSMA, kontak, jurusan, valueDate, sesi, surel, kelas, fakjur, univ, pembayaran, jenisBank, namaDiRek);
+        let arr = []
+        for(let i=0; i<jumlahVal; i++){
+            arr.push({
+                nama: nama[i],
+                paguyuban: "Karang Praga",
+                sekolah: asalSMA[i],
+                kota: asalKota[i],
+                provinsi: asalProv[i],
+                kelas: kelas[i],
+                email: surel[i],
+                nohp: kontak[i],
+                rumpun: stateJurusan[i] ? stateJurusan[i] : "Saintek",
+                tanggal: String(valueDate[i].getDate()).padStart(2, '0') + "/" + String((valueDate[i].getMonth()+1)).padStart(2, '0') + "/" + valueDate[i].getFullYear(),
+                sesi: stateSesi[i] ? stateSesi[i] : "A",
+                fakultas: fakjur[i],
+                univ: univ[i],
+                namarek: namaDiRek,
+                jenisrek: jenisBank,
+                tujuanrek: pembayaran,
+                fileURL: fileLink
+            })
+        }
+        let response = await fetch('/api/registration/', {
+            method: 'POST',
+            mode: 'same-origin',
+            credentials: "same-origin",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(arr)
+        })
+        if(response.status===200){
+            window.location.reload()
+        } else{
+            alert(response.json())
+        }
     }
 
     // BUAT RENDER FORM

@@ -17,12 +17,13 @@ router.post("/", userChecker, async (req,res)=>{
             req.body.forEach((item)=>{
                 item.user_id = req.session.uid
             })
+            console.log(req.body)
         }
         await registController.insert(req.body)
         await userController.setRegistered(req.session.uid)
         res.status(200).json('Yey berhasil')
     }catch (e) {
-        res.status(500).json({error: e})
+        res.status(500).json(e)
     }
 })
 
@@ -101,11 +102,9 @@ router.get('/registered', async(req,res)=>{
 router.get('/registeredCheck', async(req,res)=>{
     try{
         const data = await userController.getOne(req.session.uid)
-        console.log(data.registered)
-        if(data.registered===false){
+        if(data.registered==false){
             res.status(404)
         } else{
-            console.log("Here")
             res.status(200).json("Sukses")
         }
     }catch (e) {

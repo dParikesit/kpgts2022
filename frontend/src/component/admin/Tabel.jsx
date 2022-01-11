@@ -100,7 +100,7 @@ const Tabel = () => {
         setRows(response.map((item)=>{
             const verif = item.verified ? 'YES' : 'NO'
             console.log(item.user_id)
-            return createData(item.id, item.nama, item.sekolah, item.jurusan, item.kontak, item.fileURL, verif, item.user_id)
+            return createData(item.id, item.nama, item.sekolah, item.rumpun, item.nohp, item.fileURL, verif, item.user_id)
         }))
     }, []);
 

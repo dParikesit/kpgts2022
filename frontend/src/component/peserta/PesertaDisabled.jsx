@@ -86,6 +86,7 @@ const PesertaDisabled = () => {
     const Auth = useContext(AuthContext)
     const navigate = useNavigate()
 
+    const [tempData, setTempData] = useState([])
     const [jumlahVal, setJumlahVal] = useState('1');
     const [fileLink, setFileLink] = useState('')
     const [valueDate, setValueDate] = React.useState([]);
@@ -123,8 +124,9 @@ const PesertaDisabled = () => {
         data = await data.json()
         await console.log(data)
         await setJumlahVal(data.length)
-        await data.forEach(item =>{
-          setNama([...nama, item.nama])
+        // await setTempData(data)
+        data.forEach(item =>{
+          setNama(nama.concat(item.nama))
           setAsalSMA([...asalSMA, item.sekolah])
           setAsalKota([...asalKota, item.kota])
           setAsalProv([...asalProv, item.provinsi])
@@ -135,9 +137,8 @@ const PesertaDisabled = () => {
           setFakjur([...fakjur, item.fakultas])
           setUniv([...univ, item.univ])
           setSesi([...sesi, item.sesi])
-          setValueDate([...valueDate, new Date(item.tanggal)])
-
-
+          let dateParts = item.tanggal.split("/")
+          setValueDate([...valueDate, new Date(dateParts[2], dateParts[1], dateParts[0])])
         })
         await setNamaDiRek(data[0].namarek)
         await setJenisBank(data[0].jenisrek)
@@ -145,6 +146,27 @@ const PesertaDisabled = () => {
         await setFileLink(data[0].fileURL)
       }
     }, [])
+
+    // tempData.forEach(item =>{
+    //   setNama(nama.concat(item.nama))
+    //   setAsalSMA([...asalSMA, item.sekolah])
+    //   setAsalKota([...asalKota, item.kota])
+    //   setAsalProv([...asalProv, item.provinsi])
+    //   setKelas([...kelas, item.kelas])
+    //   setSurel([...surel, item.email])
+    //   setKontak([...kontak, item.nohp])
+    //   setJurusan([...jurusan, item.rumpun])
+    //   setFakjur([...fakjur, item.fakultas])
+    //   setUniv([...univ, item.univ])
+    //   setSesi([...sesi, item.sesi])
+    //   setValueDate([...valueDate, new Date(item.tanggal)])
+    //
+    //
+    // })
+    // setNamaDiRek(tempData[0].namarek)
+    // setJenisBank(tempData[0].jenisrek)
+    // setPembayaran(tempData[0].tujuanrek)
+    // setFileLink(tempData[0].fileURL)
 
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -260,8 +282,8 @@ const PesertaDisabled = () => {
                             disabled
                             label="Pilih Tanggal Try Out"
                             openTo="day"
-                            views={['year', 'month', 'day']}
-                            value={new Date(valueDate[i])}
+                            views={['day', 'month', 'year']}
+                            value={valueDate[i] || new Date()}
                             minDate={startDate}
                             maxDate={endDate}
                             onChange={(newValue) => {
