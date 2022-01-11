@@ -109,8 +109,7 @@ router.post('/resetpassword', async(req, res) => {
         }catch(e){
             res.status(500).json(e)
         }
-        console.log(`${process.env.ORIGIN_URL}/reset_password/${token}`)
-        res.status(200).json(`${process.env.ORIGIN_URL}/reset_password/${token}`)
+        res.status(200).json(`Sukses`)
     } else{
         res.status(400).json({ message: "Email doesn't exist. Please fill in a valid email." });
     }

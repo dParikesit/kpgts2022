@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const registController = require('../controller/registration')
 const userController = require('../controller/user')
+const mailer = require("../mailer");
 const {adminChecker, userChecker} = require('../middleware/role-checker')
 
 // Create TO Participant
@@ -110,6 +111,27 @@ router.get('/registeredCheck', async(req,res)=>{
     }catch (e) {
         res.status(500).json(e)
     }
+})
+
+router.post('/verifmail/:id', adminChecker, async(req,res)=>{
+    try{
+        const user = await registController.getOne(req.params.id)
+        await mailer.send ({
+            template: 'verif_to',
+            message: {
+                to: user.email
+            },
+            locals: {
+                image: `${process.env.ORIGIN_URL}/assets/logo.png`,
+                peserta: user.nama,
+                tanggal: user.tanggal,
+                sesi: user.sesi
+            }
+        });
+    }catch (e) {
+        res.status(500).json(e)
+    }
+    res.status(200).json(`Sukses`)
 })
 
 module.exports = router

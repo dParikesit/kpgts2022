@@ -202,11 +202,31 @@ const Tabel = () => {
         });
       }
 
-      const onClickNewData = () => {
-
-      }
-
-      const [radValue, setRadValue] = useState("Saintek")
+  const onClickEmail = (id) => {
+    setRows(state => {
+      return rows.map(row => {
+        if(row.id === id) {
+          fetch('/api/registration/verifmail/'+row.id, {
+            method: 'PoST',
+            mode: 'same-origin',
+            credentials: "same-origin",
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }).then(res => {
+            console.log(res.status)
+            if(res.status===200){
+              alert('Sukses kirim email')
+            } else{
+              alert('Gagal kirim email')
+            }
+          })
+        }
+        return row;
+      });
+    });
+  }
+  const [radValue, setRadValue] = useState("Saintek")
       const handleRadChange = (e)=>{
         setRadValue(e.target.value);
       }

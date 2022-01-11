@@ -8,6 +8,10 @@ function getAll(){
     return db('registration');
 }
 
+function getOne(id){
+    return db('user').where('id', id).first();
+}
+
 function getFiltered(colName, query){
     return db('registration').where(colName, query);
 }
@@ -25,4 +29,4 @@ function invertVerifBool(id){
         verified: db.raw('NOT ??',  ['verified'])
     })
 }
-module.exports = {getAll, getFiltered, getById, insert, findAndUpdate, invertVerifBool}
+module.exports = {getAll, getFiltered, getById, insert, findAndUpdate, invertVerifBool, getOne}
