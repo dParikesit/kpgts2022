@@ -178,9 +178,9 @@ const NavbarLoggedIn = () => {
         {isMobile ? (
           <>
             <CssBaseline />
-            <AppBar position="sticky" style={{ background:"#94D3DA", fontFamily: "Ramaraja", borderBottomLeftRadius: "20px", borderBottomRightRadius: "20px" }}>
+            <AppBar position="sticky" style={{ background:"#C2BC9B", fontFamily: "Ramaraja", borderBottomLeftRadius: "20px", borderBottomRightRadius: "20px" }}>
               <Toolbar>
-                <Avatar src={process.env.PUBLIC_URL + '/assets/gajah-logo-trans.png'} variant={"square"} sx={{ width: 56, height: 56, bgcolor: "#95d3db"}}/>
+                <Avatar src={process.env.PUBLIC_URL + '/assets/gajah-logo-trans.png'} variant={"square"} sx={{ width: 56, height: 56, bgcolor: "#C2BC9B"}}/>
                 <IconButton 
                     onClick={toggleDrawer}
                     color="inherit"
@@ -243,10 +243,10 @@ const NavbarLoggedIn = () => {
           // Kalo bukan mobile
         ) : (
           <ThemeProvider theme={theme}>
-            <AppBar position="sticky" style={{ background:"#94D3DA", fontFamily: "Ramaraja", borderBottomLeftRadius: "20px", borderBottomRightRadius: "20px" }}>
+            <AppBar position="sticky" style={{ background:"#C2BC9B", fontFamily: "Ramaraja", borderBottomLeftRadius: "20px", borderBottomRightRadius: "20px" }}>
               <CssBaseline />
               <Toolbar>
-                <Avatar src={process.env.PUBLIC_URL + '/assets/gajah-logo-trans.png'} variant={"square"} sx={{ width: 56, height: 56, bgcolor: "#95d3db"}}/>
+                <Avatar src={process.env.PUBLIC_URL + '/assets/gajah-logo-trans.png'} variant={"square"} sx={{ width: 56, height: 56, bgcolor: "#C2BC9B"}}/>
                 <div className={classes.navlinks}>
                     <div className={classes.linkArea}>
                       <Link to="/" className={classes.link}>
