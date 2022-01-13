@@ -89,13 +89,28 @@ const jumlah = [
       value: 'GOPAY',
       label: 'GOPAY',
     },
+    {
+      value: 'BNI',
+      label: 'BNI   ',
+    },
+    {
+      value: 'OVO',
+      label: 'OVO   ',
+    },
+    {
+      value: 'DANA',
+      label: 'DANA   ',
+    },
   ];
 
 //   Buat data pembayaran
   const noRek = 
       {
           "BCA": "BCA: Aditya Prawira Nugroho, 0095499321",
-          "GOPAY": "GOPAY: NAMA, NOMOR"
+          "GOPAY": "GOPAY: Rofi Nuruddin atau Muhammad Zaki Bariqwan, 082136790980",
+          "BNI": "BNI: Putri Ervina Puspa Azalia, 2808062002",
+          "OVO": "OVO: Isna Nur Firdausi, 081330193560",
+          "DANA": "DANA: Pramukti Probojati Yoga, 085540457643",
       }
 
 //   Buat rendering peserta
