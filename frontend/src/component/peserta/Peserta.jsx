@@ -131,7 +131,7 @@ const Peserta = () => {
               'Content-Type': 'application/json'
           },
         })
-        if(data.status === 200){
+        if(data.status !== 404){
           await navigate('/cekdata', {replace: true})
         }
 
@@ -308,6 +308,7 @@ const Peserta = () => {
                 nohp: kontak[i],
                 rumpun: stateJurusan[i] ? stateJurusan[i] : "Saintek",
                 tanggal: String(valueDate[i].getDate()).padStart(2, '0') + "/" + String((valueDate[i].getMonth()+1)).padStart(2, '0') + "/" + valueDate[i].getFullYear(),
+                sesi: stateSesi[i] ? stateSesi[i] : "A",
                 fakultas: fakjur[i],
                 univ: univ[i],
                 namarek: namaDiRek,

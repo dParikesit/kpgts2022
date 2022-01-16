@@ -139,7 +139,8 @@ router.post('/verifmail/:id', adminChecker, async(req,res)=>{
                 image: `${process.env.ORIGIN_URL}/assets/logo.png`,
                 peserta: user.nama,
                 tanggal: user.tanggal,
-                sesi: user.sesi
+                // sesi: user.sesi
+                sesi: "-"
             }
         });
     }catch (e) {
