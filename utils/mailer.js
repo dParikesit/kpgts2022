@@ -1,3 +1,4 @@
+require('dotenv').config()
 const nodemailer = require("nodemailer");
 const Email = require('email-templates');
 
@@ -14,8 +15,8 @@ const transporter = nodemailer.createTransport({
 const email = new Email({
     views: { root:'./templates', options: { extension: 'ejs' } },
     message: {
-        // from: process.env.MAILER_FROM
-        from: "noreply@kpgts2022.com"
+        from: process.env.MAILER_FROM
+        // from: "noreply@kpgts2022.com"
     },
     preview: process.env.NODE_ENV === 'development',
     send: !(process.env.NODE_ENV === 'development'),
