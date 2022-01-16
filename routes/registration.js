@@ -4,6 +4,20 @@ const userController = require('../controller/user')
 const mailer = require("../mailer");
 const {adminChecker, userChecker} = require('../middleware/role-checker')
 
+//Get apakah TO masih buka
+router.get("/cekopen", async (req,res)=>{
+    try{
+
+        if(process.env.OPREG === 'open'){
+            res.status(200).end()
+        } else{
+            res.status(403).end()
+        }
+    }catch (e) {
+        res.status(500).json(e)
+    }
+})
+
 // Create TO Participant
 router.post("/", userChecker, async (req,res)=>{
     try{
@@ -94,7 +108,7 @@ router.put("/verif/:id", adminChecker, async (req, res) => {
 router.get('/registered', async(req,res)=>{
     const data = await registController.getById(req.session.uid)
     if(data.length===0){
-        res.status(404)
+        res.status(404).end()
     } else{
         res.status(200).json(data)
     }
@@ -104,7 +118,7 @@ router.get('/registeredCheck', async(req,res)=>{
     try{
         const data = await userController.getOne(req.session.uid)
         if(data.registered==false){
-            res.status(404)
+            res.status(404).end()
         } else{
             res.status(200).json("Sukses")
         }

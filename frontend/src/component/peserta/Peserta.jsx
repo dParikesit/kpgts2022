@@ -117,21 +117,39 @@ const jumlah = [
 const Peserta = () => {
     const Auth = useContext(AuthContext)
     const navigate = useNavigate()
+
+    const [status, setStatus] = useState('open')
     useEffect(async()=>{
       // if (Auth.role!=="user"){
       //   navigate('/', {replace: true})
       // }
-      const data = await fetch('/api/registration/registeredCheck', {
+        let data = await fetch('/api/registration/registeredCheck', {
           method: 'GET',
           mode: 'same-origin',
           credentials: "same-origin",
           headers: {
               'Content-Type': 'application/json'
           },
-      })
-      if(data.status === 200){
-          navigate('/cekdata', {replace: true})
-      }
+        })
+        if(data.status === 200){
+          await navigate('/cekdata', {replace: true})
+        }
+
+        await console.log(data.status)
+        data = await fetch('/api/registration/cekopen', {
+            method: 'GET',
+            mode: 'same-origin',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+
+        if(data.status===403){
+            await setStatus('close')
+        }
+
+
     }, [])
 
     // variabel variabel
@@ -167,12 +185,12 @@ const Peserta = () => {
     const [kontak, setKontak] = useState([]);
     const [surel, setSurel] = useState([]);
     const [jenisBank, setJenisBank] = useState('');
-    const [namaDiRek, setNamaDiRek] = useState('');    
-    
+    const [namaDiRek, setNamaDiRek] = useState('');
+
     const handleUploadFoto = async(event) => {
         setFileLink(event.target.value)
     };
-    
+
     const handleJurusan = (event) => {
         const idx = event.target.getAttribute('name');
         let temp = jurusan;
@@ -305,6 +323,27 @@ const Peserta = () => {
         }
     }
 
+    if(status==='close'){
+        return(
+            <ThemeProvider theme={theme}>
+                <NavbarLoggedIn></NavbarLoggedIn>
+                <CssBaseline />
+                <Container component="main" maxWidth="xl" >
+                    <Box
+                        sx={{
+                            marginTop: 8,
+                            display: 'flex',
+                            alignItems: 'center',
+                            flexDirection: "column",
+                        }}>
+                        <Typography component="h1" variant="h4">
+                            Maaf, registrasi sudah ditutup
+                        </Typography>
+                    </Box>
+                </Container>
+            </ThemeProvider>
+        )
+    }
     // BUAT RENDER FORM
     const renderForm = () => {
         var rows = [];
@@ -339,7 +378,7 @@ const Peserta = () => {
                         value={asalSMA[i]}
                         onChange={handleAsal}
                         />
-                    </Grid> 
+                    </Grid>
                     <Grid item xs={12}>
                        <TextField
                         required
@@ -351,7 +390,7 @@ const Peserta = () => {
                         value={asalKota[i]}
                         onChange={handleAsalKota}
                         />
-                    </Grid> 
+                    </Grid>
                     <Grid item xs={12}>
                        <TextField
                         required
@@ -363,7 +402,7 @@ const Peserta = () => {
                         value={asalProv[i]}
                         onChange={handleAsalProv}
                         />
-                    </Grid> 
+                    </Grid>
                     <Grid item xs={12}>
                        <TextField
                         required
@@ -376,7 +415,7 @@ const Peserta = () => {
                         value={kelas[i]}
                         onChange={handleKelas}
                         />
-                    </Grid> 
+                    </Grid>
                     <Grid item xs={12}>
                         <TextField
                         required
@@ -467,7 +506,7 @@ const Peserta = () => {
                         value={fakjur[i]}
                         onChange={handleFakjur}
                         />
-                    </Grid> 
+                    </Grid>
                     <Grid item xs={12}>
                        <TextField
                         required
@@ -479,7 +518,7 @@ const Peserta = () => {
                         value={univ[i]}
                         onChange={handleUniv}
                         />
-                    </Grid> 
+                    </Grid>
                 </>);
                         }
         return rows.map((row) => row);
@@ -537,7 +576,7 @@ const Peserta = () => {
                                     label="Jumlah Peserta"
                                     value={jumlahVal}
                                     onChange={handleChange}
-                                    helperText="Pilih jumlah peserta yang akan registrasi Try Out"                        
+                                    helperText="Pilih jumlah peserta yang akan registrasi Try Out"
                                 >
                                     {jumlah.map((option) => (
                                         <MenuItem key={option.value} value={option.value}>
@@ -563,7 +602,7 @@ const Peserta = () => {
                                 value={namaDiRek}
                                 onChange={handleNamaDiRek}
                                 />
-                            </Grid> 
+                            </Grid>
                             <Grid item xs={12}>
                                 <TextField
                                 required
@@ -575,7 +614,7 @@ const Peserta = () => {
                                 value={jenisBank}
                                 onChange={handleJenisBank}
                                 />
-                            </Grid> 
+                            </Grid>
                            <Grid item xs={12}>
                                 <TextField
                                 select
@@ -607,9 +646,9 @@ const Peserta = () => {
                                     </Box>
                                 </Grid>
                             )}
-                            
+
                             {renderDetail()}
-                            
+
                             <Typography component="h1" variant="h5" marginTop={2}>
                                 Upload Bukti Pembayaran
                             </Typography>
@@ -626,7 +665,7 @@ const Peserta = () => {
                                 value={fileLink}
                                 onChange={handleUploadFoto}
                                 />
-                            </Grid> 
+                            </Grid>
                            {/* SUBMIT BUTTON */}
                             <Grid item xs={12}>
                                 <ColorButton type="submit" size="medium" variant="contained" style={{ width:"8vw" }}>
