@@ -159,6 +159,7 @@ Ada 2 jenis server yang bisa kalian pakai, vps atau web hosting biasa
          Untuk `MAILER_HOST` dan `MAILER_PORT`, cari di bagian email inbox  
          Untuk `ORIGIN_URL` isinya alamat website kalian pakai https  
          Untuk `OPREG` , kalau open berarti buka registrasi, close berarti sudah tutup
+      8. Save dengan pencet `Ctrl+X`, `Shift+Y`, `Enter`
       
    6. Migrate Database
       1. Cari bagian **Setup Node.js App**
