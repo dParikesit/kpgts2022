@@ -89,7 +89,7 @@ Ada 2 jenis server yang bisa kalian pakai, vps atau web hosting biasa
 2. Setup aplikasi (Web hosting version)
    1. Persiapan  
       1. Setelah kalian beli, kalian bakal dapet email berisi informasi tentang hosting kalian  
-         ![Server Info](https://raw.github.com/dParikesit/kpgts2022-karangpraga/main/readmeAssets/hostInfo.png "Hosting Info)
+         ![Server Info](https://github.com/dParikesit/kpgts2022-karangpraga/raw/main/readmeAssets/hostInfo.png "Hosting Info)
    2. Setup Repo
       1. Ssh ke hosting kalian. Kalian bisa pakai putty di windows atau langsung di terminal linux  
       `ssh cpanelUsername@serverIP -p SSHPort`  
