@@ -7,7 +7,8 @@ Kepada divisi IT selanjutnya, ini markdown untuk backend. Yang frontend ada di
 ## ToC
 - [Struktur file](#struktur-file)
 - [Cara deploy](#cara-deploy)
-- [Apa yang bisa diubah](#editing-files)
+- [Cara ubah file](#editing-files)
+- [Harus DIbaca !!!](#super-important)
 
 ### Struktur File
 - Folder controller
@@ -146,8 +147,7 @@ Ada 2 jenis server yang bisa kalian pakai, vps atau web hosting biasa
          DB_USER=kpgtscom_postgres  
          DB_PASS=passYgTadiDibuat  
          SESSION_SECRET=ini secret  
-         IMAGE_FOLDER=uploads  
-         MAILER_FROM=noreply@kpgts2022.com
+         IMAGE_FOLDER=uploads
          MAILER_HOST=mail.kpgts2022.com  
          MAILER_PORT=465  
          MAILER_USERNAME=noreply@kpgts2022.com  
@@ -155,7 +155,7 @@ Ada 2 jenis server yang bisa kalian pakai, vps atau web hosting biasa
          ORIGIN_URL=https://kpgts2022.com  
          OPREG=open  
       
-         Sesuaikan bagian `DB_USER`, `DB_PASS`, `MAILER_FROM`, `MAILER_HOST`, `MAILER_PORT`, `MAILER_USERNAME`, `MAILER_PASSWORD`, `ORIGIN_URL`  
+         Sesuaikan bagian `DB_USER`, `DB_PASS`, `MAILER_HOST`, `MAILER_PORT`, `MAILER_USERNAME`, `MAILER_PASSWORD`, `ORIGIN_URL`  
          Untuk `MAILER_HOST` dan `MAILER_PORT`, cari di bagian email inbox  
          Untuk `ORIGIN_URL` isinya alamat website kalian pakai https  
          Untuk `OPREG` , kalau open berarti buka registrasi, close berarti sudah tutup
@@ -179,3 +179,8 @@ Ada 2 jenis server yang bisa kalian pakai, vps atau web hosting biasa
 3. Setelah itu, jangan lupa restart aplikasi
 4. Kalau kalian mau reset table, masuk ke ssh, ketik `yarn knexRollback`, ketik `yarn knexMigrate`
 5. Have fun !!!
+### Super Important
+1. Jangan lupa ubah `from: ` yang ada di utils/mailer.js
+2. Ubah logo.png di folder public
+3. Cek email templates termasuk subject siapa tau ada yang salah tahun
+
