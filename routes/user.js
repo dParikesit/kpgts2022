@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const User = require("../controller/user");
 const Registration = require("../controller/registration");
-const mailer = require("../mailer");
+const mailer = require("../utils/mailer");
 const {body, validationResult} = require('express-validator');
 const bcrypt = require("bcrypt");
 const crypto = require('crypto')

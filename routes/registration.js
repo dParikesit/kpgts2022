@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const registController = require('../controller/registration')
 const userController = require('../controller/user')
-const mailer = require("../mailer");
+const mailer = require("../utils/mailer");
 const {adminChecker, userChecker} = require('../middleware/role-checker')
 
 //Get apakah TO masih buka
