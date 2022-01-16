@@ -152,11 +152,21 @@ const Peserta = () => {
 
     }, [])
 
-    // variabel variabel
-    const harga = 50000;
     // state form
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const [jumlahVal, setJumlahVal] = useState('1');
+    // variabel variabel
+    if (jumlahVal == 1) {
+        var harga = 15000;
+    } else if (jumlahVal == 2) {
+        var harga = 30000;
+    } else if (jumlahVal == 3) {
+        var harga = 40000;
+    } else if (jumlahVal == 4) {
+        var harga = 50000;
+    } else if (jumlahVal == 5) {
+        var harga = 60000;
+    }
     // buat loop state jurusan
     var stateJurusan = [];
     for (var i=0; i<jumlahVal; i++) {
@@ -171,8 +181,8 @@ const Peserta = () => {
     const [fileLink, setFileLink] = useState('')
     const [pembayaran, setPembayaran] = useState('');
     const [valueDate, setValueDate] = React.useState([]);
-    const [startDate, setStartDate] = useState(new Date("2022/01/22"));
-    const [endDate, setEndDate] = useState(new Date("2022/01/25"));
+    const [startDate, setStartDate] = useState(new Date("2022/02/05"));
+    const [endDate, setEndDate] = useState(new Date("2022/02/06"));
     const [jurusan, setJurusan] = useState(stateJurusan);
     const [sesi, setSesi] = useState(stateSesi);
     const [fakjur, setFakjur] = useState([]);
@@ -636,13 +646,13 @@ const Peserta = () => {
                             {isMobile ? (
                                 <Grid item xs={12} >
                                     <Box sx={{ color:"black", fontSize: "6vw" }} >
-                                        Total: {harga*jumlahVal}
+                                        Total: {harga}
                                     </Box>
                                 </Grid>
                             ) : (
                                 <Grid item xs={12} >
                                     <Box sx={{ color:"black", fontSize: "1.6vw" }} >
-                                        Total: {harga*jumlahVal}
+                                        Total: {harga}
                                     </Box>
                                 </Grid>
                             )}
