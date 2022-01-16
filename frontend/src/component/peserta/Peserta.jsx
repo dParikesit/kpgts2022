@@ -308,7 +308,6 @@ const Peserta = () => {
                 nohp: kontak[i],
                 rumpun: stateJurusan[i] ? stateJurusan[i] : "Saintek",
                 tanggal: String(valueDate[i].getDate()).padStart(2, '0') + "/" + String((valueDate[i].getMonth()+1)).padStart(2, '0') + "/" + valueDate[i].getFullYear(),
-                sesi: stateSesi[i] ? stateSesi[i] : "A",
                 fakultas: fakjur[i],
                 univ: univ[i],
                 namarek: namaDiRek,
@@ -485,25 +484,6 @@ const Peserta = () => {
                             renderInput={(params) => <TextField {...params} />}
                             />
                         </LocalizationProvider>
-                    </Grid>
-                    <Grid item xs={12} sx={{marginTop:'10px'}}>
-                        <FormControl
-                        fullWidth
-                        >
-                            <InputLabel id="demo-simple-select-label">Sesi TO</InputLabel>
-                            <NativeSelect
-                            onChange={handleSesi}
-                            name={i}
-                            inputProps={{
-                                id:"sesi",
-                                label:"Sesi",
-                            }}
-                            >
-                                <option value={'A'}>A</option>
-                                <option value={'B'}>B</option>
-                                <option value={'C'}>C</option>
-                            </NativeSelect>
-                        </FormControl>
                     </Grid>
                     <Grid item xs={12}>
                        <TextField
