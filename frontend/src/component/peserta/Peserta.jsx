@@ -120,9 +120,9 @@ const Peserta = () => {
 
     const [status, setStatus] = useState('open')
     useEffect(async()=>{
-      // if (Auth.role!=="user"){
-      //   navigate('/', {replace: true})
-      // }
+      if (Auth.role!=="user"){
+        navigate('/', {replace: true})
+      }
         let data = await fetch('/api/registration/registeredCheck', {
           method: 'GET',
           mode: 'same-origin',
