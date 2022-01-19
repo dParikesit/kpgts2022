@@ -27,9 +27,12 @@
     "start": "nodemon index.js",
     "build": "cd frontend && yarn && yarn build",
     "knexMigrate": "knex migrate:latest",
-    "knexRollback": "knex migrate:rollback"
+    "knexRollback": "knex migrate:rollback",
+    "formatFix": "prettier-eslint --ignore 'frontend/*' --write '*/*.{js,jsx}' -l 'debug'"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "prettier-eslint": "^13.0.0",
+    "prettier-eslint-cli": "^5.0.1"
   }
 }

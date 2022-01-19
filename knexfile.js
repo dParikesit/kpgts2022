@@ -1,12 +1,11 @@
 // Update with your config settings.
-require('dotenv').config()
+require("dotenv").config();
 
-const path = require('path')
+const path = require("path");
 
 module.exports = {
-
   development: {
-    client: 'pg',
+    client: "pg",
     connection: {
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,
@@ -15,13 +14,13 @@ module.exports = {
       database: process.env.DB_DATABASE,
     },
     migrations: {
-      directory: path.join(__dirname, './database/migrations'),
+      directory: path.join(__dirname, "./database/migrations"),
     },
-    debug: true
+    debug: true,
   },
 
   production: {
-    client: 'pg',
+    client: "pg",
     connection: {
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,
@@ -31,11 +30,10 @@ module.exports = {
     },
     pool: {
       min: 2,
-      max: 10
+      max: 10,
     },
     migrations: {
-      directory: path.join(__dirname, './database/migrations'),
-    }
-  }
-
+      directory: path.join(__dirname, "./database/migrations"),
+    },
+  },
 };
