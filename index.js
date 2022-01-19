@@ -3,6 +3,7 @@ const environment = process.env.NODE_ENV || 'development';
 
 const path = require("path");
 const routes = require('./routes/index')
+const compression = require("compression");
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
@@ -13,6 +14,8 @@ const app = express();
 if (environment === 'production') {
   app.set('trust proxy', 1); // trust first proxy, crucial
 }
+
+app.use(compression())
 
 app.use( session({
   secret: process.env.SESSION_SECRET,
