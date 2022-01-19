@@ -120,9 +120,9 @@ const Peserta = () => {
 
     const [status, setStatus] = useState('open')
     useEffect(async()=>{
-    //   if (Auth.role!=="user"){
-    //     navigate('/', {replace: true})
-    //   }
+      if (Auth.role!=="user"){
+        navigate('/', {replace: true})
+      }
         let data = await fetch('/api/registration/registeredCheck', {
           method: 'GET',
           mode: 'same-origin',
@@ -131,9 +131,9 @@ const Peserta = () => {
               'Content-Type': 'application/json'
           },
         })
-        // if(data.status !== 404){
-        //   await navigate('/cekdata', {replace: true})
-        // }
+        if(data.status !== 404){
+          await navigate('/cekdata', {replace: true})
+        }
 
         await console.log(data.status)
         data = await fetch('/api/registration/cekopen', {
@@ -302,24 +302,32 @@ const Peserta = () => {
         let arr = []
         for(let i=0; i<jumlahVal; i++){
             arr.push({
-                nama: nama[i],
-                paguyuban: "Karang Praga",
-                sekolah: asalSMA[i],
-                kota: asalKota[i],
-                provinsi: asalProv[i],
-                kelas: kelas[i],
-                email: surel[i],
-                nohp: kontak[i],
-                rumpun: stateJurusan[i] ? stateJurusan[i] : "Saintek",
-                tanggal: String(valueDate[i].getDate()).padStart(2, '0') + "/" + String((valueDate[i].getMonth()+1)).padStart(2, '0') + "/" + valueDate[i].getFullYear(),
-                sesi: stateSesi[i] ? stateSesi[i] : "A",
-                fakultas: fakjur[i],
-                univ: univ[i],
-                namarek: namaDiRek,
-                jenisrek: jenisBank,
-                tujuanrek: pembayaran,
-                fileURL: fileLink
-            })
+              nama: nama[i],
+              paguyuban: "Karang Praga",
+              sekolah: asalSMA[i],
+              kota: asalKota[i],
+              provinsi: asalProv[i],
+              kelas: kelas[i],
+              email: surel[i],
+              nohp: kontak[i],
+              rumpun: stateJurusan[i] ? stateJurusan[i] : "Saintek",
+              tanggal:
+                String(valueDate[i].getDate()).padStart(2, "0") +
+                "/" +
+                String(valueDate[i].getMonth() + 1).padStart(2, "0") +
+                "/" +
+                valueDate[i].getFullYear(),
+              sesi: stateSesi[i] ? stateSesi[i] : "A",
+              fakultas: fakjur[i],
+              univ: univ[i],
+              follow: buktiFollow.startsWith("https://")
+                ? buktiFollow
+                : "https://" + buktiFollow,
+              namarek: namaDiRek,
+              jenisrek: jenisBank,
+              tujuanrek: pembayaran.startsWith("https://") ? pembayaran : "https://" + pembayaran,
+              fileURL: fileLink,
+            });
         }
         let response = await fetch('/api/registration/', {
             method: 'POST',

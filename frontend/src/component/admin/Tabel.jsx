@@ -36,9 +36,9 @@ import {useNavigate} from "react-router-dom";
 // Untuk kirim email dapat dilihat pada line 270
 // Semangat
 
-  const createData = (ID, nama, sekolah, jurusan, kontak, bukti_transfer, verified, uuid) => ({
+  const createData = (ID, nama, sekolah, jurusan, kontak, bukti_follow, bukti_transfer, verified, uuid) => ({
     id: ID,
-    ID, nama, sekolah, jurusan, kontak, bukti_transfer, verified, uuid,
+    ID, nama, sekolah, jurusan, kontak, bukti_follow, bukti_transfer, verified, uuid,
     isEditMode: false
   });
   
@@ -93,7 +93,7 @@ const Tabel = () => {
         setRows(response.map((item)=>{
             const verif = item.verified ? 'YES' : 'NO'
             console.log(item.user_id)
-            return createData(item.id, item.nama, item.sekolah, item.rumpun, item.nohp, item.fileURL, verif, item.user_id)
+            return createData(item.id, item.nama, item.sekolah, item.rumpun, item.nohp, item.follow, item.fileURL, verif, item.user_id)
         }))
     }, []);
 
@@ -277,133 +277,181 @@ const Tabel = () => {
     
       return (
         <div>
-            <ThemeProvider theme={theme} >
+          <ThemeProvider theme={theme}>
             <Paper>
-                <div style={{marginLeft:'3vw', marginTop:'0'}}>
+              <div style={{ marginLeft: "3vw", marginTop: "0" }}>
                 <FormControl component="fieldset">
-                    <FormLabel component="legend">Filter</FormLabel>
-                    <RadioGroup aria-label="position" value={radValue} onChange={handleRadChange} row>
-                        <FormControlLabel
-                        value="Saintek"
-                        control={<Radio />}
-                        label="Saintek"
-                        labelPlacement="end"
-                        />
-                        <FormControlLabel
-                        value="Soshum"
-                        control={<Radio />}
-                        label="Soshum"
-                        labelPlacement="end"
-                        />
-                        <FormControlLabel
-                        value="true"
-                        control={<Radio />}
-                        label="Terverifikasi"
-                        labelPlacement="end"
-                        />
-                        <FormControlLabel
-                        value="false"
-                        control={<Radio />}
-                        label="Belum Terverifikasi"
-                        labelPlacement="end"
-                        />
-                        <Button variant="outlined" onClick={submitRad}>Apply</Button>
-                    </RadioGroup>
-                    <FormGroup aria-label="position" row style={{marginTop:'1em'}}>
-                        <TextField style={{marginRight:'2em'}} id="outlined-basic" label="Masukkan yang ingin dicari" variant="outlined" value={nama} onChange={handleNamaChange}/>
-                        <Button variant="outlined" onClick={submitNama}>Cari</Button>
-                    </FormGroup>
-                    
+                  <FormLabel component="legend">Filter</FormLabel>
+                  <RadioGroup
+                    aria-label="position"
+                    value={radValue}
+                    onChange={handleRadChange}
+                    row
+                  >
+                    <FormControlLabel
+                      value="Saintek"
+                      control={<Radio />}
+                      label="Saintek"
+                      labelPlacement="end"
+                    />
+                    <FormControlLabel
+                      value="Soshum"
+                      control={<Radio />}
+                      label="Soshum"
+                      labelPlacement="end"
+                    />
+                    <FormControlLabel
+                      value="true"
+                      control={<Radio />}
+                      label="Terverifikasi"
+                      labelPlacement="end"
+                    />
+                    <FormControlLabel
+                      value="false"
+                      control={<Radio />}
+                      label="Belum Terverifikasi"
+                      labelPlacement="end"
+                    />
+                    <Button variant="outlined" onClick={submitRad}>
+                      Apply
+                    </Button>
+                  </RadioGroup>
+                  <FormGroup
+                    aria-label="position"
+                    row
+                    style={{ marginTop: "1em" }}
+                  >
+                    <TextField
+                      style={{ marginRight: "2em" }}
+                      id="outlined-basic"
+                      label="Masukkan yang ingin dicari"
+                      variant="outlined"
+                      value={nama}
+                      onChange={handleNamaChange}
+                    />
+                    <Button variant="outlined" onClick={submitNama}>
+                      Cari
+                    </Button>
+                  </FormGroup>
                 </FormControl>
-                </div>
-                <TableContainer>
-                    <Table aria-label="caption table">
-                        <caption>Daftar peserta KPGTS 2022</caption>
-                        <TableHead>
-                        <TableRow>
-                            <TableCell align="left" />
-                            <TableCell align="left">Nomer Peserta</TableCell>
-                            <TableCell align="left">NAMA</TableCell>
-                            <TableCell align="left">SEKOLAH</TableCell>
-                            <TableCell align="left">JURUSAN</TableCell>
-                            <TableCell align="left">KONTAK</TableCell>
-                            <TableCell align="left">BUKTI</TableCell>
-                            <TableCell align="left">Verified</TableCell>
-                            <TableCell align="left"></TableCell>
-                        </TableRow>
-                        </TableHead>
-                        <TableBody>
-                        {rows.map(row => (
-                            <TableRow key={row.id}>
-                            <TableCell>
-                                {row.isEditMode ? (
-                                <>
-                                    <IconButton
-                                    aria-label="done"
-                                    onClick={() => onToggleEditMode(row.id)}
-                                    disabled
-                                    >
-                                    <DoneIcon />
-                                    </IconButton>
-                                    <IconButton
-                                    aria-label="revert"
-                                    onClick={() => onRevert(row.id)}
-                                    disabled
-                                    >
-                                    <RevertIcon />
-                                    </IconButton>
-                                </>
-                                ) : (
-                                <IconButton
-                                    aria-label="delete"
-                                    onClick={() => onToggleEditMode(row.id)}
-                                    disabled
-                                >
-                                    <EditIcon />
-                                </IconButton>
-                                )}
-                            </TableCell>
-                            <CustomTableCell {...{ row, name: "id", onChange }} />
-                            <CustomTableCell {...{ row, name: "nama", onChange }} />
-                            <CustomTableCell {...{ row, name: "sekolah", onChange }} />
-                            <CustomTableCell {...{ row, name: "jurusan", onChange }} />
-                            <CustomTableCell {...{ row, name: "kontak", onChange }} />
-                            {/*<CustomTableCell {...{ row, name: "bukti_transfer", onChange }} />*/}
-                            <TableCell component={"a"} href={row.bukti_transfer}>Link</TableCell>
-                            <CustomTableCell {...{ row, name: "verified", onChange }} />
-                            <Box
-                                component="div"
-                                sx={{
-                                display: 'inline',
-                                p: 1,
-                                m: 1,
-                                bgcolor: 'background.paper',
-                                }}
+              </div>
+              <TableContainer>
+                <Table aria-label="caption table">
+                  <caption>Daftar peserta KPGTS 2022</caption>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="left" />
+                      <TableCell align="left">Nomer Peserta</TableCell>
+                      <TableCell align="left">NAMA</TableCell>
+                      <TableCell align="left">SEKOLAH</TableCell>
+                      <TableCell align="left">JURUSAN</TableCell>
+                      <TableCell align="left">KONTAK</TableCell>
+                      <TableCell align="left">FOLLOW</TableCell>
+                      <TableCell align="left">PEMBAYARAN</TableCell>
+                      <TableCell align="left">Verified</TableCell>
+                      <TableCell align="left"></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow key={row.id}>
+                        <TableCell>
+                          {row.isEditMode ? (
+                            <>
+                              <IconButton
+                                aria-label="done"
+                                onClick={() => onToggleEditMode(row.id)}
+                                disabled
+                              >
+                                <DoneIcon />
+                              </IconButton>
+                              <IconButton
+                                aria-label="revert"
+                                onClick={() => onRevert(row.id)}
+                                disabled
+                              >
+                                <RevertIcon />
+                              </IconButton>
+                            </>
+                          ) : (
+                            <IconButton
+                              aria-label="delete"
+                              onClick={() => onToggleEditMode(row.id)}
+                              disabled
                             >
-                                <Button style={{marginTop:'1em',marginLeft:'0.75em'}} variant="outlined" onClick={() => onClickButton(row.id)}>Change</Button> 
-                            </Box>
-                            <Box
-                                component="div"
-                                sx={{
-                                display: 'inline',
-                                p: 1,
-                                m: 1,
-                                bgcolor: 'background.paper',
-                                }}
-                            >
+                              <EditIcon />
+                            </IconButton>
+                          )}
+                        </TableCell>
+                        <CustomTableCell {...{ row, name: "id", onChange }} />
+                        <CustomTableCell {...{ row, name: "nama", onChange }} />
+                        <CustomTableCell
+                          {...{ row, name: "sekolah", onChange }}
+                        />
+                        <CustomTableCell
+                          {...{ row, name: "jurusan", onChange }}
+                        />
+                        <CustomTableCell
+                          {...{ row, name: "kontak", onChange }}
+                        />
+                        {/*<CustomTableCell {...{ row, name: "bukti_transfer", onChange }} />*/}
+                        <TableCell component={"a"} href={row.bukti_follow}>
+                          Link
+                        </TableCell>
+                        <TableCell component={"a"} href={row.bukti_transfer}>
+                          Link
+                        </TableCell>
+                        <CustomTableCell
+                          {...{ row, name: "verified", onChange }}
+                        />
+                        <Box
+                          component="div"
+                          sx={{
+                            display: "inline",
+                            p: 1,
+                            m: 1,
+                            bgcolor: "background.paper",
+                          }}
+                        >
+                          <Button
+                            style={{ marginTop: "1em", marginLeft: "0.75em" }}
+                            variant="outlined"
+                            onClick={() => onClickButton(row.id)}
+                          >
+                            Change
+                          </Button>
+                        </Box>
+                        <Box
+                          component="div"
+                          sx={{
+                            display: "inline",
+                            p: 1,
+                            m: 1,
+                            bgcolor: "background.paper",
+                          }}
+                        >
+                          {/* Ini diubah, disesuaikan dengan kebutuhan, ini untuk kirim email */}
 
-                                {/* Ini diubah, disesuaikan dengan kebutuhan, ini untuk kirim email */}
-                                
-                                <Button disabled={row.verified == "NO"} style={{marginTop:'0.5em',marginLeft:'0.75em', marginBottom:'1em'}} variant="outlined" onClick={() => onClickEmail(row.id)}>Kirim Email</Button>
-                            
-                            </Box>
-                            </TableRow>
-                        ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                          <Button
+                            disabled={row.verified == "NO"}
+                            style={{
+                              marginTop: "0.5em",
+                              marginLeft: "0.75em",
+                              marginBottom: "1em",
+                            }}
+                            variant="outlined"
+                            onClick={() => onClickEmail(row.id)}
+                          >
+                            Kirim Email
+                          </Button>
+                        </Box>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Paper>
-            </ThemeProvider>
+          </ThemeProvider>
         </div>
       );
 }

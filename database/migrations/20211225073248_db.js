@@ -30,6 +30,7 @@ exports.up = function(knex) {
           table.string('sesi').notNullable()
           table.string('fakultas').notNullable()
           table.string('univ').notNullable()
+          table.string('follow').notNullable()
           table.string('namarek').notNullable()
           table.string('jenisrek').notNullable()
           table.string('tujuanrek').notNullable()

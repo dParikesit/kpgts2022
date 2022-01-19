@@ -89,6 +89,7 @@ const PesertaDisabled = () => {
     const [tempData, setTempData] = useState([])
     const [jumlahVal, setJumlahVal] = useState('1');
     const [fileLink, setFileLink] = useState('')
+    const [followLink, setFollowLink] = useState('');
     const [valueDate, setValueDate] = React.useState([]);
     const [startDate, setStartDate] = useState(new Date("2022/01/22"));
     const [endDate, setEndDate] = useState(new Date("2022/01/25"));
@@ -144,6 +145,7 @@ const PesertaDisabled = () => {
         await setJenisBank(data[0].jenisrek)
         await setPembayaran(data[0].tujuanrek)
         await setFileLink(data[0].fileURL)
+        await setFollowLink(data[0].follow)
       }
     }, [])
 
@@ -332,106 +334,118 @@ const PesertaDisabled = () => {
         return rows.map((row) => row);
     }
 
-    return(
-        <ThemeProvider theme={theme}>
-            <NavbarLoggedIn></NavbarLoggedIn>
-            <CssBaseline />
-            <Container component="main" maxWidth="xl" >
-                <Box
-                sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    alignItems: 'center',
-                    flexDirection: "column",
-                }}>
-                    <Typography component="h1" variant="h4">
-                        Registrasi Tryout
+    return (
+      <ThemeProvider theme={theme}>
+        <NavbarLoggedIn></NavbarLoggedIn>
+        <CssBaseline />
+        <Container component="main" maxWidth="xl">
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Typography component="h1" variant="h4">
+              Registrasi Tryout
+            </Typography>
+            {/* Pilih jumlah orang */}
+            <Box component="form" sx={{ mt: 3, width: "70vw" }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} marginBottom={2}>
+                  <Grid item xs={12}>
+                    <Typography variant="h6" marginBottom={3} color={"red"}>
+                      Hubungi admin apabila ada masalah.
                     </Typography>
-                    {/* Pilih jumlah orang */}
-                    <Box component="form" sx={{ mt: 3, width: "70vw" }}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} marginBottom={2}>
-                                <Grid item xs={12}>
-                                    <Typography variant="h6" marginBottom={3} color={'red'}>
-                                        Hubungi admin apabila ada masalah.
-                                    </Typography>
-                                </Grid>
-                                <TextField
-                                    disabled
-                                    fullWidth
-                                    id="outlined-select-jumlah"
-                                    select
-                                    label="Jumlah Peserta"
-                                    value={jumlahVal}
-                                    helperText="Pilih jumlah peserta yang akan registrasi Try Out"                        
-                                >
-                                    {jumlah.map((option) => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
-                                        </MenuItem>
-                                    ))}
-                                </TextField>
-                            </Grid>
-                            {/* Bagian form */}
-                            {renderForm()}
-                            {/* BAGIAN PEMBAYARAN */}
-                            <Typography component="h1" variant="h5" marginTop={5}>
-                                Pembayaran
-                            </Typography>
-                            <Grid item xs={12}>
-                                <TextField
-                                disabled
-                                required
-                                fullWidth
-                                id="namaPemilikBank"
-                                label="Nama di Rekening"
-                                name="namaPemilikBankank"
-                                autoComplete="Nama"
-                                value={namaDiRek || ""}
-                                />
-                            </Grid> 
-                            <Grid item xs={12}>
-                                <TextField
-                                disabled
-                                required
-                                fullWidth
-                                id="jenisBank"
-                                label="Jenis Bank"
-                                name="jenisBank"
-                                autoComplete="BCA"
-                                value={jenisBank || ""}
-                                />
-                            </Grid> 
-                           <Grid item xs={12}>
-                                <TextField
-                                disabled
-                                fullWidth
-                                id="pembayaran"
-                                label="Cara Pembayaran"
-                                name="pembayaran"
-                                value={pembayaran || ""}
-                                >
-                                </TextField>
-                            </Grid>
-                            
-                            <Typography component="h1" variant="h5" marginTop={2}>
-                                Upload Bukti Pembayaran
-                            </Typography>
-                            {/* upload foto */}
-                            <Grid item xs={12} marginBottom={'30px'}>
-                              <Chip
-                                label="Bukti Pembayaran"
-                                component="a"
-                                href={fileLink || ""}
-                                clickable
-                              />
-                            </Grid> 
-                        </Grid>
-                    </Box>
-                </Box>
-            </Container>
-        </ThemeProvider>
-    )
+                  </Grid>
+                  <TextField
+                    disabled
+                    fullWidth
+                    id="outlined-select-jumlah"
+                    select
+                    label="Jumlah Peserta"
+                    value={jumlahVal}
+                    helperText="Pilih jumlah peserta yang akan registrasi Try Out"
+                  >
+                    {jumlah.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+                {/* Bagian form */}
+                {renderForm()}
+                {/* BAGIAN PEMBAYARAN */}
+                <Typography component="h1" variant="h5" marginTop={5}>
+                  Pembayaran
+                </Typography>
+                <Grid item xs={12}>
+                  <TextField
+                    disabled
+                    required
+                    fullWidth
+                    id="namaPemilikBank"
+                    label="Nama di Rekening"
+                    name="namaPemilikBankank"
+                    autoComplete="Nama"
+                    value={namaDiRek || ""}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    disabled
+                    required
+                    fullWidth
+                    id="jenisBank"
+                    label="Jenis Bank"
+                    name="jenisBank"
+                    autoComplete="BCA"
+                    value={jenisBank || ""}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    disabled
+                    fullWidth
+                    id="pembayaran"
+                    label="Cara Pembayaran"
+                    name="pembayaran"
+                    value={pembayaran || ""}
+                  ></TextField>
+                </Grid>
+
+                <Typography component="h1" variant="h5" marginTop={2}>
+                  Bukti Follow
+                </Typography>
+                {/* upload foto */}
+                <Grid item xs={12} marginBottom={"30px"}>
+                  <Chip
+                    label="Bukti Follow"
+                    component="a"
+                    href={followLink || ""}
+                    clickable
+                  />
+                </Grid>
+                <Typography component="h1" variant="h5" marginTop={2}>
+                  Bukti Pembayaran
+                </Typography>
+                {/* upload foto */}
+                <Grid item xs={12} marginBottom={"30px"}>
+                  <Chip
+                    label="Bukti Pembayaran"
+                    component="a"
+                    href={fileLink || ""}
+                    clickable
+                  />
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Container>
+      </ThemeProvider>
+    );
 }
 
 export default PesertaDisabled;
