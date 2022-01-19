@@ -120,9 +120,9 @@ const Peserta = () => {
 
     const [status, setStatus] = useState('open')
     useEffect(async()=>{
-      if (Auth.role!=="user"){
-        navigate('/', {replace: true})
-      }
+    //   if (Auth.role!=="user"){
+    //     navigate('/', {replace: true})
+    //   }
         let data = await fetch('/api/registration/registeredCheck', {
           method: 'GET',
           mode: 'same-origin',
@@ -131,9 +131,9 @@ const Peserta = () => {
               'Content-Type': 'application/json'
           },
         })
-        if(data.status !== 404){
-          await navigate('/cekdata', {replace: true})
-        }
+        // if(data.status !== 404){
+        //   await navigate('/cekdata', {replace: true})
+        // }
 
         await console.log(data.status)
         data = await fetch('/api/registration/cekopen', {
@@ -178,7 +178,8 @@ const Peserta = () => {
         stateJurusan.push('A')
     };
     // Buat foto
-    const [fileLink, setFileLink] = useState('')
+    const [fileLink, setFileLink] = useState('');
+    const [buktiFollow, setbuktiFollow] = useState('');
     const [pembayaran, setPembayaran] = useState('');
     const [valueDate, setValueDate] = React.useState([]);
     const [startDate, setStartDate] = useState(new Date("2022/02/05"));
@@ -199,6 +200,9 @@ const Peserta = () => {
 
     const handleUploadFoto = async(event) => {
         setFileLink(event.target.value)
+    };
+    const handleBuktiFollow = async(event) => {
+        setbuktiFollow(event.target.value)
     };
 
     const handleJurusan = (event) => {
@@ -578,6 +582,23 @@ const Peserta = () => {
                             </Grid>
                             {/* Bagian form */}
                             {renderForm()}
+                            {/* Bagian bukti follow ig */}
+                            <Typography component="h1" variant="h5" marginTop={5}>
+                                Follow IG @studiin.id terus upload buktinya disini ya!
+                            </Typography>
+                            <Grid item xs={12}>
+                                <TextField
+                                required
+                                fullWidth
+                                id="linkBuktiFollow"
+                                label="Link Foto Bukti Follow IG Studiin"
+                                name="linkBuktiFollow"
+                                autoComplete="IG"
+                                helperText="Upload bukti ke drive atau yang lain, pastikan link dapat diakses"
+                                value={buktiFollow}
+                                onChange={handleBuktiFollow}
+                                />
+                            </Grid>
                             {/* BAGIAN PEMBAYARAN */}
                             <Typography component="h1" variant="h5" marginTop={5}>
                                 Pembayaran
