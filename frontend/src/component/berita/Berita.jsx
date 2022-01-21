@@ -54,8 +54,7 @@ const theme = createTheme({
 
 export default function Berita() {
   const [data, setData] = useState([
-    createData(0, "https://image.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg", "Tes","",  "admin", ""),
-    createData(1, "https://image.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg", "Tes","",  "admin", ""),
+    createData(0, "", "","",  "admin", "")
   ])
 
   useEffect(async () => {
@@ -69,9 +68,9 @@ export default function Berita() {
       }
     })
     response = await response.json()
-    // setData(
-    //   response.map(data => createData(data.id, "/static/"+data.picturePath, data.title, data.content, data.name, ""))
-    // )
+    setData(
+      response.map(data => createData(data.id, "/static/"+data.picturePath, data.title, data.content, data.name, ""))
+    )
   }, []);
 
   return (
