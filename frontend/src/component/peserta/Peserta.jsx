@@ -479,6 +479,7 @@ const Peserta = () => {
                             >
                                 <option value={'Saintek'}>Saintek</option>
                                 <option value={'Soshum'}>Soshum</option>
+                                <option value={'Campuran'}>Campuran</option>
                             </NativeSelect>
                         </FormControl>
                     </Grid>
