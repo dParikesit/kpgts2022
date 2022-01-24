@@ -320,13 +320,13 @@ const Peserta = () => {
               sesi: stateSesi[i] ? stateSesi[i] : "A",
               fakultas: fakjur[i],
               univ: univ[i],
-              follow: buktiFollow.startsWith("https://")
+              follow: buktiFollow.startsWith("http")
                 ? buktiFollow
                 : "https://" + buktiFollow,
               namarek: namaDiRek,
               jenisrek: jenisBank,
               tujuanrek: pembayaran,
-              fileURL: fileLink.startsWith("https://") ? fileLink : "https://" + fileLink,
+              fileURL: fileLink.startsWith("http") ? fileLink : "https://" + fileLink,
             });
         }
         let response = await fetch('/api/registration/', {
