@@ -325,8 +325,8 @@ const Peserta = () => {
                 : "https://" + buktiFollow,
               namarek: namaDiRek,
               jenisrek: jenisBank,
-              tujuanrek: pembayaran.startsWith("https://") ? pembayaran : "https://" + pembayaran,
-              fileURL: fileLink,
+              tujuanrek: pembayaran,
+              fileURL: fileLink.startsWith("https://") ? fileLink : "https://" + fileLink,
             });
         }
         let response = await fetch('/api/registration/', {
