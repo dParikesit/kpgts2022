@@ -144,7 +144,7 @@ router.post("/verifmail/:id", adminChecker, async (req, res) => {
         peserta: user.nama,
         tanggal: user.tanggal,
         // sesi: user.sesi
-        sesi: "-",
+        jam: "09.00 WIB",
       },
     });
   } catch (e) {
