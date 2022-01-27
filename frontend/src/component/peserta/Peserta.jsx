@@ -157,15 +157,15 @@ const Peserta = () => {
     const [jumlahVal, setJumlahVal] = useState('1');
     // variabel variabel
     if (jumlahVal == 1) {
-        var harga = 15000;
+        var harga = 18000;
     } else if (jumlahVal == 2) {
-        var harga = 30000;
+        var harga = 36000;
     } else if (jumlahVal == 3) {
-        var harga = 40000;
+        var harga = 48000;
     } else if (jumlahVal == 4) {
-        var harga = 50000;
+        var harga = 64000;
     } else if (jumlahVal == 5) {
-        var harga = 60000;
+        var harga = 70000;
     }
     // buat loop state jurusan
     var stateJurusan = [];
