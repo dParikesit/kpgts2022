@@ -18,7 +18,7 @@ const email = new Email({
     from: "noreply@kpgts2022.com",
   },
   preview: process.env.NODE_ENV === "development",
-  send: !(process.env.NODE_ENV === "development"),
+  send: true,
   transport: transporter,
 });
 

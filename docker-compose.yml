@@ -18,6 +18,19 @@ services:
     environment:
       NODE_ENV: production
       DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: postgres
+      DB_DATABASE: kpgts
+      SESSION_SECRET: "ini secret"
+      IMAGE_FOLDER: "uploads"
+      MAILER_FROM: noreply@kpgts2022.com
+      MAILER_HOST: localhost
+      MAILER_PORT: 25
+      MAILER_USERNAME: ""
+      MAILER_PASSWORD: ""
+      ORIGIN_URL: "backend:3001"
+      OPREG: close
     volumes:
       - backend:/app
     ports:
